@@ -1,0 +1,12 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "JavaDatabase/lib/derby.jar",
+        "JavaDatabase/lib/derbyclient.jar",
+        "JavaDatabase/lib/derbynet.jar",
+        "JavaDatabase/lib/derbyoptionaltools.jar",
+        "JavaDatabase/lib/derbyrun.jar",
+        "JavaDatabase/lib/derbyshared.jar",
+        "JavaDatabase/lib/derbytools.jar"
+    ]
+}
