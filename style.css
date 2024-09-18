@@ -12,9 +12,13 @@ body {
   padding: 0;
 }
 
+.main-content-container {
+  display: flex;
+  flex-direction: row;
+}
+
 /* Navbar Styles */
 nav.navbar {
-  grid-area: he;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,44 +30,14 @@ nav.navbar {
   z-index: 1000;
 }
 
-.container {
-  display: grid;
-  grid-template-areas:
-    'sn he he he he'
-    'sn ma ma ma ma'
-    'sn ma ma ma ma'
-    'sn ma ma ma ma'
-    'sn fo fo fo fo'
-
-  ;
-}
-
-.container-hompage {
-  display: grid;
-  grid-template-areas:
-    'he he he he he'
-    'ma ma ma ma ma'
-    'ma ma ma ma ma'
-    'ma ma ma ma ma'
-    'fo fo fo fo fo'
-
-  ;
-}
-
-.header {
-  grid-area: he;
-}
-
 
 .side-nav {
-  grid-area: sn;
+  flex: 1;
+  height: 100vh;
   display: flex;
-  width: 100%;
-  background-color: black;
-  color: white;
-  height: 100%;
   flex-direction: column;
-  justify-content: space-evenly;
+  padding: 2vw;
+  background-color: #575757;
 }
 
 .logo {
@@ -86,33 +60,18 @@ nav.navbar {
   text-decoration: none;
   padding: 0.5rem 1rem;
   font-size: 1rem;
+  border-radius: 4px;
   transition: background-color 0.3s ease;
 }
 
 .nav-items li a:hover {
   background-color: #575757;
-  border-radius: 4px;
-}
-
-.add-item-btn {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.add-item-btn:hover {
-  background-color: #45a049;
 }
 
 /* Main Content */
 main {
-  grid-area: ma;
-  padding: 2rem;
+  flex: 10;
+  padding: 2vw;
 }
 
 .intro h1 {
@@ -126,7 +85,6 @@ main {
 
 /* Footer */
 footer {
-  grid-area: fo;
   text-align: center;
   padding: 1rem;
   background-color: #333;
