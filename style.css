@@ -1,97 +1,165 @@
 /* Global Styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Navbar Styles */
-  nav.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #333;
-    color: white;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  
-  
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .nav-items {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .nav-items li {
-    display: inline;
-  }
-  
-  .nav-items li a {
-    color: white;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-  }
-  
-  .nav-items li a:hover {
-    background-color: #575757;
-    border-radius: 4px;
-  }
-  
-  .add-item-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .add-item-btn:hover {
-    background-color: #45a049;
-  }
-  
-  /* Main Content */
-  main {
-    padding: 2rem;
-  }
-  
-  .intro h1 {
-    margin-bottom: 0.5rem;
-  }
-  
-  .item-list ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #333;
-    color: white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-  
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar Styles */
+nav.navbar {
+  grid-area: he;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #333;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.container {
+  display: grid;
+  grid-template-areas:
+    'sn he he he he'
+    'sn ma ma ma ma'
+    'sn ma ma ma ma'
+    'sn ma ma ma ma'
+    'sn fo fo fo fo'
+
+  ;
+}
+
+.container-hompage {
+  display: grid;
+  grid-template-areas:
+    'he he he he he'
+    'ma ma ma ma ma'
+    'ma ma ma ma ma'
+    'ma ma ma ma ma'
+    'fo fo fo fo fo'
+
+  ;
+}
+
+.header {
+  grid-area: he;
+}
+
+
+.side-nav {
+  grid-area: sn;
+  display: flex;
+  width: 100%;
+  background-color: black;
+  color: white;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-items {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-items li {
+  display: inline;
+}
+
+.nav-items li a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.nav-items li a:hover {
+  background-color: #575757;
+  border-radius: 4px;
+}
+
+.add-item-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-item-btn:hover {
+  background-color: #45a049;
+}
+
+/* Main Content */
+main {
+  grid-area: ma;
+  padding: 2rem;
+}
+
+.intro h1 {
+  margin-bottom: 0.5rem;
+}
+
+.item-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Footer */
+footer {
+  grid-area: fo;
+  text-align: center;
+  padding: 1rem;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+
+
+/* Add Item Page Styles */
+.add-item-section {
+  padding: 2rem;
+}
+
+.add-item-section form {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}

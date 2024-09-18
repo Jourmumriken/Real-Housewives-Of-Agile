@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Item</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <a href=""><div class="logo">
+        Yes
+      </div>
+      <ul class="nav-items">
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <form style="background-color: #f9f9f9; padding: 20px; border-radius: 10px; width: 300px; margin: auto;">
+            <h2 style="text-align: center; color: #333;">Input Form</h2>
+            
+            <!-- First Text Area -->
+            <label for="textarea1" style="display: block; margin-bottom: 10px; font-weight: bold;">Enter Name</label>
+            <textarea required id="textarea1" name="textarea1" rows="4" cols="30" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 20px;"></textarea>
+    
+            <!-- Second Text Area -->
+            <label for="textarea2" style="display: block; margin-bottom: 10px; font-weight: bold;">Enter Guide</label>
+            <textarea required ="textarea2" name="textarea2" rows="4" cols="30" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 20px;"></textarea>
+    
+            <!-- Difficuly level Input -->
+            <label for="range" style="display: block; margin-bottom: 10px; font-weight: bold;">Difficulty Level from 1 to 5</label>
+            <input type="range" required id="range" name="range" min="1" max="5" step="1" style="width: 100%; margin-bottom: 20px;">
+            
+            <!-- Submit Button -->
+            <input type="submit" value="Submit" style="background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">
+        </form>
+    </main>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
