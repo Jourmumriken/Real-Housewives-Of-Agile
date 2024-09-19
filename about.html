@@ -3,46 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My website</title>
+    <title>Repairhub</title>
     <link rel="stylesheet" href="style.css">
   </head>
-  <body class = "container">
+  <body class = "container-homepage">
     
-    <!-- Navigation -->
-    <nav class="navbar">
-      <div class="logo">
-        <b>Repairhub</b>
-      </div>
-      <ul class="nav-items">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li>
-
-          <button onclick="window.location.href = 'add-item.html';" class="add-item-btn">
-            Add A Wiki 
-          </button>
-          
-        </li>
-      </ul>
-    </nav>
-
+    <header>
+      <!-- Navigation -->
+      <nav class="navbar">
+        <div class="logo">
+          <b>Repairhub</b>
+        </div>
+        <ul class="nav-items">
+          <li><a href="#">Home</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+    </header>
    
 
-    <!-- Main Content -->
-    <main>
-      <section class="intro">
-        <h1>About</h1>
-        <p> This amazing community was created by project group team 14. We are also known as the Real Housewives of agile.</p>
-      </section>
-    </main>
-
-    <div class="side-nav">
-      <a href="guide1.html">First WIKI</a>
-      <a href="guide2.html">Second WIKI</a>
-      <div>
+    <div class="main-content-container">
+      <!-- side navigation -->
+       <div class ="side-nav">
+         <ul>
+           <li><a href="guide1.html">Clean a camera lens</a></li>
+           <li><a href="guide2.html">Clean a charging port</a></li>
+         </ul>
+       </div>
+   
+      <!-- Main Content -->
+      <main class = "main">
+        <h1>About us!</h1>
+        <p>This is a project by group 14 of the agile development course</p>
+        <p>AKA</p>
+        <h2 style="font-weight: 200;">The Real Housewives Of Agile</h2>
+        <p>We have made a repair wiki with guides for repairing eletronics and other devices.</p>
+      </main>
+    </div>
+   
     <!-- Footer -->
     <footer>
-      <p>&copy; 2024 My Website. All rights  reserved.</p>
+      <p>&copy; 2024 Repairhub. Right reserved and all that</p>
     </footer>
 
     <!-- JavaScript -->
