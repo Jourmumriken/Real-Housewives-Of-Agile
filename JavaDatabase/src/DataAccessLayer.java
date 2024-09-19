@@ -27,7 +27,7 @@ public class DataAccessLayer {
                 statement.close();
             }
         } catch (SQLException e) {
-             e.printStackTrace();
+             //e.printStackTrace();
             if (dropAllData)
                 System.out.println("Can not delete table, it does not exist.");
             else
