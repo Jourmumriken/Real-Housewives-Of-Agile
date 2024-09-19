@@ -3,12 +3,13 @@ public class Guide {
     private String title;
     private String content;
 
-    Guide(int id, String title, String content){
-        this.id=id;
-        this.title=title;
-        this.content=content;
+    Guide(int id, String title, String content) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
     }
-    Guide(){
+
+    Guide() {
 
     }
 
@@ -31,12 +32,12 @@ public class Guide {
     public void setId(int id) {
         this.id = id;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
 
-
     public String toString() {
-        return "id: "+id+" title: "+title+" content: "+content;
+        return "id: " + id + " title: " + title + " content: " + content;
     }
 }
