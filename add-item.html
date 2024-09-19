@@ -9,35 +9,39 @@
   <body>
     <!-- Navigation -->
     <nav class="navbar">
-      <a href=""><div class="logo">
-        Yes
-      </div>
+      <div class="logo">Repairhub</div>
       <ul class="nav-items">
         <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href=#>Add a guide</a></li>
       </ul>
     </nav>
 
     <!-- Main Content -->
     <main>
-        <form style="background-color: #f9f9f9; padding: 20px; border-radius: 10px; width: 300px; margin: auto;">
-            <h2 style="text-align: center; color: #333;">Input Form</h2>
+        <form class="add-item-form">
+            <h2>Input Form</h2>
             
             <!-- First Text Area -->
-            <label for="textarea1" style="display: block; margin-bottom: 10px; font-weight: bold;">Enter Name</label>
-            <textarea required id="textarea1" name="textarea1" rows="4" cols="30" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 20px;"></textarea>
+            <label class="input-label" for="textarea1">Enter Name</label>
+            <textarea class="text-input" required id="textarea1" name="textarea1" rows="4" cols="30"></textarea>
     
             <!-- Second Text Area -->
-            <label for="textarea2" style="display: block; margin-bottom: 10px; font-weight: bold;">Enter Guide</label>
-            <textarea required ="textarea2" name="textarea2" rows="4" cols="30" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 20px;"></textarea>
+            <label class="input-label" for="textarea2">Enter Guide</label>
+            <textarea class="text-input" required id="textarea2" name="textarea2" rows="4" cols="30"></textarea>
     
             <!-- Difficuly level Input -->
-            <label for="range" style="display: block; margin-bottom: 10px; font-weight: bold;">Difficulty Level from 1 to 5</label>
-            <input type="range" required id="range" name="range" min="1" max="5" step="1" style="width: 100%; margin-bottom: 20px;">
+            <label class="input-label" for="difficulty-slider">Difficulty Level from 1 to 5</label>
+            <input class="input-slider" type="range" required id="class="input-label"" name="range" min="1" max="5" step="1">
             
             <!-- Submit Button -->
-            <input type="submit" value="Submit" style="background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">
+            <input class="submit-button" type="submit" value="Submit">
         </form>
     </main>
+
+    <footer>
+      <p>&copy; 2024 Repairhub. Right reserved and all that</p>
+    </footer>
 
     <!-- JavaScript -->
     <script src="script.js"></script>
