@@ -18,6 +18,12 @@ public class MultiPageHttpServer {
         // Create context for the About page
         server.createContext("/about", new MyFileHandler("html/about.html"));
 
+        // Create context fro guide1 
+        server.createContext("/guide1", new MyFileHandler("html/guide1.html"));
+
+        // Create context fro guide1 
+        server.createContext("/guide2", new MyFileHandler("html/guide2.html"));
+
         //Create context for the Add page
         server.createContext("/add-item", new MyFileHandler("html/add-item.html")); 
 
