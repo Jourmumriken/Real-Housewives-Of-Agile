@@ -29,8 +29,8 @@ class SubmitHandler implements HttpHandler {
             Map<String, String> parsedData = parseFormData(formData);
 
             // Respond with a confirmation message
-            String response = "Thank you, " + parsedData.get("name1") + "! We have received your submission.<br>" +
-                              "Text2: " + parsedData.get("name2");
+            String response = "Name of the guide, " + parsedData.get("name1") + "! We have received your submission.<br>" +
+                              "How to do: " + parsedData.get("name2");
 
             exchange.getResponseHeaders().set("Content-Type", "text/html");
             exchange.sendResponseHeaders(200, response.length());
