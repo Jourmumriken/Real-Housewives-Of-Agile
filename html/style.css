@@ -7,19 +7,44 @@
 
 
 body {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
-
+/* Wrappers*/
+.header{
+  display: flex;
+  width: 100vw;
+  height: 10vh;
+}
 .main-content-container {
   display: flex;
   flex-direction: row;
+  width: 100vw;
+  height: 80vh;
+
+}
+/* Footer */
+footer {
+  display: flex;
+  width: 100vw;
+  height: 10vh;
+  text-align: center;
+  padding: 1rem;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  bottom: 0;
 }
 
 /* Navbar Styles */
 nav.navbar {
   display: flex;
+  width: 100vw;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
@@ -82,16 +107,7 @@ main {
   padding: 0;
 }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #333;
-  color: white;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
+
 
 
 
