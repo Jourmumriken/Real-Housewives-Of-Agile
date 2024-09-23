@@ -28,7 +28,7 @@ body {
   height: 80vh;
 
 }
-/* Footer */
+
 footer {
   display: flex;
   width: 100vw;
@@ -56,6 +56,7 @@ footer {
   flex: 10;
   padding: 2vw;
 }
+
 /* navbars*/
 nav.navbar {
   display: flex;
