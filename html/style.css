@@ -54,6 +54,7 @@ footer {
   width: 85vw;
   height: 80vh;
   flex: 10;
+  flex-direction: column;
   padding: 2vw;
 }
 
