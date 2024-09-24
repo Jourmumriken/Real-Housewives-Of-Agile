@@ -1,6 +1,10 @@
+
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * A class that provides an abstracted interface for accessing data from the database
+ */
 public class DataAccessLayer {
     // *SET THIS TO TRUE ONLY IF YOU INTEND TO WIPE THE DATABASE ON NEXT RUN *//
     // Should be set to false outside of testing!
@@ -9,7 +13,14 @@ public class DataAccessLayer {
     private final String createSQLTable = "CREATE TABLE RepairGuide (" +
             "id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, " +
             "title VARCHAR(255), " +
-            "content VARCHAR(10000))";
+            "content VARCHAR(10000)," +
+            "FOREIGN KEY (username) REFERENCES Account(username)" + // "ON DELETE CASCADE" maybe?
+            ")";
+    private final String sqlAccount = "CREATE TABLE Account ("+
+            "username VARCHAR(15) PRIMARY KEY,"+ // better that we use an INT as primary key instead.
+            // But simple prototype first and incremental progress and all that.
+            "password VARCHAR(15) NOT NULL"+ // plaintext password LOL!
+            ")";
 
     public DataAccessLayer(Connection conn) {
         if (conn != null) {
@@ -40,6 +51,61 @@ public class DataAccessLayer {
     }
 
     /**
+     * returns a list of all accounts in db as Account objects
+     * @param conn the connection to the database to be queried
+     * @return an ArrayList of Accounts objects
+     * @throws SQLException throws if the query fails
+     */
+    public ArrayList<Account> queryAllAccounts(Connection conn) throws SQLException{
+        String query = "SELECT username,password FROM Account";
+        PreparedStatement stm = conn.prepareStatement(query);
+        ResultSet rs = stm.executeQuery();
+        ArrayList<Account> accounts = new ArrayList<>();
+        while (rs.next()) {
+           String username= rs.getString("username");
+           String password= rs.getString("password");
+           Account a = new Account(username,password);
+           accounts.add(a);
+        }
+        return accounts;
+    }
+
+    /**
+     * returns an Account object representing the account with the provided username
+     * @param conn the connection to the database to be queried
+     * @param username the username of the account
+     * @return an Account object
+     * @throws SQLException throws exception if the query fails
+     */
+    public Account queryAccount(Connection conn, String username) throws SQLException {
+        String query = "SELECT * FROM Account WHERE username = ?";
+        PreparedStatement stm = conn.prepareStatement(query);
+        stm.setString(1, username);
+        ResultSet rs = stm.executeQuery();
+        Account a = null;
+        while (rs.next()) {
+            String password = rs.getString("password");
+            a = new Account(username,password);
+        }
+        return a;
+}
+
+    /**
+     * Creates a new account in db with username and password in parameters
+     * @param conn the connection of the database to insert into
+     * @param username the username
+     * @param password the password
+     * @throws SQLException throws exception if the insertion fails
+     */
+    public void insertAccount(Connection conn, String username, String password) throws SQLException{
+        String sql = "INSERT INTO TABLE Account (username,password) (?,?)";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setString(1,username);
+        stm.setString(2,password);
+        stm.executeUpdate();
+        stm.close();
+}
+    /**
      * Returns a list of every guide in DB as Guide objects.
      * 
      * @param conn the connection of the database to query
@@ -47,7 +113,7 @@ public class DataAccessLayer {
      * @throws SQLException throws exception if query fails
      */
     public ArrayList<Guide> queryAllGuides(Connection conn) throws SQLException {
-        String query = "SELECT id, title, content FROM RepairGuide";
+        String query = "SELECT id, title, content, username  FROM RepairGuide";
         ArrayList<Guide> guides = new ArrayList<>();
 
         // Query the database and retrieve all results
@@ -56,10 +122,11 @@ public class DataAccessLayer {
 
         // Go through results and add into the array as `Guides`
         while (rs.next()) {
-            Guide g = new Guide();
-            g.setId(rs.getInt("id"));
-            g.setTitle(rs.getString("title"));
-            g.setContent(rs.getString("content"));
+            int id =rs.getInt("id");
+           String title= rs.getString("title");
+            String content= rs.getString("content");
+            String username = rs.getString("username");
+            Guide g = new Guide(id,title,content,queryAccount(conn,username));
             guides.add(g);
         }
 
@@ -67,7 +134,8 @@ public class DataAccessLayer {
     }
 
     /**
-     * Creates new guide in db with title and content in parameters
+     * Creates new guide in db with title and content in parameters that is associated with the
+     * account in the parameters
      * 
      * @param conn    the connection as a Connection object to the database to
      *                insert into
@@ -76,11 +144,12 @@ public class DataAccessLayer {
      * @throws SQLException throws exception for various reasons, bad connection,
      *                      wrong data type, table does not exist and others
      */
-    public void insertGuide(Connection conn, String title, String content) throws SQLException {
-        String sql = "INSERT INTO RepairGuide (title, content) VALUES (?, ?)";
+    public void insertGuide(Connection conn, String title, String content,Account account) throws SQLException {
+        String sql = "INSERT INTO RepairGuide (title, content,username) VALUES (?, ?, ?)";
         PreparedStatement stm = conn.prepareStatement(sql);
         stm.setString(1, title);
         stm.setString(2, content);
+        stm.setString(3,account.getUsername()); // the username for the account that created the guide
         stm.executeUpdate();
         stm.close();
         // "INSERT INTO RepairGuide (title, content) VALUES (?,?,?)"
@@ -99,11 +168,12 @@ public class DataAccessLayer {
         PreparedStatement stm = conn.prepareStatement(sql);
         stm.setInt(1, id);
         ResultSet rs = stm.executeQuery();
-        Guide g = new Guide();
+        Guide g = null;
         while (rs.next()) {
-            g.setId(rs.getInt("id"));
-            g.setTitle(rs.getString("title"));
-            g.setContent(rs.getString("content"));
+            String title= rs.getString("title");
+            String content= rs.getString("content");
+            String username = rs.getString("username");
+            g = new Guide(id,title,content,queryAccount(conn,username)); // Each guide has an associated user
         }
         rs.close();
         stm.close();
@@ -126,10 +196,10 @@ public class DataAccessLayer {
         ResultSet rs = stm.executeQuery();
         ArrayList<Guide> guides = new ArrayList<>();
         while (rs.next()) {
-            Guide g = new Guide();
-            g.setId(rs.getInt("id"));
-            g.setTitle(rs.getString("title"));
-            g.setContent(rs.getString("content"));
+            int id = rs.getInt("id");
+            String content= rs.getString("content");
+            String username = rs.getString("username");
+            Guide g = new Guide(id,title,content,queryAccount(conn,username));
             guides.add(g);
         }
         rs.close();
