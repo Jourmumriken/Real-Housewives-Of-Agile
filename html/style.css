@@ -48,6 +48,7 @@ footer {
   width: 100vw;
   height: 80vh;
   padding: 2vw;
+  flex-direction: column;
 }
 .main-with-sidebar {
   display: flex;
