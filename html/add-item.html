@@ -6,44 +6,58 @@
     <title>Add New Item</title>
     <link rel="stylesheet" href="style.css">
   </head>
-  <body>
+  <!-- Body container -->
+  <body class="container-homepage">
+    <!--  Header -->
+    <header>
     <!-- Navigation -->
-    <nav class="navbar">
-      <div class="logo">Repairhub</div>
-      <ul class="nav-items">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href=#>Add a guide</a></li>
-      </ul>
-    </nav>
+      <nav class="navbar">
+        <div class="logo">Repairhub</div>
+        <ul class="nav-items">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href=#>Add a guide</a></li>
+        </ul>
+      </nav>
+      <!-- End of Navigation -->
+    </header>
+    <!-- End of Header -->
 
-    <!-- Main Content -->
-    <main class="main">
-        <form class="add-item-form" method='POST' action='/submit'>
-            <h2>Input Form</h2>
-            
-            <!-- First Text Area -->
-            <label class="input-label" for="name1">Enter Name</label>
-            <textarea class="text-input" required id="name1" name="name1" rows="4" cols="30"></textarea>
-    
-            <!-- Second Text Area -->
-            <label class="input-label" for="name2">Enter Guide</label>
-            <textarea class="text-input" required id="name2" name="name2" rows="4" cols="30"></textarea>
-    
-            <!-- Difficuly level Input -->
-            <label class="input-label" for="difficulty-slider">Difficulty Level from 1 to 5</label>
-            <input class="input-slider" type="range" required id="input-label" class="input-label" name="range" min="1" max="5" step="1">
-            
-            <!-- Submit Button -->
-            <input class="submit-button" type="submit" value="Submit">
-        </form>
-    </main>
+    <!-- Main body wrapper -->
+    <div class="main-content-container">
+      <!-- Main Content -->
+      <main class="main">
+          <form class="add-item-form" method='POST' action='/submit'>
+              <h2>Input Form</h2>
+              
+              <!-- First Text Area -->
+              <label class="input-label" for="name1">Enter Name</label>
+              <textarea class="text-input" required id="name1" name="name1" rows="4" cols="30"></textarea>
+      
+              <!-- Second Text Area -->
+              <label class="input-label" for="name2">Enter Guide</label>
+              <textarea class="text-input" required id="name2" name="name2" rows="4" cols="30"></textarea>
+      
+              <!-- Difficuly level Input -->
+              <label class="input-label" for="difficulty-slider">Difficulty Level from 1 to 5</label>
+              <input class="input-slider" type="range" required id="input-label" class="input-label" name="range" min="1" max="5" step="1">
+              
+              <!-- Submit Button -->
+              <input class="submit-button" type="submit" value="Submit">
+          </form>
+      </main>
+      <!-- End of Main Content -->
+    </div>
+    <!-- End of Main body wrapper -->
 
+    <!-- Footer -->
     <footer>
       <p>&copy; 2024 Repairhub. Right reserved and all that</p>
     </footer>
+    <!-- End of Footer -->
 
     <!-- JavaScript -->
     <script src="script.js"></script>
   </body>
+  <!-- End of body container -->
 </html>
