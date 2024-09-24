@@ -18,14 +18,10 @@ body {
 /* Wrappers*/
 .header{
   display: flex;
-  width: 100vw;
-  height: 10vh;
 }
 .main-content-container {
   display: flex;
   flex-direction: row;
-  width: 100vw;
-  height: 80vh;
 
 }
 
@@ -63,6 +59,7 @@ footer {
 nav.navbar {
   display: flex;
   width: 100vw;
+  height: 10vh;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
