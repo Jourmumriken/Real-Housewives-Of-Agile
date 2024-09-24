@@ -19,7 +19,9 @@ class SubmitHandler implements HttpHandler {
     
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        
         if ("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
+            
             // Read the request body (form data)
             InputStream is = exchange.getRequestBody();
             BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
@@ -39,6 +41,7 @@ class SubmitHandler implements HttpHandler {
             os.write(response.getBytes());
             os.close();
         }
+
     }
 
     // Helper method to parse URL-encoded form data to people langague 
