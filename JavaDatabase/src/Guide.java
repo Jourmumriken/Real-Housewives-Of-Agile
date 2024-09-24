@@ -1,18 +1,14 @@
 public class Guide {
-    private int id;
+    private final int id;
     private String title;
     private String content;
-
-    Guide(int id, String title, String content) {
+    private final Account account;
+    Guide(int id, String title, String content,Account account) {
         this.id = id;
         this.title = title;
         this.content = content;
+        this.account=account;
     }
-
-    Guide() {
-
-    }
-
     public int getId() {
         return id;
     }
@@ -29,12 +25,12 @@ public class Guide {
         this.content = content;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Account getAccount() {
+        return account;
     }
 
     public String toString() {

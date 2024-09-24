@@ -26,16 +26,32 @@ public class ManagerLayer {
         }
         return null;
     }
-
-    // TODO Just a temporary test, remove later
-    public void InsertTest() {
+    private boolean correctPw(String username,String password){
         try {
-            db.insertGuide(conn, "How to repair electric toothbrush", "SHOVE IT UP YOUR ASS!!");
-        } catch (SQLException e) {
-            System.out.println("Exception in manager layer:");
-            System.out.println(e);
+            Account account = db.queryAccount(conn, username);
+            return account.checkPw(password);
+        }
+        catch (SQLException e) {
+            return false;
         }
     }
+    public void createAccount(String username,String password) throws AccountCreationException{
+        try{db.insertAccount(conn,username,password);}
+        catch (SQLException e) {
+            throw new AccountCreationException();
+        }
+
+    }
+
+    // TODO Just a temporary test, remove later
+//    public void InsertTest() {
+//        try {
+//            db.insertGuide(conn, "How to repair electric toothbrush", "SHOVE IT UP YOUR ASS!!");
+//        } catch (SQLException e) {
+//            System.out.println("Exception in manager layer:");
+//            System.out.println(e);
+//        }
+//    }
     // TODO also just temporary test
     public void RetrieveAllTest() {
         try {
