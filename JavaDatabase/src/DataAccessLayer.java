@@ -18,12 +18,13 @@ public class DataAccessLayer {
             "title VARCHAR(255), " +
             "content VARCHAR(10000)," +
             "username VARCHAR(15)," +
-            "FOREIGN KEY (username) REFERENCES Account(username)" + // "ON DELETE CASCADE" maybe?
+            "FOREIGN KEY (username) REFERENCES Account(username)," + // "ON DELETE CASCADE" maybe?
+            "difficulty INT" +
             ")";
     private final String sqlAccount = "CREATE TABLE Account (" +
             "username VARCHAR(15) PRIMARY KEY," + // better that we use an INT as primary key instead.
             // But simple prototype first and incremental progress and all that.
-            "password VARCHAR(25) NOT NULL" + // plaintext password LOL!
+            "password VARCHAR(30) NOT NULL" + // plaintext password LOL!
             ")";
 
     /**
@@ -118,9 +119,10 @@ public class DataAccessLayer {
      * Creates a new account in db with username and password in parameters
      * 
      * @param conn     the connection of the database to insert into
-     * @param username the username
-     * @param password the password
-     * @throws SQLException throws exception if the insertion fails
+     * @param username the username, max 15 characters.
+     * @param password the password, max 30 characters.
+     * @throws SQLException throws exception if the insertion fails, such as when
+     *                      user already exists.
      */
     public void insertAccount(Connection conn, String username, String password) throws SQLException {
         String sql = "INSERT INTO Account (username,password) VALUES (?,?)";
@@ -139,7 +141,7 @@ public class DataAccessLayer {
      * @throws SQLException throws exception if query fails
      */
     public ArrayList<Guide> queryAllGuides(Connection conn) throws SQLException {
-        String query = "SELECT id, title, content, username  FROM RepairGuide";
+        String query = "SELECT id, title, content, username, difficulty  FROM RepairGuide";
         ArrayList<Guide> guides = new ArrayList<>();
 
         // Query the database and retrieve all results
@@ -152,7 +154,8 @@ public class DataAccessLayer {
             String title = rs.getString("title");
             String content = rs.getString("content");
             String username = rs.getString("username");
-            Guide g = new Guide(id, title, content, queryAccount(conn, username));
+            int difficulty = rs.getInt("difficulty");
+            Guide g = new Guide(id, title, content, queryAccount(conn, username), difficulty);
             guides.add(g);
         }
 
@@ -170,12 +173,14 @@ public class DataAccessLayer {
      * @throws SQLException throws exception for various reasons, bad connection,
      *                      wrong data type, table does not exist and others
      */
-    public void insertGuide(Connection conn, String title, String content, Account account) throws SQLException {
-        String sql = "INSERT INTO RepairGuide (title, content,username) VALUES (?, ?, ?)";
+    public void insertGuide(Connection conn, String title, String content, Account account, int difficulty)
+            throws SQLException {
+        String sql = "INSERT INTO RepairGuide (title, content, username, difficulty) VALUES (?, ?, ?, ?)";
         PreparedStatement stm = conn.prepareStatement(sql);
         stm.setString(1, title);
         stm.setString(2, content);
         stm.setString(3, account.getUsername()); // the username for the account that created the guide
+        stm.setInt(4, difficulty);
         stm.executeUpdate();
         stm.close();
         // "INSERT INTO RepairGuide (title, content) VALUES (?,?,?)"
@@ -199,7 +204,9 @@ public class DataAccessLayer {
             String title = rs.getString("title");
             String content = rs.getString("content");
             String username = rs.getString("username");
-            g = new Guide(id, title, content, queryAccount(conn, username)); // Each guide has an associated user
+            int difficulty = rs.getInt("difficulty");
+            g = new Guide(id, title, content, queryAccount(conn, username), difficulty); // Each guide has an associated
+                                                                                         // user
         }
         rs.close();
         stm.close();
@@ -211,7 +218,8 @@ public class DataAccessLayer {
      * 
      * @param title the title that will be queried with
      * @param conn  Database connection of the database that will be queried
-     * @throws SQLException If the connection is bad
+     * @throws SQLException If a database access error occurs or this method is
+     *                      called on a closed connection.
      * @return A list with all Guides with the same title as title parameter
      */
 
@@ -225,7 +233,8 @@ public class DataAccessLayer {
             int id = rs.getInt("id");
             String content = rs.getString("content");
             String username = rs.getString("username");
-            Guide g = new Guide(id, title, content, queryAccount(conn, username));
+            int difficulty = rs.getInt("difficulty");
+            Guide g = new Guide(id, title, content, queryAccount(conn, username), difficulty);
             guides.add(g);
         }
         rs.close();
@@ -256,7 +265,40 @@ public class DataAccessLayer {
             int id = rs.getInt("id");
             String title = rs.getString("title");
             String content = rs.getString("content");
-            Guide g = new Guide(id, title, content, queryAccount(conn, username));
+            int difficulty = rs.getInt("difficulty");
+            Guide g = new Guide(id, title, content, queryAccount(conn, username), difficulty);
+            guides.add(g);
+        }
+        rs.close();
+        stm.close();
+        return guides;
+    }
+
+    /**
+     * Retrieves all repair guides from the database that match the specified
+     * difficulty level.
+     *
+     * @param conn       The Connection object that provides the database
+     *                   connection.
+     * @param difficulty The difficulty level to filter the guides by.
+     * @return An ArrayList of Guide objects, each representing a
+     *         repair guide with the specified difficulty level.
+     * @throws SQLException If a database access error occurs or this method is
+     *                      called on a closed connection.
+     */
+    public ArrayList<Guide> queryGuidesByDifficulty(Connection conn, int difficulty) throws SQLException {
+        String sql = "SELECT * FROM RepairGuide WHERE difficulty = ?";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setInt(1, difficulty);
+        ResultSet rs = stm.executeQuery();
+        ArrayList<Guide> guides = new ArrayList<>();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String title = rs.getString("title");
+            String content = rs.getString("content");
+            String username = rs.getString("username");
+            Guide g = new Guide(id, title, content, queryAccount(conn, username), difficulty);
+            guides.add(g);
         }
         rs.close();
         stm.close();
