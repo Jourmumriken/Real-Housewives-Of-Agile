@@ -23,7 +23,7 @@ public class DataAccessLayer {
     private final String sqlAccount = "CREATE TABLE Account (" +
             "username VARCHAR(15) PRIMARY KEY," + // better that we use an INT as primary key instead.
             // But simple prototype first and incremental progress and all that.
-            "password VARCHAR(15) NOT NULL" + // plaintext password LOL!
+            "password VARCHAR(25) NOT NULL" + // plaintext password LOL!
             ")";
 
     /**
@@ -63,7 +63,7 @@ public class DataAccessLayer {
                 System.out.println(tableName + " table has been created.");
             }
         } catch (SQLException e) {
-            //System.out.println(e);
+            // System.out.println(e);
             if (dropAllData) {
                 System.out.println("Cannot delete " + tableName + " table, it does not exist.");
             } else {
@@ -227,6 +227,36 @@ public class DataAccessLayer {
             String username = rs.getString("username");
             Guide g = new Guide(id, title, content, queryAccount(conn, username));
             guides.add(g);
+        }
+        rs.close();
+        stm.close();
+        return guides;
+    }
+
+    /**
+     * Retrieves all repair guides associated with a specific user from the
+     * database.
+     *
+     * @param conn     The Connection object that provides the database
+     *                 connection.
+     * @param username The username of the account whose guides are to be retrieved.
+     * @return An {@link ArrayList} of {@link Guide} objects, each representing a
+     *         repair guide belonging to the specified user.
+     * @throws SQLException If a database access error occurs or this method is
+     *                      called on a closed connection. Can also be thrown as a
+     *                      result of querying a null user.
+     */
+    public ArrayList<Guide> queryAllGuidesFromUser(Connection conn, String username) throws SQLException {
+        String sql = "SELECT * FROM RepairGuide WHERE username = ?";
+        PreparedStatement stm = conn.prepareStatement(sql);
+        stm.setString(1, username);
+        ResultSet rs = stm.executeQuery();
+        ArrayList<Guide> guides = new ArrayList<>();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String title = rs.getString("title");
+            String content = rs.getString("content");
+            Guide g = new Guide(id, title, content, queryAccount(conn, username));
         }
         rs.close();
         stm.close();

@@ -29,6 +29,20 @@ public class Account {
     public String getUsername() {
         return username;
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o)
+            return true;
+        if (o == null)
+            return false;
+        if (getClass() != o.getClass())
+            return false;
+        Account a = (Account) o;
+        if (username.equals(a.username))
+            return true;
+        return false;
+    }
 }
 
 
