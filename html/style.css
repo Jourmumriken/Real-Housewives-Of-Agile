@@ -22,6 +22,7 @@ body {
 .main-content-container {
   display: flex;
   flex-direction: row;
+  margin-bottom: 3rem;
 
 }
 
@@ -72,8 +73,8 @@ nav.navbar {
 
 .side-nav {
   flex: 1;
-  height: 80vh;
-  width: 15vw;
+  min-height: 100vh;
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
   padding: 2vw;
@@ -119,7 +120,17 @@ nav.navbar {
   padding: 0;
 }
 
-
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  height: 3rem;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
 
 
 
