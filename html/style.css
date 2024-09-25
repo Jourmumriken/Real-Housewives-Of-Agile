@@ -163,8 +163,7 @@ button[type="submit"]:hover {
   display: flex;
   justify-content: center;
   align-items: baseline;
-  min-height: 90vh;  
-  background-color: #f0f0f0; 
+  min-height: 100vh;  
 }
 
 .auth-box {
