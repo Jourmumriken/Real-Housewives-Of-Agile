@@ -3,8 +3,8 @@ public class Driver {
 
         ManagerLayer dbm = new ManagerLayer();
         System.out.println("Running test");
-        dbm.InsertTest();
-        dbm.RetrieveAllTest();
-
+        //dbm.InsertTest();
+        //dbm.RetrieveAllTest();
+        dbm.errorTest();
     }
 }

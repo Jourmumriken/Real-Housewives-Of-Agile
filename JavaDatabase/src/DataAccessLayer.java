@@ -40,6 +40,7 @@ public class DataAccessLayer {
             // as RepairGuide has constraints to Account usernames.
             initializeTable(conn, "Account", sqlAccount);
             initializeTable(conn, "RepairGuide", createSQLTable);
+
         } else {
             throw new NullPointerException("Connection passed to DataAccessLayer was null.");
         }
@@ -112,6 +113,9 @@ public class DataAccessLayer {
             String password = rs.getString("password");
             a = new Account(username, password);
         }
+        if(a==null) { // account does not exist-> error
+            throw new SQLException();
+        }
         return a;
     }
 
@@ -158,7 +162,6 @@ public class DataAccessLayer {
             Guide g = new Guide(id, title, content, queryAccount(conn, username), difficulty);
             guides.add(g);
         }
-
         return guides;
     }
 
@@ -210,6 +213,9 @@ public class DataAccessLayer {
         }
         rs.close();
         stm.close();
+        if(g==null){ // guide does not exist -> error
+            throw new SQLException();
+        }
         return g;
     }
 
