@@ -1,5 +1,5 @@
 /**
- * An exception that represents that something went wrong with creating an account
+ * An exception that represents that something went wrong with querying an account
  */
 public class AccountNotFoundException extends Exception {
 

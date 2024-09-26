@@ -1,5 +1,5 @@
 /**
- * An exception that represents that something went wrong with creating an account
+ * An exception that represents that something went wrong with querying a guide
  */
 public class GuideNotFoundException extends Exception {
 

@@ -1,5 +1,5 @@
 /**
- * An exception that represents that something went wrong with creating an account
+ * An exception that represents that something went wrong with connecting to the database
  */
 public class DataBaseConnectionException extends Exception {
 

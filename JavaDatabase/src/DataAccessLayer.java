@@ -114,7 +114,7 @@ public class DataAccessLayer {
             a = new Account(username, password);
         }
         if(a==null) { // account does not exist-> error
-            throw new SQLException();
+            throw new SQLException("No entry for 'username' exists in database.");
         }
         return a;
     }
@@ -214,7 +214,7 @@ public class DataAccessLayer {
         rs.close();
         stm.close();
         if(g==null){ // guide does not exist -> error
-            throw new SQLException();
+            throw new SQLException("No entry for guide with 'id' exists in database.");
         }
         return g;
     }

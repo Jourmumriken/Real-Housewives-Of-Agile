@@ -24,7 +24,14 @@ public class ManagerLayer {
         }
         return null;
     }
-    private boolean correctPw(String username,String password) throws AccountNotFoundException{
+    
+    /**
+     * Asserts whether a user 'username' has 'password' as their password.
+     * 
+     * @return a boolean value asserting whether 'username's password is 'password'.
+     * @throws AccountNotFoundException if 'username' does not exist.
+     */
+    public boolean correctPw(String username,String password) throws AccountNotFoundException{
         try {
             Account account = db.queryAccount(conn, username);
             return account.checkPw(password);
@@ -179,28 +186,9 @@ public class ManagerLayer {
         }
         return guides;
     }
-    // TODO Just a temporary test, remove later
-//    public void InsertTest() {
-//        try {
-//            db.insertGuide(conn, "How to repair electric toothbrush", "SHOVE IT UP YOUR ASS!!");
-//        } catch (SQLException e) {
-//            System.out.println("Exception in manager layer:");
-//            System.out.println(e);
-//        }
-//    }
-    // TODO also just temporary test
-    public void RetrieveAllTest() {
-        try {
-            ArrayList<Guide> guides = db.queryAllGuides(conn);
-            for (Guide g : guides) {
-                System.out.println(g);
-            }
-        } catch (SQLException e) {
-            System.out.println("Exception in manager layer:");
-            System.out.println(e.getMessage());
-        }
-    }
-    public void errorTest(){
+
+    // TODO: remove later, just a temporary test
+    private void errorTest(){
         System.out.println("errorTest:");
         try{
             Account acc = getAccount("zzz");
