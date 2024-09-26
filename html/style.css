@@ -24,6 +24,7 @@ body {
 .main-content-container {
   display: flex;
   flex-direction: row;
+  min-height: 90vh;
   padding-bottom: 3rem;
 }
 
@@ -54,6 +55,7 @@ footer {
   display: flex;
   width: 85vw;
   /* min-height: 90vh; */
+  height: stretch;
   flex: 10;
   flex-direction: column;
   padding: 2vw;
@@ -61,6 +63,7 @@ footer {
 
 /* navbars*/
 nav.navbar {
+  position: sticky;
   display: flex;
   width: 100vw;
   height: 10vh;
@@ -75,8 +78,9 @@ nav.navbar {
 
 
 .side-nav {
-  flex: 1;
-  min-height: 81.9vh;
+  /* flex: 1; */
+  /* min-height: 81.9vh; */
+  height: stretch;
   display: flex;
   flex-direction: column;
   padding: 2vw;
