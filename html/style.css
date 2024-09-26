@@ -19,12 +19,15 @@
 body {
   display: flex;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   flex-direction: column;
   font-family:Georgia, 'Times New Roman', Times, serif;
   margin: 0;
   padding: 0;
+  overflow-y: scroll; 
+  overflow-x: hidden;
 }
+
 /* Wrappers*/
 .header{
   display: flex;
@@ -33,8 +36,8 @@ body {
 .main-content-container {
   display: flex;
   flex-direction: row;
-  margin-bottom: 3rem;
-
+  min-height: 90vh;
+  padding-bottom: 3rem;
 }
 
 /* Footer */
@@ -47,21 +50,24 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  width: 100%;
 }
+
 
 
 /* Main Contents */
 .main{
   display: flex;
   width: 100vw;
-  height: 80vh;
+  /* min-height: 90vh; */
   padding: 2vw;
   flex-direction: column;
 }
 .main-with-sidebar {
   display: flex;
   width: 85vw;
-  height: 80vh;
+  /* min-height: 90vh; */
+  height: stretch;
   flex: 10;
   flex-direction: column;
   padding: 2vw;
@@ -69,6 +75,7 @@ footer {
 
 /* navbars*/
 nav.navbar {
+  position: sticky;
   display: flex;
   width: 100vw;
   height: 10vh;
@@ -187,7 +194,9 @@ button.toggle i{
 }
 
 .input-label{
-  display: block; margin-bottom: 10px; font-weight: bold;
+  display: block; 
+  margin-bottom: 10px; 
+  font-weight: bold;
 }
 
 .text-input {
@@ -229,3 +238,65 @@ button[type="submit"]:hover {
 }
 
 
+.main-authentication {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  min-height: 100vh;  
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 400px; 
+  height: auto;
+  max-height: 60vh; 
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.); /* Soft shadow for depth */
+}
+
+.auth-label {
+  text-align: center;
+  font-size: 2em;
+  color: white;
+  margin-bottom: 20px; /* Add space below the label */
+}
+
+.input-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* Spacing between input boxes */
+}
+
+.input-box input {
+  width: 100%;
+  max-width: 300px; /* Responsive width */
+  padding: 15px;
+  background: transparent;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  color: white;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+.input-box input:focus {
+  border-color: rgba(255, 255, 255, 0.8); 
+}
+
+.input-box input::placeholder {
+  color: rgba(255, 255, 255, 0.6); 
+}
+
+.auth-action{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
