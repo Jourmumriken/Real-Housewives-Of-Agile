@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Repairhub</title>
+    <title>RepairHub</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
   </head>
   <!-- Body container -->
   <body class = "container-homepage">
@@ -13,7 +15,12 @@
       <!-- Navigation -->
       <nav class="navbar">
         <div class="logo">
-          <b>Repairhub</b>
+          <div style="text-align:bottom; margin-top:2rem"></div>
+            <button class="toggle"> <i class="fas fa-bars"></i></button>
+            <b>RepairHub</b>
+          </div>
+        
+          
         </div>
         <ul class="nav-items">
           <li><a href="index.html">Home</a></li>
@@ -28,14 +35,17 @@
     <!-- Main Body wrapper -->
     <div class="main-content-container">
       <!-- side navigation -->
-       <div class ="side-nav">
+      <div class="side-nav side-nav--hidden">
+      <div class ="side-nav"> 
          <ul>
            <li><a href="guide1.html">Clean a camera lens</a></li>
            <li><a href="guide2.html">Clean a charging port</a></li>
          </ul>
        </div>
+      </div>
       <!-- End of side navigation -->
 
+ 
       <!-- Main Content -->
       <main class = "main-with-sidebar">
         <h1>About us!</h1>
@@ -48,10 +58,12 @@
 
     </div>
     <!-- End of Main Body wrapper -->
+        <!-- Toggle side navigation button-->
+
 
     <!-- Footer -->
     <footer>
-      <p>&copy; 2024 Repairhub. Right reserved and all that</p>
+      <p>&copy; 2024 RepairHub. Right reserved and all that</p>
     </footer>
     <!-- End of Footer -->
 
