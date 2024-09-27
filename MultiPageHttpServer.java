@@ -12,6 +12,25 @@ public class MultiPageHttpServer extends Thread {
     serverConfig config = serverConfig.getInstance();  
     
     public void main() throws IOException {
+        // Connection to database to insert, retrieve data.
+        ManagerLayer database = new ManagerLayer();
+        // ------------------------------------------------------------------------------- //
+        // Test code in this block: Uncomment and run it once, then comment it again to add 1 user and some guides:
+        // Note: You can not make a guide with a "random Account" that doesn't match an
+        // existing username in the database. Must exist!
+        // Wipe database by removing RepairWikiDB folder & derby.log file locally.
+        // This can all be removed once we can register, publish guides via the site...
+        /*
+        try {
+            database.createAccount("Jeff", "1234");
+            database.createGuide("Guide1", "<h2> step1 </h2>\n something...", database.getAccount("Jeff"), 3);
+            database.createGuide("Guide2", "basic content..", database.getAccount("Jeff"), 2);
+        } catch (DataBaseConnectionException | AccountNotFoundException | AccountCreationException e) {
+            System.out.println(e);
+        }
+        */
+        // ------------------------------------------------------------------------------- //
+
         // Create an HTTP server on port 8080
         HttpServer server = HttpServer.create(new InetSocketAddress(config.getPort()), 0);
 
@@ -20,6 +39,9 @@ public class MultiPageHttpServer extends Thread {
 
         // Create context for the About page
         server.createContext("/about", new MyFileHandler("html/about.html"));
+
+        // Create context for generic guide
+        server.createContext("/guide", new GuideHandler(database)); // TODO: Attempt at generic guide, WIP.
 
         // Create context fro guide1 
         server.createContext("/guide1", new MyFileHandler("html/guide1.html"));
