@@ -7,13 +7,20 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 
-public class MultiPageHttpServer extends Thread {
+public class MultiPageHttpServer {
 
-    serverConfig config = serverConfig.getInstance();  
+    serverConfig config = serverConfig.getInstance(); 
+    ManagerLayer database; 
+
     
     public void main() throws IOException {
         // Connection to database to insert, retrieve data.
-        ManagerLayer database = new ManagerLayer();
+        database = new ManagerLayer();
+        try {
+            database.createAccount("test", "test");
+        } catch (AccountCreationException e) {
+            
+        }
         // ------------------------------------------------------------------------------- //
         // Test code in this block: Uncomment and run it once, then comment it again to add 1 user and some guides:
         // Note: You can not make a guide with a "random Account" that doesn't match an
@@ -56,11 +63,10 @@ public class MultiPageHttpServer extends Thread {
         server.createContext("/style.css", new MyFileHandler("html/style.css", "text/css"));
 
         //logic behind the submit.
-        server.createContext("/fire", new LoginHandler()); 
+        server.createContext("/auth", new LoginHandler(database)); 
 
         //logic behind the register
-        server.createContext("/registerNew", new LoginHandler());
-
+        server.createContext("/registerNew", new LoginHandler(database));
 
         //login page 
         server.createContext("/login", new MyFileHandler("html/login.html"));
@@ -77,16 +83,9 @@ public class MultiPageHttpServer extends Thread {
         System.out.println("Server is running on http://localhost:" + config.getPort());
     }
 
-    @Override
-    public void run() {
-        try{
-            this.main();
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            System.exit(0);
-        }
-        finally{ }
+    
+    public void start () throws IOException {
+        this.main();
     }
 
     
