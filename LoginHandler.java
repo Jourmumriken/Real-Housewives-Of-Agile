@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginHandler implements HttpHandler {
+
+    private String userName; 
+    private String password; 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if ("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
@@ -19,18 +22,20 @@ public class LoginHandler implements HttpHandler {
             Map<String, String> parameters = parseFormData(requestBodyString);
 
             // login validation
-            String username = parameters.get("username");
-            String password = parameters.get("password");
+            userName = parameters.get("username");
+            password = parameters.get("password");
 
             // validation logic
             String response;
-            if ("admin".equals(username) && "password".equals(password)) {
+            if ("admin".equals(userName) && "password".equals(password)) {
                 response = "Login successful!";
             } else {
                 response = "Invalid username or password.";
             }
 
-            System.out.print(username + "," + password);
+            System.out.print(userName + "," + password);
+
+            Connection(); 
 
             // Send response back to client
             exchange.sendResponseHeaders(200, response.length());
@@ -55,5 +60,16 @@ public class LoginHandler implements HttpHandler {
             }
         }
         return parameters;
+    }
+
+    // test method 
+
+    private void Connection(){
+
+        Account myAccount = new Account(userName, password); 
+
+  
+
+
     }
 }

@@ -34,7 +34,7 @@ public class MultiPageHttpServer extends Thread {
         server.createContext("/style.css", new MyFileHandler("html/style.css", "text/css"));
 
         //logic behind the submit.
-        server.createContext("/login?", new LoginHandler()); 
+        server.createContext("/fire", new LoginHandler()); 
 
         //logic behind the register
         server.createContext("/registerNew", new LoginHandler());

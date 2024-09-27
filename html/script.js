@@ -17,7 +17,7 @@ function login() {
         alert("Wrong!!!")
         messageElement.innerHTML = `<p style="color: red;">Invalid username or password.</p>`;
     }
-    fetch('/submit', {
+    fetch('/fire', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
