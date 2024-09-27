@@ -22,6 +22,7 @@ body {
   min-height: 100vh;
   flex-direction: column;
   font-family:Georgia, 'Times New Roman', Times, serif;
+  color: var(--dark-green);
   margin: 0;
   padding: 0;
   overflow-y: scroll; 
@@ -214,7 +215,7 @@ button.toggle i{
 
 .submit-button {
   background-color: #6A9C89;
-  color: white;
+  color: var(--anti-flash-white);
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
@@ -225,7 +226,7 @@ button.toggle i{
  /*old add item button, keep if you want but currently not in use*/
 button[type="submit"] {
   background-color: #6A9C89;
-  color: white;
+  color: var(--anti-flash-white);
   border: none;
   padding: 0.5rem 1rem;
   font-size: 1rem;
@@ -243,6 +244,7 @@ button[type="submit"]:hover {
   justify-content: center;
   align-items: baseline;
   min-height: 100vh;  
+  margin: auto; 
 }
 
 .auth-box {
@@ -250,7 +252,7 @@ button[type="submit"]:hover {
   max-width: 400px; 
   height: auto;
   max-height: 60vh; 
-  background-color: #333;
+  background-color: var(--dark-green);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -258,12 +260,18 @@ button[type="submit"]:hover {
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.); /* Soft shadow for depth */
+  margin: auto; 
+  
+  
+
+  
+  
 }
 
 .auth-label {
   text-align: center;
   font-size: 2em;
-  color: white;
+  color: var(--anti-flash-white);
   margin-bottom: 20px; /* Add space below the label */
 }
 
@@ -280,19 +288,19 @@ button[type="submit"]:hover {
   padding: 15px;
   background: transparent;
   outline: none;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid var(--medium-green);
   border-radius: 40px;
-  color: white;
+  color: var(--anti-flash-white);
   font-size: 1em;
   transition: border-color 0.3s ease;
 }
 
 .input-box input:focus {
-  border-color: rgba(255, 255, 255, 0.8); 
+  border-color: var(--light-green); 
 }
 
 .input-box input::placeholder {
-  color: rgba(255, 255, 255, 0.6); 
+  color: var(--light-green); 
 }
 
 .auth-action{
