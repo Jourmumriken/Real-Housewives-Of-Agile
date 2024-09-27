@@ -32,15 +32,15 @@
       <main class="main-authentication">
         <!-- Text sections -->
         <div class="auth-box">
-            <form action="" class = "auth-action">
+            <form action="registerNew" class = "auth-action">
                 <h2 class = "auth-label">Register</h2>
                 <div class="input-box">
-                    <input type="text" placeholder="Username" />
+                    <input type="text" id="username" placeholder="Username" />
                 </div>
                 <div class="input-box">
-                    <input type="password" placeholder="Password" />
+                    <input type="password" id="password" placeholder="Password" />
                 </div>
-                <button type="submit">Register</button>
+                <button onclick="login()" >Register</button>
                 <a href="login.html" class = "authentication">Already registered? Click here</a>
             </form>
         </div>
