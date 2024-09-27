@@ -42,10 +42,13 @@ public class MultiPageHttpServer extends Thread {
         //register page
         server.createContext("/register", new MyFileHandler("html/register.html"));
 
+        //load script file 
+        server.createContext("/script.js", new MyFileHandler("html/script.js", "application/javascript"));
+
         // Start the server
         server.setExecutor(null); // Default executor
         server.start();
-        System.out.println("Server is running on http://localhost:8080");
+        System.out.println("Server is running on http://localhost:" + config.getPort());
     }
 
     @Override

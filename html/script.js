@@ -1,0 +1,2 @@
+alert("JavaScript loaded successfully!");
+
