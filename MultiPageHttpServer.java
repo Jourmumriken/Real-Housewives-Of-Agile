@@ -58,6 +58,7 @@ public class MultiPageHttpServer {
 
         //Create context for the Add page
         server.createContext("/add-item", new MyFileHandler("html/add-item.html")); 
+        server.createContext("/submit", new SubmitHandler(database));
 
         // Create context for the CSS file
         server.createContext("/style.css", new MyFileHandler("html/style.css", "text/css"));
