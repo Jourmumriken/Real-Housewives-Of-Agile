@@ -67,7 +67,7 @@ public class MultiPageHttpServer {
         server.createContext("/auth", new LoginHandler(database)); 
 
         //logic behind the register
-        server.createContext("/registerNew", new LoginHandler(database));
+        server.createContext("/registerNew", new RegisterHandler(database));
 
         //login page 
         server.createContext("/login", new MyFileHandler("html/login.html"));
