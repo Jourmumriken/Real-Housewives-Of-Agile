@@ -45,12 +45,12 @@ public class RegisterHandler implements HttpHandler{
                 database.createAccount(userName, password);
                 //exchange.getResponseHeaders().add("Set-Cookie", userLogin.cookie.toString());
                 response = "Register successful!";
-                System.out.println(response);
+                //System.out.println(response);
                 //exchange.getResponseHeaders().set("Location", "/admin.html"); 
                 //exchange.sendResponseHeaders(302, -1);
             } catch (AccountCreationException e){
                 response = "Username is already occupied.";
-                System.out.println(response);
+                //System.out.println(response);
             }
 
             // Send response back to client
