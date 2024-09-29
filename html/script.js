@@ -40,6 +40,26 @@ function login() {
 
 
 function register(){
+    event.preventDefault();
 
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const messageElement = document.getElementById('message');
+
+
+        fetch('/registerNew', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+    })
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('message').innerText = data;
+    })
+    .catch(error => {
+        document.getElementById('message').innerText = 'Error: ' + error;
+    }); 
 }
 
