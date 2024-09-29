@@ -8,15 +8,22 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Handles user registration requests.
+ */
 public class RegisterHandler implements HttpHandler{
 
-    private String userName; 
+    private String username; 
     private String password; 
     private ManagerLayer database; 
     UserLogin userLogin; 
     Account account; 
 
-
+    /**
+     * Constructs a RegisterHandler with the specified database manager.
+     * 
+     * @param database the ManagerLayer instance for database operations
+     */
     RegisterHandler(ManagerLayer database){
         this.database = database; 
          
@@ -32,7 +39,7 @@ public class RegisterHandler implements HttpHandler{
             Map<String, String> parameters = parseFormData(requestBodyString);
 
             // login validation
-            userName = parameters.get("username");
+            username = parameters.get("username");
             password = parameters.get("password");
 
             //System.out.print(userName + "," + password);
@@ -42,7 +49,7 @@ public class RegisterHandler implements HttpHandler{
             String response = "Not Initlized";
 
             try{
-                database.createAccount(userName, password);
+                database.createAccount(username, password);
                 //exchange.getResponseHeaders().add("Set-Cookie", userLogin.cookie.toString());
                 response = "Register successful!";
                 //System.out.println(response);
@@ -63,6 +70,12 @@ public class RegisterHandler implements HttpHandler{
         }
     }
 
+    /**
+     * Parses the form data from the request body into a map of parameters.
+     * 
+     * @param body the request body as a string
+     * @return a map containing form parameters
+     */
     private Map<String, String> parseFormData(String body) {
         Map<String, String> parameters = new HashMap<>();
         String[] pairs = body.split("&");

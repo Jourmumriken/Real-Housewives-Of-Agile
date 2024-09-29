@@ -166,15 +166,14 @@ public class DataAccessLayer {
     }
 
     /**
-     * Creates new guide in db with title and content in parameters that is
-     * associated with the account in the parameters
-     * 
-     * @param conn    the connection as a Connection object to the database to
-     *                insert into
-     * @param title   the String title of the guide
-     * @param content the String content of the guide
-     * @throws SQLException throws exception for various reasons, bad connection,
-     *                      wrong data type, table does not exist and others
+     * Creates a new guide in the database with the specified title, content, and associated account.
+     *
+     * @param conn    the connection to the database to insert into
+     * @param title   the title of the guide
+     * @param content the content of the guide
+     * @param account the Account associated with the guide
+     * @param difficulty the difficulty level of the guide
+     * @throws SQLException if the insertion fails
      */
     public void insertGuide(Connection conn, String title, String content, Account account, int difficulty)
             throws SQLException {
@@ -190,12 +189,12 @@ public class DataAccessLayer {
     }
 
     /**
-     * Query a guide by the guide's ID
-     * 
-     * @param conn Database connection of the database that will be queried
-     * @throws SQLException If the connection is bad throws SQLException
-     * @return A Guide object. If guide doesn't exist, id = 0 and title/content =
-     *         null.
+     * Queries a guide by the guide's ID.
+     *
+     * @param conn the database connection to be queried
+     * @param id   the ID of the guide to query
+     * @return a Guide object; if the guide doesn't exist, throws SQLException
+     * @throws SQLException if the connection is bad or if the guide doesn't exist
      */
     public Guide queryGuide(Connection conn, int id) throws SQLException {
         String sql = "SELECT * FROM RepairGuide WHERE id = ?";

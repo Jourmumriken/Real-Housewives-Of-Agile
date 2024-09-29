@@ -8,19 +8,28 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Handles user login requests and manages authentication.
+ */
 public class LoginHandler implements HttpHandler{
 
-    private String userName; 
+    private String username; 
     private String password; 
     private ManagerLayer database; 
     UserLogin userLogin; 
     Account account; 
 
 
-    LoginHandler(ManagerLayer database){
+    /**
+     * Constructs a LoginHandler with the specified ManagerLayer.
+     *
+     * @param database The manager layer responsible for database operations.
+     */
+    public LoginHandler(ManagerLayer database){
         this.database = database; 
          
     }
+
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if ("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
@@ -32,7 +41,7 @@ public class LoginHandler implements HttpHandler{
             Map<String, String> parameters = parseFormData(requestBodyString);
 
             // login validation
-            userName = parameters.get("username");
+            username = parameters.get("username");
             password = parameters.get("password");
 
             //System.out.print(userName + "," + password);
@@ -66,6 +75,13 @@ public class LoginHandler implements HttpHandler{
         }
     }
 
+
+    /**
+     * Parses the form data from the request body into a map of parameters.
+     *
+     * @param body The request body containing form data.
+     * @return A map of parameter names and values.
+     */
     private Map<String, String> parseFormData(String body) {
         Map<String, String> parameters = new HashMap<>();
         String[] pairs = body.split("&");

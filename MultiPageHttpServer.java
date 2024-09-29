@@ -1,4 +1,4 @@
-import config.serverConfig;
+import config.ServerConfig;
 
 import com.sun.net.httpserver.HttpServer;
 
@@ -6,13 +6,19 @@ import java.io.IOException;
 
 import java.net.InetSocketAddress;
 
-
+/**
+ * A multi-page HTTP server that handles various requests and serves HTML pages.
+ */
 public class MultiPageHttpServer {
 
-    serverConfig config = serverConfig.getInstance(); 
+    ServerConfig config = ServerConfig.getInstance(); 
     ManagerLayer database; 
 
-    
+    /**
+     * Main method to set up and start the HTTP server.
+     * 
+     * @throws IOException if an I/O error occurs when creating the server.
+     */
     public void main() throws IOException {
         // Connection to database to insert, retrieve data.
         database = new ManagerLayer();
@@ -84,7 +90,11 @@ public class MultiPageHttpServer {
         System.out.println("Server is running on http://localhost:" + config.getPort());
     }
 
-    
+    /**
+     * Starts the HTTP server by calling the main method.
+     * 
+     * @throws IOException if an I/O error occurs when starting the server.
+     */
     public void start () throws IOException {
         this.main();
     }

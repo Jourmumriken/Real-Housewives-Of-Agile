@@ -10,11 +10,18 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Handles submission of guides.
+ */
 class SubmitHandler implements HttpHandler {
 
     private final ManagerLayer database;
 
-    // Constructor to inject ManagerLayer
+    /**
+     * Constructs a SubmitHandler with the specified database manager.
+     * 
+     * @param database the ManagerLayer instance for database operations
+     */
     public SubmitHandler(ManagerLayer database) {
         this.database = database;
     }
@@ -60,7 +67,13 @@ class SubmitHandler implements HttpHandler {
         }
     }
 
-    // Helper method to parse URL-encoded form data to people langague
+    /**
+     * Parses URL-encoded form data into a map.
+     * 
+     * @param formData the URL-encoded form data as a string
+     * @return a map of form parameters
+     * @throws IOException if an error occurs during decoding
+     */
     private Map<String, String> parseFormData(String formData) throws IOException {
         Map<String, String> formParams = new HashMap<>();
         String[] pairs = formData.split("&");
@@ -75,7 +88,14 @@ class SubmitHandler implements HttpHandler {
         return formParams;
     }
 
-    // Helper method to send an HTTP response
+    /**
+     * Sends an HTTP response to the client.
+     * 
+     * @param exchange the HttpExchange object representing the request/response
+     * @param responseText the response text to send
+     * @param statusCode the HTTP status code to send
+     * @throws IOException if an error occurs while sending the response
+     */
     private void sendResponse(HttpExchange exchange, String responseText, int statusCode) throws IOException {
         exchange.getResponseHeaders().set("Content-Type", "text/html");
         exchange.sendResponseHeaders(statusCode, responseText.length());

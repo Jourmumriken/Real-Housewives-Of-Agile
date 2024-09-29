@@ -7,6 +7,12 @@ public class Account {
     private String username;
     private String password;
 
+     /**
+     * Constructs an Account instance with the specified username and password.
+     *
+     * @param username the username associated with this account
+     * @param password the password for this account
+     */
     public Account(String username, String password) {
         this.username = username;
         this.password = password;
@@ -15,11 +21,11 @@ public class Account {
     /**
      * Asserts that given string matches password
      * 
-     * @param atempt string that will be matched to password
+     * @param attempt string that will be matched to password
      * @return true if argument matches password, else false
      */
-    public boolean checkPw(String atempt) {
-        char[] arr = atempt.toCharArray();
+    public boolean checkPw(String attempt) {
+        char[] arr = attempt.toCharArray();
         char[] pw = password.toCharArray();
         try {
             for (int i = 0; i < pw.length; i++) {
@@ -33,6 +39,11 @@ public class Account {
         }
     }
 
+    /**
+     * Returns the username of this account.
+     *
+     * @return the username as a string
+     */
     public String getUsername() {
         return username;
     }

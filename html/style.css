@@ -18,7 +18,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Wrappers*/
+/* Page Wrappers */
 .header{
   display: flex;
 }
@@ -53,6 +53,8 @@ footer {
   padding: 2vw;
   flex-direction: column;
 }
+
+/* Sidebar + Main Content Layout */
 .main-with-sidebar {
   display: flex;
   width: 85vw;
@@ -94,10 +96,11 @@ nav.navbar {
   font-weight: bold;
 }
 
+/* Navigation Items */
 .nav-items {
-  list-style: none;
+  list-style: none; /* Remove bullet points */
   display: flex;
-  gap: 1.5rem;
+  gap: 1.5rem;  /* Space between nav items */
 }
 
 .nav-items li {
@@ -191,7 +194,7 @@ button[type="submit"]:hover {
   background-color: #45a049;
 }
 
-
+/* Authentication Page Styles */
 .main-authentication {
   display: flex;
   justify-content: center;
@@ -199,6 +202,7 @@ button[type="submit"]:hover {
   min-height: 100vh;  
 }
 
+/* Authentication Box */
 .auth-box {
   width: 100%;
   max-width: 400px; 
@@ -228,6 +232,7 @@ button[type="submit"]:hover {
   margin-bottom: 20px; /* Spacing between input boxes */
 }
 
+/* Input Styles for Form */
 .input-box input {
   width: 100%;
   max-width: 300px; /* Responsive width */

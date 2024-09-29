@@ -3,6 +3,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * The ManagerLayer class handles the application logic for managing accounts and guides.
+ * It interacts with the DataAccessLayer to perform database operations.
+ */
 public class ManagerLayer {
     private final DataAccessLayer db;
     private final Connection conn;
@@ -11,6 +15,7 @@ public class ManagerLayer {
         this.conn = setupConn();
         this.db = new DataAccessLayer(conn);
     }
+
     /**
      * gets a connection to the database in the DatabaseURL field
      * 
@@ -27,7 +32,8 @@ public class ManagerLayer {
     
     /**
      * Asserts whether a user 'username' has 'password' as their password.
-     * 
+     * @param username the username of the account
+     * @param password the password to verify
      * @return a boolean value asserting whether 'username's password is 'password'.
      * @throws AccountNotFoundException if 'username' does not exist.
      */
@@ -44,17 +50,15 @@ public class ManagerLayer {
     /**
      * returns a list of all accounts in db
      * @return {@link ArrayList} of all accounts as {@link Account} objects
-     * @throws DataBaseConnectionException Database access error or Database connection closed
+     * @throws DatabaseConnectionException Database access error or Database connection closed
      */
-    public ArrayList<Account>  getAllAccounts() throws DataBaseConnectionException{
-        ArrayList<Account> accounts = null;
+    public ArrayList<Account>  getAllAccounts() throws DatabaseConnectionException{
         try{
-            accounts=db.queryAllAccounts(conn);
+            return db.queryAllAccounts(conn);
         }
         catch (SQLException e) {
-            throw new DataBaseConnectionException("Database access error or Database connection closed",e);
+            throw new DatabaseConnectionException("Database access error or Database connection closed",e);
         }
-        return accounts;
     }
 
     /**
@@ -64,19 +68,18 @@ public class ManagerLayer {
      * @throws AccountNotFoundException if the account does not exist
      */
     public Account getAccount(String username) throws AccountNotFoundException{
-        Account account;
         try{
-            account=db.queryAccount(conn,username);
+            return db.queryAccount(conn,username);
         }
         catch (SQLException e) {
             System.out.println("getAccount error");
             throw new AccountNotFoundException("Account "+username+" does not exists");
         }
-        return account;
     }
 
     /**
-     * adds new account in database
+     * Creates a new account with the specified username and password.
+     * 
      * @param username the username of the new account as a String
      * @param password the password of the new account as a String
      * @throws AccountCreationException if an account with that username already exists
@@ -91,17 +94,15 @@ public class ManagerLayer {
     /**
      * returns all guides in database
      * @return {@link ArrayList} with all guides as {@link Guide} objects
-     * @throws DataBaseConnectionException Database access error or Database connection closed
+     * @throws DatabaseConnectionException Database access error or Database connection closed
      */
-    public ArrayList<Guide> getAllGuides() throws DataBaseConnectionException{
-        ArrayList<Guide> guides;
+    public ArrayList<Guide> getAllGuides() throws DatabaseConnectionException{
         try{
-            guides=db.queryAllGuides(conn);
+            return db.queryAllGuides(conn);
         }
         catch (SQLException e){
-            throw new DataBaseConnectionException("Database access error or Database connection closed",e);
+            throw new DatabaseConnectionException("Database access error or Database connection closed",e);
         }
-        return  guides;
     }
 
     /**
@@ -110,49 +111,47 @@ public class ManagerLayer {
      * @param content the content of the guide as a String
      * @param account  the author of the guide as {@link Account} object
      * @param difficulty the difficulty of the guide as an int
-     * @throws DataBaseConnectionException Database access error or Database connection closed
+     * @throws DatabaseConnectionException Database access error or Database connection closed
      */
-    public void createGuide(String title, String content, Account account, int difficulty) throws DataBaseConnectionException {
+    public void createGuide(String title, String content, Account account, int difficulty) throws DatabaseConnectionException {
         try{
             db.insertGuide(conn,title,content,account,difficulty);
         }
         catch (SQLException e) {
-           throw new DataBaseConnectionException("Database access error or Database connection closed",e);
+           throw new DatabaseConnectionException("Database access error or Database connection closed",e);
         }
     }
 
     /**
      * returns the guide with provided id
+     * 
      * @param id the id as an int
      * @return the guide with matching id as a {@link Guide} object
      * @throws GuideNotFoundException if the guide does not exist
      */
     public Guide getGuideById(int id) throws GuideNotFoundException{
-        Guide g;
         try{
-            g=db.queryGuide(conn,id);
+            return db.queryGuide(conn,id);
         }
         catch (SQLException e) {
             throw new GuideNotFoundException("Guide "+id+" does not exist",e);
         }
-        return g;
     }
 
     /**
      * returns all guides with titles that matches the provided title
+     * 
      * @param title the title that will be searched for as a String
      * @return {@link ArrayList} of all guides in database as {@link Guide} objects
-     * @throws DataBaseConnectionException if Database access error or Database connection closed
+     * @throws DatabaseConnectionException if Database access error or Database connection closed
      */
-    public ArrayList<Guide> getGuidesByTitle(String title) throws DataBaseConnectionException{
-        ArrayList<Guide> guides;
+    public ArrayList<Guide> getGuidesByTitle(String title) throws DatabaseConnectionException{
         try{
-            guides=db.queryAllGuidesWithTitle(conn,title);
+            return db.queryAllGuidesWithTitle(conn,title);
         }
         catch (SQLException e) {
-            throw new DataBaseConnectionException("Database access error or Database connection closed");
+            throw new DatabaseConnectionException("Database access error or Database connection closed");
         }
-        return guides;
     }
     /**
      * returns all guides authored by the user with provided username
@@ -161,30 +160,26 @@ public class ManagerLayer {
      * @throws AccountNotFoundException if the account does not exist
      */
     public ArrayList<Guide> getAllGuidesFromUser(String username) throws AccountNotFoundException {
-        ArrayList<Guide> guides;
         try{
-            guides=db.queryAllGuidesFromUser(conn,username);
+            return db.queryAllGuidesFromUser(conn,username);
         }
         catch (SQLException e) {
             throw new AccountNotFoundException("Account "+username+" does not exist",e);
         }
-        return guides;
     }
     /**
      * returns all guides in database with the provided difficulty
      * @param difficulty the difficulty of the guides as an int
      * @return {@link ArrayList} of all guides with matching difficulty as {@link Guide} Objects
-     * @throws DataBaseConnectionException if Database access error or Database connection closed
+     * @throws DatabaseConnectionException if Database access error or Database connection closed
      */
-    public ArrayList<Guide> getGuidesWithDifficulty(int difficulty) throws DataBaseConnectionException{
-        ArrayList<Guide> guides;
+    public ArrayList<Guide> getGuidesWithDifficulty(int difficulty) throws DatabaseConnectionException{
         try{
-            guides=db.queryGuidesByDifficulty(conn,difficulty);
+            return db.queryGuidesByDifficulty(conn,difficulty);
         }
         catch (SQLException e) {
-            throw new DataBaseConnectionException("Database access error or Database connection closed",e);
+            throw new DatabaseConnectionException("Database access error or Database connection closed",e);
         }
-        return guides;
     }
 
     // TODO: remove later, just a temporary test

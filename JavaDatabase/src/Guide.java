@@ -8,7 +8,7 @@ public class Guide {
     private final int id;
     private String title;
     private String content;
-    private final Account account;
+    private final Account account;  // Account associated with the guide (creator)
     private int difficulty;
 
     /**
@@ -110,10 +110,10 @@ public class Guide {
      */
     @Override
     public String toString() {
-        return "id: " + id +
-                " title: " + title +
-                " content: " + content +
-                " poster: " + this.account.getUsername() +
-                " difficulty: " + difficulty;
+        return "ID: " + id +
+                ", Title: " + title +
+                ", Content: " + content +
+                ", Poster: " + account.getUsername() +
+                ", Difficulty: " + difficulty;
     }
 }
