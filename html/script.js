@@ -40,9 +40,12 @@ function login() {
 
 
 function register(){
+    event.preventDefault();
+
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const messageElement = document.getElementById('message');
+
 
         fetch('/registerNew', {
         method: 'POST',
