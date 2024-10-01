@@ -48,25 +48,22 @@ public class LoginHandler implements HttpHandler{
 
             
             // validation logic
-            String response;
-
-            if (account.checkPw(password)) {
-                userLogin = new UserLogin(account);
-                //exchange.getResponseHeaders().add("Set-Cookie", userLogin.cookie.toString());
-                response = "Login successful!";
-                System.out.println(response);
+            String response = "Not initlized";
+            try {
+                if(database.correctPw(username, password)) {
+                    //exchange.getResponseHeaders().add("Set-Cookie", userLogin.cookie.toString());
+                    response = "Login successful!";
+                } else {
                 //exchange.getResponseHeaders().set("Location", "/admin.html"); 
                // exchange.sendResponseHeaders(302, -1);
-                
-            } else {
-                response = "Invalid username or password.";
-            }
-
-             
+                    response = "Invalid username or password.";
+                }
+            } catch (Exception e) {
+                response = "Account do not Exist";
+            }      
 
             // Send response back to client
-            //exchange.sendResponseHeaders(200, response.length());
-            
+            exchange.sendResponseHeaders(200, response.length());
             OutputStream os = exchange.getResponseBody();
             os.write(response.getBytes());
             os.close();

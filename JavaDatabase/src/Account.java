@@ -27,16 +27,20 @@ public class Account {
     public boolean checkPw(String attempt) {
         char[] arr = attempt.toCharArray();
         char[] pw = password.toCharArray();
-        try {
-            for (int i = 0; i < pw.length; i++) {
-                if (pw[i] != arr[i]) {
-                    return false;
-                }
-            }
-            return true;
-        } catch (IndexOutOfBoundsException e) {
+        
+        // Check if the lengths are different
+        if (arr.length != pw.length) {
             return false;
         }
+    
+        // Compare character by character
+        for (int i = 0; i < pw.length; i++) {
+            if (pw[i] != arr[i]) {
+                return false;
+            }
+        }
+    
+        return true;
     }
 
     /**

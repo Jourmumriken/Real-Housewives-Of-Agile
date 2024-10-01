@@ -1,7 +1,7 @@
 // alert("JavaScript loaded successfully!");
 // Function to handle login functionality
 function login() {
-    
+    event.preventDefault();
     // Get username and password input values
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
