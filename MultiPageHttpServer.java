@@ -6,6 +6,10 @@ import java.io.IOException;
 
 import java.net.InetSocketAddress;
 
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
 /**
  * A multi-page HTTP server that handles various requests and serves HTML pages.
  */
@@ -13,6 +17,7 @@ public class MultiPageHttpServer {
 
     ServerConfig config = ServerConfig.getInstance(); 
     ManagerLayer database; 
+    private final Logger logger = Logger.getLogger(MultiPageHttpServer.class.getName()); 
 
     /**
      * Main method to set up and start the HTTP server.
@@ -46,6 +51,9 @@ public class MultiPageHttpServer {
 
         // Create an HTTP server on port 8080
         HttpServer server = HttpServer.create(new InetSocketAddress(config.getPort()), 0);
+
+        //Logger to help us read HTTP requests
+        setupLogger(); 
 
         // Create context for the root (Home page) or index.html
         server.createContext("/", new MyFileHandler("html/index.html"));
@@ -87,6 +95,7 @@ public class MultiPageHttpServer {
         // Start the server
         server.setExecutor(null); // Default executor
         server.start();
+        logger.info("Server runnung on port"+ config.getPort());
         System.out.println("Server is running on http://localhost:" + config.getPort());
     }
 
@@ -97,6 +106,18 @@ public class MultiPageHttpServer {
      */
     public void start () throws IOException {
         this.main();
+    }
+
+
+    private void setupLogger() {
+        try {
+            FileHandler fileHandler = new FileHandler("server.log", true); // Append mode
+            fileHandler.setFormatter(new SimpleFormatter()); // Simple text format
+            logger.addHandler(fileHandler);
+            //logger.setUseParentHandlers(false); // Disable console logging
+        } catch (IOException e) {
+            logger.severe("Failed to setup logger: " + e.getMessage());
+        }
     }
 
     

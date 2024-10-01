@@ -7,6 +7,10 @@ import java.net.HttpCookie;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
+
+
+
 
 /**
  * Handles user login requests and manages authentication.
@@ -18,6 +22,7 @@ public class LoginHandler implements HttpHandler{
     private ManagerLayer database; 
     UserLogin userLogin; 
     Account account; 
+    public final Logger logger = Logger.getLogger(MultiPageHttpServer.class.getName());
 
 
     /**
@@ -32,8 +37,11 @@ public class LoginHandler implements HttpHandler{
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
+        ; 
         if ("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
-            System.out.print("I am here");
+            
+            System.out.print("inside of Login Handler");
+            
             InputStream requestBody = exchange.getRequestBody();
             byte[] data = requestBody.readAllBytes();
             String requestBodyString = new String(data, StandardCharsets.UTF_8);
@@ -45,17 +53,20 @@ public class LoginHandler implements HttpHandler{
             password = parameters.get("password");
 
             //System.out.print(userName + "," + password);
-
-            
             // validation logic
             String response = "Not initlized";
             try {
+
+                logger.info("UserName input " + username + "Passowrd " + password);
+
                 if(database.correctPw(username, password)) {
                     //exchange.getResponseHeaders().add("Set-Cookie", userLogin.cookie.toString());
                     response = "Login successful!";
+                    
+                    // we need to send further to the protected site
+                    //exchange.getResponseHeaders().set("Location", "/"); 
+                    //exchange.sendResponseHeaders(301, -1);
                 } else {
-                //exchange.getResponseHeaders().set("Location", "/admin.html"); 
-               // exchange.sendResponseHeaders(302, -1);
                     response = "Invalid username or password.";
                 }
             } catch (Exception e) {
@@ -92,5 +103,7 @@ public class LoginHandler implements HttpHandler{
         }
         return parameters;
     }
+
+    
     
 }
