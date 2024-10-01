@@ -62,10 +62,13 @@ public class LoginHandler implements HttpHandler{
                 if(database.correctPw(username, password)) {
                     //exchange.getResponseHeaders().add("Set-Cookie", userLogin.cookie.toString());
                     response = "Login successful!";
-                    
                     // we need to send further to the protected site
-                    //exchange.getResponseHeaders().set("Location", "/"); 
-                    //exchange.sendResponseHeaders(301, -1);
+                    logger.info("Login successful!");
+                    
+                    sendResponse(exchange, response, 302, "/html/guide1");
+
+
+
                 } else {
                     response = "Invalid username or password.";
                 }
@@ -74,7 +77,7 @@ public class LoginHandler implements HttpHandler{
             }      
 
             // Send response back to client
-            exchange.sendResponseHeaders(200, response.length());
+            //exchange.sendResponseHeaders(200, response.length());
             OutputStream os = exchange.getResponseBody();
             os.write(response.getBytes());
             os.close();
@@ -104,6 +107,18 @@ public class LoginHandler implements HttpHandler{
         return parameters;
     }
 
-    
+    private void sendResponse(HttpExchange exchange, String responseText, int statusCode, String locationURL) throws IOException {
+        exchange.getResponseHeaders().set("Location", locationURL);
+        exchange.getResponseHeaders().set("Cache-Control", "no-store, no-cache, must-revalidate");
+
+        
+        //exchange.getResponseHeaders().set("responseText", locationURL);
+        exchange.sendResponseHeaders(statusCode, -1);
+
+        OutputStream os = exchange.getResponseBody();
+        //os.write(responseText.getBytes());
+        os.close();
+    }
+
     
 }

@@ -95,7 +95,7 @@ public class MultiPageHttpServer {
         // Start the server
         server.setExecutor(null); // Default executor
         server.start();
-        logger.info("Server runnung on port"+ config.getPort());
+        logger.info("Logger is running");
         System.out.println("Server is running on http://localhost:" + config.getPort());
     }
 
