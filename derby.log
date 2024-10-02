@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Fri Sep 27 15:47:51 CEST 2024:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-0192-33bc-ea47-000007986800 
-on database directory /Users/yousefnoufal/Desktop/Real-Housewives-Of-Agile/RepairWikiDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1cf4f579 
-Loaded from file:/Users/yousefnoufal/Desktop/Real-Housewives-Of-Agile/JavaDatabase/lib/derby.jar
+Thu Oct 03 07:11:10 CEST 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-0192-50ca-0681-00000ec14f40 
+on database directory /home/markus/IdeaProjects/Real-Housewives-Of-Agile/RepairWikiDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a 
+Loaded from file:/home/markus/coding/database/db-derby-10.17.1.0-bin/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=21.0.2+13-58
-user.dir=/Users/yousefnoufal/Desktop/Real-Housewives-Of-Agile
-os.name=Mac OS X
-os.arch=aarch64
-os.version=15.0
+user.dir=/home/markus/IdeaProjects/Real-Housewives-Of-Agile
+os.name=Linux
+os.arch=amd64
+os.version=6.10.4-200.fc40.x86_64
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
