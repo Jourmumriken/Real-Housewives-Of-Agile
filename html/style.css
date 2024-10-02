@@ -27,6 +27,7 @@ body {
   padding: 0;
   overflow-y: scroll; 
   overflow-x: hidden;
+  background: var(--anti-flash-white);
 }
 
 /* Wrappers*/
@@ -55,7 +56,6 @@ footer {
 }
 
 
-
 /* Main Contents */
 .main{
   display: flex;
@@ -67,12 +67,14 @@ footer {
 .main-with-sidebar {
   display: flex;
   width: 85vw;
-  /* min-height: 90vh; */
+  min-height: 90vh; 
   height: stretch;
   flex: 10;
   flex-direction: column;
   padding: 2vw;
+  transition: width 0.3s ease-in-out;
 }
+
 
 /* navbars*/
 nav.navbar {
@@ -90,25 +92,33 @@ nav.navbar {
   position: sticky; 
 }
 
-
 .side-nav {
   flex: 1;
   min-height: 100vh;
-  width: 50%;
-  /* height: 100%; */
+  width: 12rem;
+  height: 100%; 
   display: flex;
   flex-direction: column;
-  padding: 2vw;
   background-color: var(--medium-green);
   color: var(--anti-flash-white);
   transition: transform 300ms ease in;
+  text-align: left; 
+   
+
 }
 .side-nav--hidden{
     transform: translateX(-12rem); 
     transition: transform 300ms ease-out; 
   }
 
+  .main-content-container.side-nav--hidden .main-with-sidebar {
+    width: 100vw;
+  }
 
+  
+a:before{
+  color: var(--dark-green);
+}
 
 a:visited{
 color: var(--light-green);
@@ -123,10 +133,17 @@ color: var(--light-green);
  
 }
 
+.logo a{
+  background-color: transparent;
+  text-decoration: none;
+  color: var(--anti-flash-white); 
+}
+
 .nav-items {
   list-style: none;
   display: flex;
   gap: 1.5rem;
+  align-items: center;
 }
 
 .nav-items li {
@@ -135,18 +152,20 @@ color: var(--light-green);
 }
 
 .nav-items li a {
-  color: #E9EFEC;
+  color: var(--anti-flash-white);
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2rem;
   font-size: 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+  background: none; 
+  border-radius: 2px;
+  background-color: #6A9C89;
+  transition: background-color 0.3s ease-in;
+  align-items: center;
 }
 
 .nav-items li a:hover {
-  background-color: #16423C;
+  background-color: var(--dark-green);
 }
-
 
 
 .intro h1 {
@@ -260,11 +279,7 @@ button[type="submit"]:hover {
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.); /* Soft shadow for depth */
-  margin: auto; 
-  
-  
-
-  
+  margin: auto;
   
 }
 
