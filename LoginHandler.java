@@ -36,8 +36,7 @@ public class LoginHandler implements HttpHandler{
     }
 
     @Override
-    public void handle(HttpExchange exchange) throws IOException {
-        ; 
+    public void handle(HttpExchange exchange) throws IOException { 
         if ("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
             
             System.out.print("inside of Login Handler");
@@ -60,24 +59,33 @@ public class LoginHandler implements HttpHandler{
                 logger.info("UserName input " + username + "Passowrd " + password);
 
                 if(database.correctPw(username, password)) {
-                    //exchange.getResponseHeaders().add("Set-Cookie", userLogin.cookie.toString());
+
+                    this.account = database.getAccount(username);
+                    UserLogin userLogin = new UserLogin(account);
+
+                    exchange.getResponseHeaders().add("Set-Cookie", userLogin.getCookie().toString());
+                    
                     response = "Login successful!";
                     // we need to send further to the protected site
                     logger.info("Login successful!");
                     
-                    sendResponse(exchange, response, 302, "/html/guide1");
+                    sendResponse(exchange, response, 302, "/guide1");
 
 
 
                 } else {
                     response = "Invalid username or password.";
+                    // Redirect to login page again, if account exists but password was wrong.
+                    sendResponse(exchange, response, 302, "/login");
                 }
-            } catch (Exception e) {
-                response = "Account do not Exist";
+            } catch (AccountNotFoundException e) {
+                response = "Account does not Exist";
+                // Redirect to login page again, if account does not exist.
+                sendResponse(exchange, response, 302, "/login");
             }      
 
             // Send response back to client
-            //exchange.sendResponseHeaders(200, response.length());
+            exchange.sendResponseHeaders(200, response.length());
             OutputStream os = exchange.getResponseBody();
             os.write(response.getBytes());
             os.close();
