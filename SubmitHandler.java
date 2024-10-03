@@ -49,15 +49,18 @@ class SubmitHandler implements HttpHandler {
                 String guideContent = parsedData.get("name2");
                 int difficulty = Integer.parseInt(parsedData.get("range")); // Assuming range is always valid
 
-                // Use a hardcoded account TODO: (this will be replaced later with dynamic user accounts)
-                Account hardcodedAccount = database.getAccount("test"); // Assumes "test" user exists.
+                String sessionId = UserLogin.extractSessionIdFromCookies(exchange);
+                if(sessionId != null){ // Only creates guide if there's a cookie session(login session)
+                    // Pass the data to database
+                    database.createGuide(guideTitle, guideContent, database.getAccount(sessionId), difficulty);    
+                    
+                    // Respond with a success message
+                    String response = "Guide \"" + guideTitle + "\" has been successfully submitted!";
+                    sendResponse(exchange, response, 200);
+                } else {
+                    sendResponse(exchange, "Guide submission failed. Must be logged in!", 401);
+                }
 
-                // Pass the data to database
-                database.createGuide(guideTitle, guideContent, hardcodedAccount, difficulty);
-
-                // Respond with a success message
-                String response = "Guide \"" + guideTitle + "\" has been successfully submitted!";
-                sendResponse(exchange, response, 200);
             } catch (Exception e) {
                 e.printStackTrace();
                 sendResponse(exchange, "An error occurred while processing your request.", 500);

@@ -7,6 +7,10 @@ import java.net.HttpCookie;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
+
+
+
 
 /**
  * Handles user login requests and manages authentication.
@@ -18,6 +22,7 @@ public class LoginHandler implements HttpHandler{
     private ManagerLayer database; 
     UserLogin userLogin; 
     Account account; 
+    public final Logger logger = Logger.getLogger(MultiPageHttpServer.class.getName());
 
 
     /**
@@ -31,9 +36,11 @@ public class LoginHandler implements HttpHandler{
     }
 
     @Override
-    public void handle(HttpExchange exchange) throws IOException {
+    public void handle(HttpExchange exchange) throws IOException { 
         if ("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
-            System.out.print("I am here");
+            
+            System.out.print("inside of Login Handler");
+            
             InputStream requestBody = exchange.getRequestBody();
             byte[] data = requestBody.readAllBytes();
             String requestBodyString = new String(data, StandardCharsets.UTF_8);
@@ -45,28 +52,40 @@ public class LoginHandler implements HttpHandler{
             password = parameters.get("password");
 
             //System.out.print(userName + "," + password);
-
-            
             // validation logic
-            String response;
+            String response = "Not initlized";
+            try {
 
-            if (account.checkPw(password)) {
-                userLogin = new UserLogin(account);
-                //exchange.getResponseHeaders().add("Set-Cookie", userLogin.cookie.toString());
-                response = "Login successful!";
-                System.out.println(response);
-                //exchange.getResponseHeaders().set("Location", "/admin.html"); 
-               // exchange.sendResponseHeaders(302, -1);
-                
-            } else {
-                response = "Invalid username or password.";
-            }
+                logger.info("UserName input " + username + "Passowrd " + password);
 
-             
+                if(database.correctPw(username, password)) {
+
+                    this.account = database.getAccount(username);
+                    UserLogin userLogin = new UserLogin(account);
+
+                    exchange.getResponseHeaders().add("Set-Cookie", userLogin.getCookie().toString());
+                    
+                    response = "Login successful!";
+                    // we need to send further to the protected site
+                    logger.info("Login successful!");
+                    
+                    sendResponse(exchange, response, 302, "/guide1");
+
+
+
+                } else {
+                    response = "Invalid username or password.";
+                    // Redirect to login page again, if account exists but password was wrong.
+                    sendResponse(exchange, response, 302, "/login");
+                }
+            } catch (AccountNotFoundException e) {
+                response = "Account does not Exist";
+                // Redirect to login page again, if account does not exist.
+                sendResponse(exchange, response, 302, "/login");
+            }      
 
             // Send response back to client
-            //exchange.sendResponseHeaders(200, response.length());
-            
+            exchange.sendResponseHeaders(200, response.length());
             OutputStream os = exchange.getResponseBody();
             os.write(response.getBytes());
             os.close();
@@ -95,5 +114,19 @@ public class LoginHandler implements HttpHandler{
         }
         return parameters;
     }
+
+    private void sendResponse(HttpExchange exchange, String responseText, int statusCode, String locationURL) throws IOException {
+        exchange.getResponseHeaders().set("Location", locationURL);
+        exchange.getResponseHeaders().set("Cache-Control", "no-store, no-cache, must-revalidate");
+
+        
+        //exchange.getResponseHeaders().set("responseText", locationURL);
+        exchange.sendResponseHeaders(statusCode, -1);
+
+        OutputStream os = exchange.getResponseBody();
+        //os.write(responseText.getBytes());
+        os.close();
+    }
+
     
 }
