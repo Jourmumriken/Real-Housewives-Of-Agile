@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.IOException;
 import com.sun.net.httpserver.HttpExchange;
@@ -11,16 +12,29 @@ import java.util.*;
 
 
 
-
+/**
+ * A handler for serving files over HTTP.
+ */
 class MyFileHandler implements HttpHandler {
     private String filePath;
     private String contentType;
     File file; 
 
+    /**
+     * Constructor for MyFileHandler with default content type as "text/html".
+     * 
+     * @param filePath the path of the file to serve
+     */
     public MyFileHandler(String filePath) {
         this (filePath, "text/html");
     }
 
+     /**
+     * Constructor for MyFileHandler with specified content type.
+     * 
+     * @param filePath   the path of the file to serve
+     * @param contentType the content type of the file
+     */
     public MyFileHandler(String filePath, String contentType) {
         this.filePath = filePath;
         this.contentType = contentType;
@@ -59,6 +73,11 @@ class MyFileHandler implements HttpHandler {
         }
     }
     
+    /**
+     * Logs the request information to the console.
+     * 
+     * @param exchange the HTTP exchange containing request data
+     */
     private void logRequestInfo(HttpExchange exchange) {
         System.out.println("---- Incoming Request ----");
         System.out.println("Method: " + exchange.getRequestMethod());

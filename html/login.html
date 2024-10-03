@@ -10,7 +10,7 @@
 
   </head>
   <!-- Body container -->
-  <body class = "container-homepage">
+  <body class = "homepage-container">
     <!-- Header -->
     <header>
       <!-- Navigation -->
@@ -36,15 +36,18 @@
       <main class="main-authentication">
         <!-- Text sections -->
         <div class="auth-box">
-            <form action="" class = "auth-action">
-                <h2 class = "auth-label">Log in</h2>
+            <form action='/auth' method='POST' class = "auth-action">
+                <h2 class = "auth-label">Login</h2>
                 <div class="input-box">
-                    <input type="text" placeholder="Username" />
+                    <input type="text" id="username" placeholder="Username" />
                 </div>
                 <div class="input-box">
-                    <input type="password" placeholder="Password" />
+                    <input type="password" id="password" placeholder="Password" />
                 </div>
-                <button type="submit">Log in</button>
+                <button onclick="login()">Login</button>
+                
+                <div id="message" class="message"></div>
+
                 <a href="register.html">Create an account</a>
             </form>
         </div>
