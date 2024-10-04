@@ -50,7 +50,7 @@ public class MultiPageHttpServer {
 //            database.createGuide("Guide1", "<h2> step1 </h2>\n something...", database.getAccount("Jeff"), 3);
 //            database.createGuide("Guide2", "basic content..", database.getAccount("Jeff"), 2);
 //            Guide g = database.getGuidesByTitle("Guide1").getFirst();
-//            database.voteOnGuide(database.getAccount("Jeff"),g, VoteType.DOWNVOTE);
+//            database.voteOnGuide(database.getAccount("Jeff"),g, VoteType.UPVOTE);
 //            System.out.println(database.getVoteBalance(g));
 //            database.voteOnGuide(database.getAccount("Jeff"),g, VoteType.UPVOTE);
 //            System.out.println(database.getVoteBalance(g));
