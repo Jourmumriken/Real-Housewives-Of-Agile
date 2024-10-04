@@ -117,8 +117,8 @@ nav.navbar {
   }
 
   .icon {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     vertical-align: center; /* Aligns the icon with text */
     margin-right: 8px; /* Adds some spacing between the icon and the text */
   }
@@ -148,14 +148,16 @@ color: var(--light-green);
 
 /* Navigation Items */
 .nav-items {
-  list-style: none; /* Remove bullet points */
+  list-style: none; 
   display: flex;
-  gap: 1.5rem;  /* Space between nav items */
+  gap: 16px;  
 }
 
 .nav-items li {
-  display: inline;
-  position: center; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
 
 .nav-items li a {
