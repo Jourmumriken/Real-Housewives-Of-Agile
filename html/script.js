@@ -100,3 +100,9 @@ function register(){
     }); 
 }
 
+
+/* Toggle side nav bar*/
+function toggleSideNav() {
+    document.getElementById("toggle-sidebar").classList.toggle("collapsed");
+    document.getElementById("toggle-main").classList.toggle("collapsed");
+  }

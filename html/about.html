@@ -1,76 +1,73 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title class="logo">RepairHub</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title class="logo">RepairHub</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 
-  </head>
-  <!-- Body container -->
-  <body class = "homepage-container">
-    <!--  Header -->
-    <header class="header">
-      <!-- Navigation -->
-      <nav class="navbar">
-        <div class="logo">
-          <div style="text-align:bottom; margin-top:2rem"></div>
-            <button class="toggle"> <a class="fas fa-bars"></a></button>
-            <a href="index.html"><b>RepairHub</a></b>
-          </div>
-        
-          
-        </div>
-        <ul class="nav-items">
-          <li><a href="index.html" class="fa-solid fa-house"></a></li>
-          <li><a href="about.html" class="fa-solid fa-file"></a></li>
-          <li><a href="add-item.html" class="fa-solid fa-plus"></a></li>
-          <li><a href="login.html">Log in/Register</a></li>
-        </ul>
-      </nav>
-      <!--  End of Navigation -->
-    </header>
-    <!--  End of Header-->
+</head>
+<!-- Body container -->
 
-    <!-- Main Body wrapper -->
-    <div class="main-content-container">
-      <!-- side navigation -->
-      <div class="side-nav side-nav--hidden">
-      <div class ="side-nav"> 
-         <ul>
-           <li><a href="guide1.html">Clean a camera lens</a></li>
-           <li><a href="guide2.html">Clean a charging port</a></li>
-         </ul>
-       </div>
-      </div>
-      <!-- End of side navigation -->
+<body class="homepage-container">
 
- 
-      <!-- Main Content -->
-      <main class="main main-with-sidebar">
-        <h1>About us!</h1>
-        <p>This is a project by group 14 of the agile development course</p>
-        <p>AKA</p>
-        <h2 style="font-weight: 200;">The Real Housewives Of Agile</h2>
-        <p>We have made a repair wiki with guides for repairing eletronics and other devices.</p>
-      </main>
-      <!--  End of Main Content -->
+  <!--  Header -->
+  <header class="header">
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="logo"> <a href="index.html"><b>RepairHub</a></b></div>
 
+      <ul class="nav-items">
+        <li><a href="index.html" class="fa-solid fa-house"></a></li>
+        <li><a href="about.html" class="fa-solid fa-file"></a></li>
+        <li><a href="add-item.html" class="fa-solid fa-plus"></a></li>
+        <li><a href="login.html">Log in/Register</a></li>
+      </ul>
+    </nav>
+    <!--  End of Navigation -->
+  </header>
+  <!--  End of Header-->
+
+  <!-- Main Body wrapper -->
+  <div class="main-content-container">
+    <!-- side navigation -->
+    <div id="toggle-sidebar" class="side-nav">
+      <a href="#" class="toggle-btn" onclick="toggleSideNav()"> <!-- placeholder visual -->
+        &#9776;&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;
+      </a>
+      <a href="guide1.html">Clean a camera lens</a>
+      <a href="guide2.html">Clean a charging port</a>
     </div>
-    <!-- End of Main Body wrapper -->
+    <!-- End of side navigation -->
 
 
-    <!-- Footer -->
-    <footer>
-      <p>&copy; 2024 RepairHub. Rights reserved and all that</p>
-    </footer>
-    <!-- End of Footer -->
+    <!-- Main Content -->
+    <main id="toggle-main" class="main-with-sidebar">
+      <h1>About us!</h1>
+      <p>This is a project by group 14 of the agile development course</p>
+      <p>AKA</p>
+      <h2 style="font-weight: 200;">The Real Housewives Of Agile</h2>
+      <p>We have made a repair wiki with guides for repairing eletronics and other devices.</p>
+    </main>
+    <!--  End of Main Content -->
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
-    <!-- End of JavaScript-->
-  </body>
-  <!-- End of body container -->
+  </div>
+  <!-- End of Main Body wrapper -->
+
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 RepairHub. Rights reserved and all that</p>
+  </footer>
+  <!-- End of Footer -->
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+  <!-- End of JavaScript-->
+</body>
+<!-- End of body container -->
+
 </html>

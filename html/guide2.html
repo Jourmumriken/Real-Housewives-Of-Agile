@@ -18,9 +18,7 @@
   <header>
     <!-- Navigation -->
     <nav class="navbar">
-      <div class="logo">
-        <b> RepairHub </b>
-      </div>
+      <div class="logo"> <a href="index.html"><b>RepairHub</a></b></div>
 
       <ul class="nav-items">
         <li><a href="index.html" class="fa-solid fa-house"></a></li>
@@ -36,14 +34,17 @@
   <!-- Main body wrapper -->
   <div class="main-content-container">
     <!-- side navigation -->
-    <ul class="side-nav">
-      <li><a href="guide1.html">Clean a camera lens</a></li>
-      <li><a href="guide2.html">Clean a charging port</a></li>
-    </ul class="side-nav">
+    <div id="toggle-sidebar" class="side-nav">
+      <a href="#" class="toggle-btn" onclick="toggleSideNav()"> <!-- placeholder visual -->
+        &#9776;&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;
+      </a>
+      <a href="guide1.html">Clean a camera lens</a>
+      <a href="guide2.html">Clean a charging port</a>
+    </div>
     <!-- End of side navigation -->
 
     <!-- Main Content -->
-    <main class="main-with-sidebar">
+    <main id="toggle-main" class="main-with-sidebar">
       <section class="intro">
         <h1>How to clean a charging port</h1>
         <hr>
