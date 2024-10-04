@@ -1,4 +1,5 @@
- 
+package JavaWebSite;
+
 import java.io.IOException;
 
 public class Main {

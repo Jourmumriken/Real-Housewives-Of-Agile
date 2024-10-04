@@ -1,3 +1,5 @@
+package JavaWebSite;
+
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -5,7 +7,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
-
+import JavaDataBase.ManagerLayer;
+import JavaDataBase.Guide;
+import JavaDataBase.Exceptions.*;
+//import org.apache.derby.impl.load.Import;
 /**
  * Currently messy "proof of concept". It works by grabbing index.html as
  * a string, editing the item container to include existing guides,
@@ -20,7 +25,7 @@ class GuideHandler implements HttpHandler {
     ManagerLayer database;
 
     /**
-     * Constructor to initialize the GuideHandler with a database reference.
+     * Constructor to initialize the JavaWebSite.GuideHandler with a database reference.
      *
      * @param database The database management layer.
      */
@@ -80,7 +85,7 @@ class GuideHandler implements HttpHandler {
                             .append(guide.getTitle())
                             .append("</a></li>\n");
                 }
-            } catch (DatabaseConnectionException e) {
+            } catch (DataBaseConnectionException e) {
                 System.out.println(e);
             }
 

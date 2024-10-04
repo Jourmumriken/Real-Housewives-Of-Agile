@@ -1,3 +1,5 @@
+package JavaDataBase;
+
 /**
  * The Account class represents a user account.
  * Each account has a username and password, and allows

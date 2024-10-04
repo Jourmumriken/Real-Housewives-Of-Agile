@@ -1,3 +1,7 @@
+package JavaWebSite;
+
+import JavaDataBase.Account;
+
 import java.net.HttpCookie;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +31,7 @@ public class UserLogin {
 
     /**
      * Creates a session Cookie.
-     * 
+     *
      * @return a new HttpCookie that contains the sessionID
      */
     private HttpCookie createSessionCookie() {
@@ -40,7 +44,7 @@ public class UserLogin {
 
     /**
      * Extracts a sessionId from the request cookies.
-     * 
+     *
      * @param exchange the httpExchange object representing a request.
      * @return the sessionId from the cookie if it is found, otherwise null.
      */
@@ -63,7 +67,7 @@ public class UserLogin {
     /**
      * Checks if the sessionId in the user's cookie matches the
      * current user's session
-     * 
+     *
      * @param exchange The HttpExchange object.
      * @return true if the session matches, otherwise false.
      */
@@ -74,7 +78,7 @@ public class UserLogin {
 
     /**
      * Returns the cookie associated with this UserLogin.
-     * 
+     *
      * @return the cookie as an HttpCookie
      */
     public HttpCookie getCookie() {
@@ -90,4 +94,6 @@ public class UserLogin {
         return this.sessionId;
     }
 
+
+    
 }

@@ -1,3 +1,5 @@
+package JavaDataBase;
+
 /**
  * The Guide class represents a repair guide created by a user.
  * Each guide is associated with an account and contains

@@ -1,3 +1,7 @@
+package JavaWebSite;
+
+import JavaDataBase.Exceptions.AccountCreationException;
+import JavaDataBase.VoteType;
 import config.ServerConfig;
 
 import com.sun.net.httpserver.HttpServer;
@@ -5,6 +9,8 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 
 import java.net.InetSocketAddress;
+import JavaDataBase.*;
+import JavaDataBase.Exceptions.*;
 
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -16,8 +22,8 @@ import java.util.logging.SimpleFormatter;
 public class MultiPageHttpServer {
 
     ServerConfig config = ServerConfig.getInstance(); 
-    ManagerLayer database; 
-    private final Logger logger = Logger.getLogger(MultiPageHttpServer.class.getName()); 
+    ManagerLayer database;
+    private final Logger logger = Logger.getLogger(MultiPageHttpServer.class.getName());
 
     /**
      * Main method to set up and start the HTTP server.
@@ -38,22 +44,27 @@ public class MultiPageHttpServer {
         // existing username in the database. Must exist!
         // Wipe database by removing RepairWikiDB folder & derby.log file locally.
         // This can all be removed once we can register, publish guides via the site...
-        /*
-        try {
-            database.createAccount("Jeff", "1234");
-            database.createGuide("Guide1", "<h2> step1 </h2>\n something...", database.getAccount("Jeff"), 3);
-            database.createGuide("Guide2", "basic content..", database.getAccount("Jeff"), 2);
-        } catch (DataBaseConnectionException | AccountNotFoundException | AccountCreationException e) {
-            System.out.println(e);
-        }
-        */
+
+//        try {
+//            database.createAccount("Jeff", "1234");
+//            database.createGuide("Guide1", "<h2> step1 </h2>\n something...", database.getAccount("Jeff"), 3);
+//            database.createGuide("Guide2", "basic content..", database.getAccount("Jeff"), 2);
+//            Guide g = database.getGuidesByTitle("Guide1").getFirst();
+//            database.voteOnGuide(database.getAccount("Jeff"),g, VoteType.DOWNVOTE);
+//            System.out.println(database.getVoteBalance(g));
+//            database.voteOnGuide(database.getAccount("Jeff"),g, VoteType.UPVOTE);
+//            System.out.println(database.getVoteBalance(g));
+//        } catch (DataBaseConnectionException | AccountNotFoundException | AccountCreationException| GuideNotFoundException e) {
+//            System.out.println(e);
+//        }
+
         // ------------------------------------------------------------------------------- //
 
         // Create an HTTP server on port 8080
         HttpServer server = HttpServer.create(new InetSocketAddress(config.getPort()), 0);
 
         //Logger to help us read HTTP requests
-        setupLogger(); 
+        setupLogger();
 
         // Create context for the root (Home page) or index.html
         server.createContext("/", new MyFileHandler("html/index.html"));
@@ -120,5 +131,5 @@ public class MultiPageHttpServer {
         }
     }
 
-    
+
 }

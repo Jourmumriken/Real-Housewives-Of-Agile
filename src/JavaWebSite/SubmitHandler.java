@@ -1,4 +1,9 @@
+package JavaWebSite;
+
 import java.io.IOException;
+
+import JavaDataBase.Account;
+import JavaDataBase.ManagerLayer;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.OutputStream;
@@ -18,7 +23,7 @@ class SubmitHandler implements HttpHandler {
     private final ManagerLayer database;
 
     /**
-     * Constructs a SubmitHandler with the specified database manager.
+     * Constructs a JavaWebSite.SubmitHandler with the specified database manager.
      * 
      * @param database the ManagerLayer instance for database operations
      */

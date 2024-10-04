@@ -1,3 +1,5 @@
+package JavaDataBase.Exceptions;
+
 /**
  * An exception that represents that something went wrong with creating an account
  */

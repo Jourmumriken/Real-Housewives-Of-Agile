@@ -1,3 +1,6 @@
+package JavaWebSite;
+import JavaDataBase.Account;
+import JavaDataBase.ManagerLayer;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
@@ -19,14 +22,14 @@ public class LoginHandler implements HttpHandler{
 
     private String username; 
     private String password; 
-    private ManagerLayer database; 
+    private ManagerLayer database;
     UserLogin userLogin; 
-    Account account; 
+    Account account;
     public final Logger logger = Logger.getLogger(MultiPageHttpServer.class.getName());
 
 
     /**
-     * Constructs a LoginHandler with the specified ManagerLayer.
+     * Constructs a JavaWebSite.LoginHandler with the specified ManagerLayer.
      *
      * @param database The manager layer responsible for database operations.
      */
@@ -36,11 +39,11 @@ public class LoginHandler implements HttpHandler{
     }
 
     @Override
-    public void handle(HttpExchange exchange) throws IOException { 
+    public void handle(HttpExchange exchange) throws IOException {
         if ("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
-            
+
             System.out.print("inside of Login Handler");
-            
+
             InputStream requestBody = exchange.getRequestBody();
             byte[] data = requestBody.readAllBytes();
             String requestBodyString = new String(data, StandardCharsets.UTF_8);
@@ -64,11 +67,11 @@ public class LoginHandler implements HttpHandler{
                     UserLogin userLogin = new UserLogin(account);
 
                     exchange.getResponseHeaders().add("Set-Cookie", userLogin.getCookie().toString());
-                    
+
                     response = "Login successful!";
                     // we need to send further to the protected site
                     logger.info("Login successful!");
-                    
+
                     sendResponse(exchange, response, 302, "/guide1");
 
 
@@ -82,7 +85,7 @@ public class LoginHandler implements HttpHandler{
                 response = "Account does not Exist";
                 // Redirect to login page again, if account does not exist.
                 sendResponse(exchange, response, 302, "/login");
-            }      
+            }
 
             // Send response back to client
             exchange.sendResponseHeaders(200, response.length());
@@ -119,7 +122,7 @@ public class LoginHandler implements HttpHandler{
         exchange.getResponseHeaders().set("Location", locationURL);
         exchange.getResponseHeaders().set("Cache-Control", "no-store, no-cache, must-revalidate");
 
-        
+
         //exchange.getResponseHeaders().set("responseText", locationURL);
         exchange.sendResponseHeaders(statusCode, -1);
 
@@ -128,5 +131,5 @@ public class LoginHandler implements HttpHandler{
         os.close();
     }
 
-    
+
 }

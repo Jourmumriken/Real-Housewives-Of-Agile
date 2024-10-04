@@ -1,3 +1,8 @@
+package JavaWebSite;
+
+import JavaDataBase.Account;
+import JavaDataBase.Exceptions.AccountCreationException;
+import JavaDataBase.ManagerLayer;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
@@ -15,12 +20,12 @@ public class RegisterHandler implements HttpHandler{
 
     private String username; 
     private String password; 
-    private ManagerLayer database; 
+    private ManagerLayer database;
     UserLogin userLogin; 
-    Account account; 
+    Account account;
 
     /**
-     * Constructs a RegisterHandler with the specified database manager.
+     * Constructs a JavaWebSite.RegisterHandler with the specified database manager.
      * 
      * @param database the ManagerLayer instance for database operations
      */
@@ -31,7 +36,7 @@ public class RegisterHandler implements HttpHandler{
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if ("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
-            System.out.println("Inside of RegisterHandler");
+            System.out.println("Inside of JavaWebSite.RegisterHandler");
             InputStream requestBody = exchange.getRequestBody();
             byte[] data = requestBody.readAllBytes();
             String requestBodyString = new String(data, StandardCharsets.UTF_8);

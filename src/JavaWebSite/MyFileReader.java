@@ -1,3 +1,4 @@
+package JavaWebSite;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,7 @@ class MyFileHandler implements HttpHandler {
     File file; 
 
     /**
-     * Constructor for MyFileHandler with default content type as "text/html".
+     * Constructor for JavaWebSite.MyFileHandler with default content type as "text/html".
      * 
      * @param filePath the path of the file to serve
      */
@@ -30,7 +31,7 @@ class MyFileHandler implements HttpHandler {
     }
 
      /**
-     * Constructor for MyFileHandler with specified content type.
+     * Constructor for JavaWebSite.MyFileHandler with specified content type.
      * 
      * @param filePath   the path of the file to serve
      * @param contentType the content type of the file
