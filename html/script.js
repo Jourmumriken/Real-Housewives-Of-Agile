@@ -1,20 +1,3 @@
-
-/* window.addEventListener("DOMContentLoaded", () => {
-    const toggleButton = document.querySelector(".toggle"); 
-    const sideNavEl = document.querySelector(".side-nav"); 
-    const mainWithSide = document.querySelector(".")
-    toggleButton.addEventListener("click", () => {
-        sideNavEl.classList.toggle("side-nav--hidden"); 
-        
-     
-        
-    });
-    
-
-
-});
-*/
-
 document.addEventListener('DOMContentLoaded', function() {
     const toggleButton = document.querySelector('.toggle'); // Select the toggle button
     const sidebar = document.querySelector('.side-nav'); // Select the sidebar

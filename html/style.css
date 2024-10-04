@@ -66,6 +66,7 @@ footer {
   flex-direction: column;
 }
 
+
 /* Sidebar + Main Content Layout */
 .main-with-sidebar {
   display: flex;
@@ -148,8 +149,14 @@ nav.navbar {
   width: 100vw;
 } */
 
-
-a:before {
+  .icon {
+    width: 24px;
+    height: 24px;
+    vertical-align: center; /* Aligns the icon with text */
+    margin-right: 8px; /* Adds some spacing between the icon and the text */
+  }
+  
+a:before{
   color: var(--dark-green);
 }
 
@@ -177,13 +184,15 @@ a:visited {
   list-style: none;
   /* Remove bullet points */
   display: flex;
-  gap: 1.5rem;
+  gap: 16px;
   /* Space between nav items */
 }
 
 .nav-items li {
-  display: inline;
-  position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
 
 .nav-items li a {
