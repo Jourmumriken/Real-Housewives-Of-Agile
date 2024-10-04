@@ -1,9 +1,6 @@
-import config.ServerConfig;
-
 import com.sun.net.httpserver.HttpServer;
-
+import config.ServerConfig;
 import java.io.IOException;
-
 import java.net.InetSocketAddress;
 
 /**
@@ -80,6 +77,7 @@ public class MultiPageHttpServer {
         
         //register page
         server.createContext("/register", new MyFileHandler("html/register.html"));
+        server.createContext("/icons/bars-solid.png", new MyFileHandler("html/icons/bars-solid.png"));
 
         //load script file 
         server.createContext("/script.js", new MyFileHandler("html/script.js", "application/javascript"));

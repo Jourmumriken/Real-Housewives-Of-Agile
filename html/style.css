@@ -140,14 +140,6 @@ nav.navbar {
 }
 
 
-/* .side-nav--hidden {
-  transform: translateX(-10rem);
-  transition: transform 300ms ease-out;
-}
-
-.main-content-container.side-nav--hidden .main-with-sidebar {
-  width: 100vw;
-} */
 
   .icon {
     width: 24px;
@@ -274,6 +266,32 @@ button.toggle i {
 .input-slider {
   width: 100%;
   margin-bottom: 20px;
+}
+
+/* Common Button Styles */
+button,
+.submit-button {
+  background-color: var(--medium-green);
+  color: var(--anti-flash-white);
+  padding: 0.5rem 2rem; /* Consistent padding */
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease-in-out;
+  width: 100%;
+  max-width: 200px; /* Max width for buttons, to prevent too wide */
+  margin: 0 auto; /* Center button */
+}
+
+button:hover,
+.submit-button:hover {
+  background-color: var(--almost-dark-green);
+}
+
+button i {
+  margin-right: 8px; /* Space between icon and text */
 }
 
 .submit-button {
