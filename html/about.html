@@ -25,6 +25,7 @@
         </div>
         <ul class="nav-items">
           <li><a href="index.html"><img src="icons/home-solid.png" class="icon"></a></li> 
+          <li><a href="index.html"><img src="icons/home-solid.png" class="icon"></a></li> 
           <li><a href="about.html"><img src="icons/info-solid.png" class="icon"></a></li>
           <li><a href="add-item.html"> <img src="icons/plus-solid.png" class="icons"></a></li>
           <li><a href="login.html">Log in/Register</a></li>
@@ -34,43 +35,43 @@
     </header>
     <!--  End of Header-->
 
-    <!-- Main Body wrapper -->
-    <div class="main-content-container">
-      <!-- side navigation -->
-      <div class="side-nav side-nav--hidden">
-      <div class ="side-nav"> 
-         <ul>
-           <li><a href="guide1.html">Clean a camera lens</a></li>
-           <li><a href="guide2.html">Clean a charging port</a></li>
-         </ul>
-       </div>
-      </div>
-      <!-- End of side navigation -->
-
- 
-      <!-- Main Content -->
-      <main class="main main-with-sidebar">
-        <h1>About us!</h1>
-        <p>This is a project by group 14 of the agile development course</p>
-        <p>AKA</p>
-        <h2 style="font-weight: 200;">The Real Housewives Of Agile</h2>
-        <p>We have made a repair wiki with guides for repairing eletronics and other devices.</p>
-      </main>
-      <!--  End of Main Content -->
-
+  <!-- Main Body wrapper -->
+  <div class="main-content-container">
+    <!-- side navigation -->
+    <div id="toggle-sidebar" class="side-nav">
+      <a href="#" class="toggle-btn" onclick="toggleSideNav()"> <!-- placeholder visual -->
+        &#9776;&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;
+      </a>
+      <a href="guide1.html">Clean a camera lens</a>
+      <a href="guide2.html">Clean a charging port</a>
     </div>
-    <!-- End of Main Body wrapper -->
+    <!-- End of side navigation -->
 
 
-    <!-- Footer -->
-    <footer>
-      <p>&copy; 2024 Repairhub. Right reserved and all that</p>
-    </footer>
-    <!-- End of Footer -->
+    <!-- Main Content -->
+    <main id="toggle-main" class="main-with-sidebar">
+      <h1>About us!</h1>
+      <p>This is a project by group 14 of the agile development course</p>
+      <p>AKA</p>
+      <h2 style="font-weight: 200;">The Real Housewives Of Agile</h2>
+      <p>We have made a repair wiki with guides for repairing eletronics and other devices.</p>
+    </main>
+    <!--  End of Main Content -->
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
-    <!-- End of JavaScript-->
-  </body>
-  <!-- End of body container -->
+  </div>
+  <!-- End of Main Body wrapper -->
+
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 RepairHub. Rights reserved and all that</p>
+  </footer>
+  <!-- End of Footer -->
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+  <!-- End of JavaScript-->
+</body>
+<!-- End of body container -->
+
 </html>

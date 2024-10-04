@@ -1,10 +1,12 @@
 /* Global Styles */
 
 /* Colours used for website */
-:root{
-  --dark-green: #16423C; 
+:root {
+  --dark-green: #16423C;
+  --almost-dark-green: #244c47;
   --medium-green: #6A9C89;
-  --light-green: #C4DAD2; 
+  --almost-light-green: #9fc9ba;
+  --light-green: #C4DAD2;
   --anti-flash-white: #E9EFEC;
 }
 
@@ -21,17 +23,17 @@ body {
   width: 100vw;
   min-height: 100vh;
   flex-direction: column;
-  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   color: var(--dark-green);
   margin: 0;
   padding: 0;
-  overflow-y: scroll; 
+  overflow-y: scroll;
   overflow-x: hidden;
   background: var(--anti-flash-white);
 }
 
 /* Page Wrappers */
-.header{
+.header {
   display: flex;
 }
 
@@ -56,7 +58,7 @@ footer {
 
 
 /* Main Contents */
-.main{
+.main {
   display: flex;
   width: 100vw;
   /* min-height: 90vh; */
@@ -68,6 +70,7 @@ footer {
 /* Sidebar + Main Content Layout */
 .main-with-sidebar {
   display: flex;
+  /* margin-left: 15vw; */
   width: 85vw;
   /* min-height: 90vh;  */
   height: stretch;
@@ -95,26 +98,56 @@ nav.navbar {
 
 .side-nav {
   flex: 1;
-  /* min-height: 100vh; */
-  width: 12rem;
-  /* height: 100%;  */
+  width: 110px;
   display: flex;
   flex-direction: column;
   background-color: var(--medium-green);
   color: var(--anti-flash-white);
   transition: transform 300ms ease in;
-  text-align: left; 
-   
-
+  text-align: left;
+  transition: 0.15s;
+  padding: 1rem 0rem;
+  /* padding: 1rem; */
+  gap: 1rem;
 }
-.side-nav--hidden{
-    transform: translateX(-12rem); 
-    transition: transform 300ms ease-out; 
-  }
 
-  .main-content-container.side-nav--hidden .main-with-sidebar {
-    width: 100vw;
-  }
+.side-nav .toggle-btn {
+  color: var(--almost-dark-green);
+  position: relative;
+  top: 0;
+  padding: 0rem 5px
+}
+.side-nav .toggle-btn:hover {
+  color:var(--dark-green)
+}
+
+.side-nav a {
+  padding: 0rem 15px;
+  /* display:table-column; */
+  position: center;
+  list-style: none;
+  /* Remove bullet points */
+}
+
+
+.side-nav.collapsed {
+  transform: translateX(-90px);
+}
+
+.main-with-sidebar.collapsed {
+  transform: translateX(-90px);
+  width: 100vw;
+}
+
+
+/* .side-nav--hidden {
+  transform: translateX(-10rem);
+  transition: transform 300ms ease-out;
+}
+
+.main-content-container.side-nav--hidden .main-with-sidebar {
+  width: 100vw;
+} */
 
   .icon {
     width: 24px;
@@ -127,30 +160,32 @@ a:before{
   color: var(--dark-green);
 }
 
-a:visited{
-color: var(--light-green);
+a:visited {
+  color: var(--almost-light-green);
 }
 
 /* Aeshetics */
 .logo {
   font-size: 2rem;
   font-weight: bold;
-  display:flex; 
-  gap: 1rem; 
- 
+  display: flex;
+  gap: 1rem;
+
 }
 
-.logo a{
+.logo a {
   background-color: transparent;
   text-decoration: none;
-  color: var(--anti-flash-white); 
+  color: var(--anti-flash-white);
 }
 
 /* Navigation Items */
 .nav-items {
-  list-style: none; 
+  list-style: none;
+  /* Remove bullet points */
   display: flex;
-  gap: 16px;  
+  gap: 16px;
+  /* Space between nav items */
 }
 
 .nav-items li {
@@ -165,7 +200,7 @@ color: var(--light-green);
   text-decoration: none;
   padding: 0.5rem 2rem;
   font-size: 1rem;
-  background: none; 
+  background: none;
   border-radius: 2px;
   background-color: #6A9C89;
   transition: background-color 0.3s ease-in;
@@ -173,7 +208,7 @@ color: var(--light-green);
 }
 
 .nav-items li a:hover {
-  background-color: var(--dark-green);
+  background-color: var(--almost-dark-green);
 }
 
 
@@ -186,8 +221,8 @@ color: var(--light-green);
   padding: 0;
 }
 
-.toggle{
-  background-color: transparent; 
+.toggle {
+  background-color: transparent;
   color: var(--anti-flash-white);
   border: none;
   font-size: 1rem;
@@ -195,12 +230,12 @@ color: var(--light-green);
 
 }
 
-button.toggle i{
+button.toggle i {
   margin: 0;
 }
 
-.toggle:hover{
-  color:var(--medium-green);
+.toggle:hover {
+  color: var(--medium-green);
 }
 
 
@@ -219,12 +254,12 @@ button.toggle i{
 }
 
 .add-item-form h2 {
-  text-align:center;
+  text-align: center;
 }
 
-.input-label{
-  display: block; 
-  margin-bottom: 10px; 
+.input-label {
+  display: block;
+  margin-bottom: 10px;
   font-weight: bold;
 }
 
@@ -251,7 +286,7 @@ button.toggle i{
   width: 100%;
 }
 
- /*old add item button, keep if you want but currently not in use*/
+/*old add item button, keep if you want but currently not in use*/
 button[type="submit"] {
   background-color: #6A9C89;
   color: var(--anti-flash-white);
@@ -271,16 +306,16 @@ button[type="submit"]:hover {
   display: flex;
   justify-content: center;
   align-items: baseline;
-  min-height: 100vh;  
-  margin: auto; 
+  min-height: 100vh;
+  margin: auto;
 }
 
 /* Authentication Box */
 .auth-box {
   width: 100%;
-  max-width: 400px; 
+  max-width: 400px;
   height: auto;
-  max-height: 60vh; 
+  max-height: 60vh;
   background-color: var(--dark-green);
   display: flex;
   justify-content: center;
@@ -288,29 +323,33 @@ button[type="submit"]:hover {
   flex-direction: column;
   padding: 20px;
   border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.); /* Soft shadow for depth */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.);
+  /* Soft shadow for depth */
   margin: auto;
-  
+
 }
 
 .auth-label {
   text-align: center;
   font-size: 2em;
   color: var(--anti-flash-white);
-  margin-bottom: 20px; /* Add space below the label */
+  margin-bottom: 20px;
+  /* Add space below the label */
 }
 
 .input-box {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 20px; /* Spacing between input boxes */
+  margin-bottom: 20px;
+  /* Spacing between input boxes */
 }
 
 /* Input Styles for Form */
 .input-box input {
   width: 100%;
-  max-width: 300px; /* Responsive width */
+  max-width: 300px;
+  /* Responsive width */
   padding: 15px;
   background: transparent;
   outline: none;
@@ -322,14 +361,14 @@ button[type="submit"]:hover {
 }
 
 .input-box input:focus {
-  border-color: var(--light-green); 
+  border-color: var(--light-green);
 }
 
 .input-box input::placeholder {
-  color: var(--light-green); 
+  color: var(--light-green);
 }
 
-.auth-action{
+.auth-action {
   display: flex;
   flex-direction: column;
   gap: 3px;
