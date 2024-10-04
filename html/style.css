@@ -64,6 +64,7 @@ footer {
   flex-direction: column;
 }
 
+
 /* Sidebar + Main Content Layout */
 .main-with-sidebar {
   display: flex;
@@ -115,6 +116,12 @@ nav.navbar {
     width: 100vw;
   }
 
+  .icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: center; /* Aligns the icon with text */
+    margin-right: 8px; /* Adds some spacing between the icon and the text */
+  }
   
 a:before{
   color: var(--dark-green);
