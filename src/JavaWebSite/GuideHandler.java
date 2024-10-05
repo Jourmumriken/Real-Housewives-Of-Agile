@@ -7,25 +7,34 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import JavaDataBase.ManagerLayer;
 import JavaDataBase.Guide;
 import JavaDataBase.Exceptions.*;
+
 //import org.apache.derby.impl.load.Import;
 /**
- * Currently messy "proof of concept". It works by grabbing index.html as
- * a string, editing the item container to include existing guides,
- * and then href:ing to the guide pages. (this should be done in JS instead...)
+ * Currently messy "proof of concept". It works by grabbing html files as
+ * strings, editing item containers to include existing guides,
+ * and then href:ing to the guide pages. (this should optimally done in JS
+ * instead...)
  * The guides are referenced by ID, as each guide has a random generated unique
  * ID on the sql side, which can be obtained via guide.getID().
  * localhost:8080/guide shows the "edited index.html" page with database guides,
  * Pressing any guide links you to localhost:8080/guide?id=(guideID), and shows
- * the temporary html display page made by ´createGuideHtml(Guide guide)´
+ * the temporary html display page made by ´createGuideHtml(Guide guide)´.
+ * The same proccess is applied to create the display page of a specific guide.
  */
 class GuideHandler implements HttpHandler {
     ManagerLayer database;
 
     /**
-     * Constructor to initialize the JavaWebSite.GuideHandler with a database reference.
+     * Constructor to initialize the JavaWebSite.GuideHandler with a database
+     * reference.
      *
      * @param database The database management layer.
      */
@@ -53,7 +62,9 @@ class GuideHandler implements HttpHandler {
     }
 
     /**
-     * Inserts guide links dynamically into the <ul id="item-container"> of the provided HTML content.
+     * Inserts guide links dynamically into the
+     * <ul id="item-container">
+     * of the provided HTML content.
      *
      * @param htmlContent The HTML content as a string.
      * @return The modified HTML content with inserted guide links.
@@ -101,8 +112,9 @@ class GuideHandler implements HttpHandler {
         }
     }
 
-     /**
-     * Handles HTTP requests and generates responses based on the provided query parameters.
+    /**
+     * Handles HTTP requests and generates responses based on the provided query
+     * parameters.
      *
      * @param exchange The HTTP exchange object containing the request and response.
      * @throws IOException If an input or output exception occurs.
@@ -178,24 +190,151 @@ class GuideHandler implements HttpHandler {
         os.write(notFound.getBytes());
         os.close();
     }
+    // -------------------------------------------------------------------------//
+    // ---Methods below are for dynamically creating the "guide display page"---//
+    // -------------------------------------------------------------------------//
+
+    // Extracts headers like <h2>, <h3> from the guide content
+    private List<String> extractHeaders(String content) {
+        List<String> headers = new ArrayList<>();
+        Pattern headerPattern = Pattern.compile("<h[2-3]>(.*?)</h[2-3]>");
+        Matcher matcher = headerPattern.matcher(content);
+        while (matcher.find()) {
+            headers.add(matcher.group(1)); // Extract the header text
+        }
+        return headers;
+    }
+
+    // Generates a Table of Contents based on the list of headers
+    private String generateTableOfContents(List<String> headers) {
+        StringBuilder tocBuilder = new StringBuilder();
+        tocBuilder.append("<div class=\"TableOfContents\">\n<h3>Table of Contents</h3>\n<ul>\n");
+        int sectionCounter = 1;
+        for (String header : headers) {
+            tocBuilder.append("<li><a href=\"#section-" + sectionCounter + "\">")
+                    .append(header)
+                    .append("</a></li>\n");
+            sectionCounter++;
+        }
+        tocBuilder.append("</ul>\n</div>");
+        return tocBuilder.toString();
+    }
+
+    // Just generates the side navigation bar that shows when a guide is open
+    // that dynamically fetches guides from the database to show.
+    private String generateSideNavigation() {
+        StringBuilder sideNavBuilder = new StringBuilder();
+
+        // Copypasted from guide1.html, idk exactly how it works but it does :)
+        sideNavBuilder.append("<div id=\"toggle-sidebar\" class=\"side-nav\">\n")
+                .append("<a href=\"#\" class=\"toggle-btn\" onclick=\"toggleSideNav()\">")
+                .append("&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;")
+                .append("</a>\n");
+
+        try {
+            for (Guide guide : database.getAllGuides()) {
+                // Add each guide as a link in the sidebar
+                sideNavBuilder.append("<li><a href=\"/guide?id=")
+                        .append(guide.getId())
+                        .append("\">")
+                        .append(guide.getTitle())
+                        .append("</a></li>\n");
+            }
+        } catch (DataBaseConnectionException e) {
+            // Something fucked up, print issue and discard navbar.
+            System.out.println(e);
+            return "";
+        }
+        // End the divvy-mcthingy and return navbar html stuff as string.
+        sideNavBuilder.append("</div>");
+        return sideNavBuilder.toString();
+    }
 
     /**
-     * Creates HTML content for a specific guide.
+     * Creates HTML content for a specific guide by removing the existing ToC and
+     * content,
+     * and dynamically injecting the guide's new Table of Contents and content.
+     * This is meant to be used for the html page to view a *specific* guide!
+     * Furthermore it configures the navbar dynamically
      *
      * @param guide The guide object containing the content to be displayed.
      * @return The dynamically generated HTML content for the guide.
      */
-    // TODO: I am bad at html, need help refactoring this to project standard.
     private String createGuideHtml(Guide guide) {
-        // Dynamically generate HTML content for the guide
-        return "<html>" +
-                "<head><title>" + guide.getTitle() + "</title></head>" +
-                "<body>" +
-                "<h1>" + guide.getTitle() + "</h1>" +
-                "<p><strong>Difficulty:</strong> " + guide.getDifficulty() + "</p>" +
-                "<p><strong>By:</strong> " + guide.getAccount().getUsername() + "</p>" +
-                "<div>" + guide.getContent() + "</div>" +
-                "</body>" +
-                "</html>";
+        // Step 1: Load the HTML template
+        String template = readHtmlAsString("guide1.html");
+
+        // ----- Replace the <h1> tag with the guide title -----//
+        // Find the <h1> tag within the intro section and replace it with the guide's
+        // title
+        template = template.replaceFirst("<h1>.*?</h1>", "<h1>" + guide.getTitle() + "</h1>");
+
+        // Add the author and difficulty level of the guide
+        template = template.replaceFirst("<hr>", "<hr>" + "\n" + "Author: " + guide.getAccount().getUsername()
+                + "<br>" + "Difficulty: " + guide.getDifficulty());
+
+        // ----- Remove existing table of contentes ----- //
+        String tocStartTag = "<div class=\"TableOfContents\">";
+        String tocEndTag = "</div>";
+        int tocStartIndex = template.indexOf(tocStartTag);
+        int tocEndIndex = template.indexOf(tocEndTag, tocStartIndex);
+
+        if (tocStartIndex != -1 && tocEndIndex != -1) {
+            // perform the removal
+            template = template.substring(0, tocStartIndex) + template.substring(tocEndIndex + tocEndTag.length());
+        }
+
+        // ----- Remove existing "content" section -----//
+        String contentStartTag = "<!-- Text sections -->";
+        String contentEndTag = "<!-- End of Text sections -->";
+        int contentStartIndex = template.indexOf(contentStartTag);
+        int contentEndIndex = template.indexOf(contentEndTag, contentStartIndex);
+
+        if (contentStartIndex != -1 && contentEndIndex != -1) {
+            // Remove everything between the content placeholders
+            template = template.substring(0, contentStartIndex + contentStartTag.length()) +
+                    template.substring(contentEndIndex);
+        }
+
+        // ---- Gnerate table of contents if headers exist in content -----//
+        // Extract headers (e.g., <h2>, <h3>) from the guide content
+        String guideContent = guide.getContent();
+        List<String> headers = extractHeaders(guideContent);
+
+        // Replace all newlines in the content string by html line breaks (<br>)
+        guideContent = guideContent.replaceAll("\n", "<br>");
+
+        // Step 2: Generate the Table of Contents (ToC) only if headers are present
+        String toc = "";
+        if (!headers.isEmpty()) {
+            toc = generateTableOfContents(headers); // This will create the <ul> with <li><a> links to headers
+        }
+
+        // Insert the Table of Contents back into the template if it exists
+        if (!toc.isEmpty()) {
+            template = template.replace("<!-- Table of Contents -->", toc);
+        }
+
+        // ----- Insert guide content with spacing ----- //
+        String guideContentWithSpacing = guideContent.replaceAll("<h2>", "<h2 style='margin-top: 15px;'>")
+                .replaceAll("<p>", "<p style='margin-bottom: 15px;'>");
+
+        template = template.replace("<!-- Text sections -->", guideContentWithSpacing);
+
+        // ----- Remove and replace template's sidebar with dynamic one ----- //
+        String navStartTag = "<div id=\"toggle-sidebar\"";
+        String navEndTag = "</div>";
+        int navStartIndex = template.indexOf(navStartTag);
+        int navEndIndex = template.indexOf(navEndTag, navStartIndex);
+
+        if (navStartIndex != -1 && navEndIndex != -1) {
+            template = template.substring(0, navStartIndex) + template.substring(navEndIndex + navEndTag.length());
+        }
+
+        template = template.replace("<!-- side navigation -->", generateSideNavigation());
+
+        // Return the complete & edited template to match the guide.
+        return template;
     }
+
 }
