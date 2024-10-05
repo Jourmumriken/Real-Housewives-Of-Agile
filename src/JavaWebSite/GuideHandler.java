@@ -190,10 +190,10 @@ class GuideHandler implements HttpHandler {
         os.write(notFound.getBytes());
         os.close();
     }
-    //-------------------------------------------------------------------------//
-    //---Methods below are for dynamically creating the "guide display page"---//
-    //-------------------------------------------------------------------------//
-    
+    // -------------------------------------------------------------------------//
+    // ---Methods below are for dynamically creating the "guide display page"---//
+    // -------------------------------------------------------------------------//
+
     // Extracts headers like <h2>, <h3> from the guide content
     private List<String> extractHeaders(String content) {
         List<String> headers = new ArrayList<>();
@@ -312,9 +312,11 @@ class GuideHandler implements HttpHandler {
             template = template.replace("<!-- Table of Contents -->", toc);
         }
 
-        // ----- Insert guide content ----- //
-        // Replace the placeholder <!-- Text sections --> with the actual guide content
-        template = template.replace("<!-- Text sections -->", guideContent);
+        // ----- Insert guide content with spacing ----- //
+        String guideContentWithSpacing = guideContent.replaceAll("<h2>", "<h2 style='margin-top: 15px;'>")
+                .replaceAll("<p>", "<p style='margin-bottom: 15px;'>");
+
+        template = template.replace("<!-- Text sections -->", guideContentWithSpacing);
 
         // ----- Remove and replace template's sidebar with dynamic one ----- //
         String navStartTag = "<div id=\"toggle-sidebar\"";
