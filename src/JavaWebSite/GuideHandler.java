@@ -190,7 +190,10 @@ class GuideHandler implements HttpHandler {
         os.write(notFound.getBytes());
         os.close();
     }
-
+    //-------------------------------------------------------------------------//
+    //---Methods below are for dynamically creating the "guide display page"---//
+    //-------------------------------------------------------------------------//
+    
     // Extracts headers like <h2>, <h3> from the guide content
     private List<String> extractHeaders(String content) {
         List<String> headers = new ArrayList<>();

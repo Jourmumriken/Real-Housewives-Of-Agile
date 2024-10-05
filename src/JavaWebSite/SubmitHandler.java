@@ -59,9 +59,9 @@ class SubmitHandler implements HttpHandler {
                     // Pass the data to database
                     database.createGuide(guideTitle, guideContent, database.getAccount(sessionId), difficulty);    
                     
-                    // Respond with a success message
-                    String response = "Guide \"" + guideTitle + "\" has been successfully submitted!";
-                    sendResponse(exchange, response, 200);
+                    // Respond with a redirect to /guide on success
+                    exchange.getResponseHeaders().set("Location", "/guide");
+                    exchange.sendResponseHeaders(302, -1); // 302 -> redirection to Location header above
                 } else {
                     sendResponse(exchange, "Guide submission failed. Must be logged in!", 401);
                 }
