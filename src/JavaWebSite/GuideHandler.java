@@ -18,14 +18,16 @@ import JavaDataBase.Exceptions.*;
 
 //import org.apache.derby.impl.load.Import;
 /**
- * Currently messy "proof of concept". It works by grabbing index.html as
- * a string, editing the item container to include existing guides,
- * and then href:ing to the guide pages. (this should be done in JS instead...)
+ * Currently messy "proof of concept". It works by grabbing html files as
+ * strings, editing item containers to include existing guides,
+ * and then href:ing to the guide pages. (this should optimally done in JS
+ * instead...)
  * The guides are referenced by ID, as each guide has a random generated unique
  * ID on the sql side, which can be obtained via guide.getID().
  * localhost:8080/guide shows the "edited index.html" page with database guides,
  * Pressing any guide links you to localhost:8080/guide?id=(guideID), and shows
- * the temporary html display page made by ´createGuideHtml(Guide guide)´
+ * the temporary html display page made by ´createGuideHtml(Guide guide)´.
+ * The same proccess is applied to create the display page of a specific guide.
  */
 class GuideHandler implements HttpHandler {
     ManagerLayer database;
@@ -263,6 +265,10 @@ class GuideHandler implements HttpHandler {
         // Find the <h1> tag within the intro section and replace it with the guide's
         // title
         template = template.replaceFirst("<h1>.*?</h1>", "<h1>" + guide.getTitle() + "</h1>");
+
+        // Add the author and difficulty level of the guide
+        template = template.replaceFirst("<hr>", "<hr>" + "\n" + "Author: " + guide.getAccount().getUsername()
+                + "<br>" + "Difficulty: " + guide.getDifficulty());
 
         // ----- Remove existing table of contentes ----- //
         String tocStartTag = "<div class=\"TableOfContents\">";
