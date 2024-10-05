@@ -301,6 +301,9 @@ class GuideHandler implements HttpHandler {
         String guideContent = guide.getContent();
         List<String> headers = extractHeaders(guideContent);
 
+        // Replace all newlines in the content string by html line breaks (<br>)
+        guideContent = guideContent.replaceAll("\n", "<br>");
+
         // Step 2: Generate the Table of Contents (ToC) only if headers are present
         String toc = "";
         if (!headers.isEmpty()) {
