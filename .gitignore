@@ -1,3 +1,6 @@
-RepairWikiDB/
-server.log 
+RepairWikiDB
+RepairWikiDB/**
+server.log
+server.log.lck 
 derby.log
+RepairWikiDB/log/logmirror.ctrl
