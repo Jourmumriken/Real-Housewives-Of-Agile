@@ -6,13 +6,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Main",
-            "request": "launch",
-            "mainClass": "Main",
-            "projectName": "Real-Housewives-Of-Agile-2_7dd9b6db"
-        },
-        {
-            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -21,7 +14,7 @@
             "type": "java",
             "name": "Main",
             "request": "launch",
-            "mainClass": "Main",
+            "mainClass": "JavaWebSite.Main",
             "projectName": "Real-Housewives-Of-Agile_27d6deb9"
         }
     ]
