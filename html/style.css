@@ -391,3 +391,41 @@ button[type="submit"]:hover {
   flex-direction: column;
   gap: 3px;
 }
+
+.search-wrapper {
+  display: flex;
+  padding: 5vh;
+  align-items:baseline;
+  justify-content: center;
+  min-width:  100vw;
+}
+
+.search {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  padding: 14px;
+  border-radius: 28px;
+  background: #C4DAD2;
+  transition: box-shadow 0.25s;
+}
+
+.search:focus-within {
+  background: #6A9C89;
+}
+
+.serach-input {
+  font-size: 16px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #16432C;
+  margin-left: 14px;
+  background: transparent;
+  outline: none;
+  border: none;
+  width: 300px;
+}
+
+.serach-input::placeholder,
+.search-icon {
+  color: rgba(0, 0, 0, 0.5);
+}
