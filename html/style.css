@@ -429,3 +429,33 @@ button[type="submit"]:hover {
 .search-icon {
   color: rgba(0, 0, 0, 0.5);
 }
+
+.suggestion-search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+  padding: 20px;
+}
+
+.search-wrapper {
+  margin-bottom: 20px;
+}
+
+.suggestions {
+  display: flex;
+  flex-direction: column;
+  background-color: #6A9C89;
+  width: 20vw;
+  height: auto;
+  max-height: 50vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.suggestions a {
+  margin: 10px;
+  text-decoration: none;
+  color: white;
+}
