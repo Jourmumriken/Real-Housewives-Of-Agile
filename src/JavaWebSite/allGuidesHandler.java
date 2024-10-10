@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * A class that handles requests for all guides in the database.
  */
 public class allGuidesHandler implements HttpHandler {
-    private ManagerLayer dataBase;
+    final private ManagerLayer dataBase;
 
     /**
      * The constructor for allGuidesHandler
@@ -37,7 +37,6 @@ public class allGuidesHandler implements HttpHandler {
         String response = buildResponse();
         exchange.sendResponseHeaders(200, response.length());
         OutputStream output = exchange.getResponseBody();
-        System.out.println(response);
         output.write(response.getBytes());
         output.close();
     }
@@ -50,21 +49,14 @@ public class allGuidesHandler implements HttpHandler {
 //    { name: "Fixing Overheating Problems", url: "guide?id=5" }
 //     ]
     private String buildResponse() throws DataBaseConnectionException{
-        StringBuilder str = new StringBuilder(); // String builder is used to ensure performant behaviour for large inputs.
+        // String builder is used to ensure performant
+        // behaviour for large inputs.
+        StringBuilder str = new StringBuilder();
         str.append("[");
         ArrayList<Guide> guides = dataBase.getAllGuides();
-        int nrOfComma = guides.size()-1; // wont matter if < 0
+        int nrOfComma = guides.size()-1; // won't matter if < 0
         for(Guide g :guides) {
-            /*
-            Since JSON requires the values to be enclosed with double quotations marks
-            we use '\"' to prevent java from interpreting each closed set of
-            quotation marks to be a separate string.
-             */
-            String name="\""+g.getTitle()+"\"";
-            String id =g.getId()+"";
-
-            String tmp = "{ \"name\":"+name+",\"url\":\"guide?id="+id+"\"}";
-
+            String tmp = g.toJson();
             if(nrOfComma > 0) {
                 tmp = tmp +",";
                 nrOfComma--;
