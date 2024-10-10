@@ -232,12 +232,16 @@ function displayData(data) {
             stepElement.appendChild(lineElement);
         });
         stepsElement.appendChild(stepElement);
-        
-        if(step.media && step.media.type == "image" && step.media.data && step.media.data.length > 0) {
-            const imageData = step.media.data[0];
-            const imgElement = document.createElement('img');
-            imgElement.src = imageData.standard;
-            stepElement.appendChild(imgElement);
+
+        if (step.media && step.media.type == "image" && step.media.data && step.media.data.length > 0) {
+            let imageCounter = 0;
+            step.media.data.forEach(image => {
+                const imageData = step.media.data[imageCounter];
+                const imgElement = document.createElement('img');
+                imgElement.src = imageData["standard"];
+                stepElement.appendChild(imgElement);
+                imageCounter++;
+            })
         }
 
         // Increase step counter
