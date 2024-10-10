@@ -5,15 +5,24 @@ import JavaDataBase.Guide;
 import JavaDataBase.ManagerLayer;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import java.io.File;
+
 import java.io.*;
 import java.util.ArrayList;
 
-public class indexHandler implements HttpHandler {
+/**
+ * A class that handles requests for all guides in the database.
+ */
+public class allGuidesHandler implements HttpHandler {
     private ManagerLayer dataBase;
-    public indexHandler(ManagerLayer managerLayer) {
+
+    /**
+     * The constructor for allGuidesHandler
+     * @param managerLayer The manager layer for the database to retrieve all guides from
+     */
+    public allGuidesHandler(ManagerLayer managerLayer) {
         dataBase=managerLayer;
     }
+
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if("GET".equals(exchange.getRequestMethod())) {
@@ -24,7 +33,7 @@ public class indexHandler implements HttpHandler {
             }
         }
     }
-    public void sendNavigationBar(HttpExchange exchange) throws IOException,DataBaseConnectionException{
+    private void sendNavigationBar(HttpExchange exchange) throws IOException,DataBaseConnectionException{
         String response = buildResponse();
         exchange.sendResponseHeaders(200, response.length());
         OutputStream output = exchange.getResponseBody();
@@ -40,12 +49,17 @@ public class indexHandler implements HttpHandler {
 //    { name: "Replacing a Hard Drive", url: "guide?id=4" },
 //    { name: "Fixing Overheating Problems", url: "guide?id=5" }
 //     ]
-    public String buildResponse() throws DataBaseConnectionException{
-        StringBuilder str = new StringBuilder();
+    private String buildResponse() throws DataBaseConnectionException{
+        StringBuilder str = new StringBuilder(); // String builder is used to ensure performant behaviour for large inputs.
         str.append("[");
         ArrayList<Guide> guides = dataBase.getAllGuides();
-        int nrOfComma = guides.size()-1; // Could be < 0, but in that case we won't get bad output because of the for loop.
+        int nrOfComma = guides.size()-1; // wont matter if < 0
         for(Guide g :guides) {
+            /*
+            Since JSON requires the values to be enclosed with double quotations marks
+            we use '\"' to prevent java from interpreting each closed set of
+            quotation marks to be a separate string.
+             */
             String name="\""+g.getTitle()+"\"";
             String id =g.getId()+"";
 
