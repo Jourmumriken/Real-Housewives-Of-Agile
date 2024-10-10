@@ -1,5 +1,4 @@
 package JavaWebSite;
-
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -15,6 +14,9 @@ import java.util.regex.Pattern;
 import JavaDataBase.ManagerLayer;
 import JavaDataBase.Guide;
 import JavaDataBase.Exceptions.*;
+
+
+
 
 //import org.apache.derby.impl.load.Import;
 /**
@@ -58,6 +60,8 @@ class GuideHandler implements HttpHandler {
         } catch (IOException e) {
             System.out.println(e);
         }
+
+
         return contentBuilder.toString();
     }
 

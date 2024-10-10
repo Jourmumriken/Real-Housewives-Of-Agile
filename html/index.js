@@ -8,7 +8,7 @@ function appendGuides(guides,contentDiv) {
                   const li = document.createElement('li');
                   const a = document.createElement('a');
 
-                  a.textContent = guide.name;
+                  a.textContent = guide.title;
                   a.href = guide.url;
 
 
