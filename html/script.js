@@ -174,11 +174,30 @@ function displaySuggestions(suggestions) {
 // ------------------------------- //
 // ----- Querying by GuideID ----- //
 // ------------------------------- //
+
+// Getting the guideID from the domain
+// ex: (http://localhost:8080/extguide?guideID=140588) -> returns 140588
+function getGuideIdFromURL() {
+    const urlParameter = new URLSearchParams(window.location.search);
+    return urlParameter.get('guideID');
+}
+
+// Add event listener which actively fetches guideIDs from url query
+// And passes it onto an api call to fetch the guide, and
+// furthermore create a channel for html to display it.
+document.addEventListener('DOMContentLoaded', function () {
+    const guideID = getGuideIdFromURL();
+    if (guideID) {
+        fetchGuide(guideID);
+    } else {
+        console.error("No guideID for external guide provided in URL.");
+    }
+});
+
+// Querying by GuideID
 function fetchGuide(guideId) {
-    // API URL to fetch guide from
     const apiUrl = `https://www.ifixit.com/api/2.0/guides/${guideId}`;
 
-    // Fetch the guide on the URL
     fetch(apiUrl)
         .then(response => {
             if (!response.ok) {
@@ -190,36 +209,50 @@ function fetchGuide(guideId) {
         .catch(error => console.error('Error fetching data:', error));
 }
 
-// TODO: It receives info but displays it poorly...
+// Display fetched data into the page
 function displayData(data) {
-    // Display the introduction
-    const introductionElement = document.getElementById('introduction');
-    introductionElement.innerHTML = data.introduction_rendered;
+    // Set guide title
+    document.getElementById('guide-title').textContent = data.title;
 
-    // Display the steps
+    // Set introduction
+    const introductionElement = document.getElementById('introduction');
+    introductionElement.innerHTML = `<h3> Introduction </h3><br>` + data.introduction_rendered;
+
+    // Populate steps
     const stepsElement = document.getElementById('steps');
+    stepsElement.innerHTML = ''; // Clear any existing steps
+    let stepCounter = 1; // Counter for the step number
     data.steps.forEach(step => {
         const stepElement = document.createElement('div');
-        stepElement.innerHTML = `<h3>${step.title || 'Step'}</h3>`;
-
+        stepElement.innerHTML = `<br><h3>Step ${stepCounter}: ${step.title || ''}</h3>`;
         step.lines.forEach(line => {
             const lineElement = document.createElement('p');
             lineElement.innerHTML = line.text_rendered;
             stepElement.appendChild(lineElement);
         });
-
         stepsElement.appendChild(stepElement);
+        
+        if(step.media && step.media.type == "image" && step.media.data && step.media.data.length > 0) {
+            const imageData = step.media.data[0];
+            const imgElement = document.createElement('img');
+            imgElement.src = imageData.standard;
+            stepElement.appendChild(imgElement);
+        }
+
+        // Increase step counter
+        stepCounter++;
     });
 
-    // Display any flags
-    const flagsElement = document.getElementById('flags');
-    data.flags.forEach(flag => {
-        const flagElement = document.createElement('div');
-        flagElement.innerHTML = `<strong>${flag.title}</strong>: ${flag.text}`;
-        flagsElement.appendChild(flagElement);
+    // Populate table of contents
+    const tocElement = document.getElementById('table-of-contents');
+    tocElement.innerHTML = ''; // Clear existing contents
+    let tocStepCounter = 1; // Counter for the step number in the table of contents
+    data.steps.forEach(step => {
+        const tocItem = document.createElement('li');
+        const stepTitleIfExists = step.title ? `: ${step.title}` : '';
+        tocItem.innerHTML = `<a href="#step-${tocStepCounter}">Step ${tocStepCounter}${stepTitleIfExists}</a>`;
+        tocElement.appendChild(tocItem);
+        tocStepCounter++;
     });
-
-    // Display the guide image
-    const imageElement = document.getElementById('image');
-    imageElement.src = data.image.thumbnail;
 }
+

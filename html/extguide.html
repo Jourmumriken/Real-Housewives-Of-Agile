@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Repairhub Guide</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.css">
+  </head>
+
+  <body class="guide-container">
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="index.html"><b>RepairHub</b></a>
+        </div>
+        <ul class="nav-items">
+          <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+          <li><a href="external-guide.html"><i class="fa-solid fa-circle-xmark"></i></a></li>
+          <li><a href="about.html"><i class="fa-solid fa-info"></i></a></li>
+          <li><a href="add-item.html"><i class="fa-solid fa-plus"></i></a></li>
+          <li><a href="login.html"><i class="fa-solid fa-user"></i></a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="main-content-container">
+
+      <main id="toggle-main" class="main-with-sidebar">
+        <section class="intro">
+          <h1 id="guide-title">Guide Title</h1>
+          <hr>
+          
+          <!-- Table of Contents -->
+          <div class="TableOfContents">
+            <h3>Table of Contents</h3>
+            <ul id="table-of-contents">
+              <!-- To be dynamically populated -->
+            </ul>
+          </div>
+          <br>
+
+          <!-- Guide introduction -->
+          <section id="introduction">
+            <!-- Fetched guide introduction will be injected here -->
+          </section>
+          <br>
+
+          <!-- Guide steps -->
+          <section id="steps">
+            <!-- Fetched guide steps will be injected here -->
+            <!-- This includes images as well, yippieee -->
+          </section>
+          <br>
+
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Repairhub. Rights reserved and all that</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -48,6 +48,9 @@ public class MultiPageHttpServer {
         // Create context for the External Guide(iFixIt) page
         server.createContext("/external-guide", new MyFileHandler("html/external-guide.html"));
 
+        // Creaate context for the External Guide viewing page
+        server.createContext("/extguide", new MyFileHandler("html/extguide.html"));
+
         // Create context for generic guide
         server.createContext("/guide", new GuideHandler(database)); // TODO: Attempt at generic guide, WIP.
 
