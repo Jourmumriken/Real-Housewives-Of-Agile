@@ -224,6 +224,7 @@ function displayData(data) {
     let stepCounter = 1; // Counter for the step number
     data.steps.forEach(step => {
         const stepElement = document.createElement('div');
+        stepElement.setAttribute("id", `step-${stepCounter}`);
         stepElement.innerHTML = `<br><h3>Step ${stepCounter}: ${step.title || ''}</h3>`;
         step.lines.forEach(line => {
             const lineElement = document.createElement('p');
