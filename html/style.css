@@ -459,3 +459,7 @@ button[type="submit"]:hover {
   text-decoration: none;
   color: white;
 }
+/* Adds spacing between images fetched in external guides */
+div[id^="step-"] img {
+  margin: 10px 20px 10px 0; /* Top, Right, Bottom, Left */
+}
