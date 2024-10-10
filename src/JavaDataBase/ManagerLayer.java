@@ -23,6 +23,12 @@ public class ManagerLayer {
         this.db = new DataAccessLayer(conn);
     }
 
+    // Constructor injection for testing
+    public ManagerLayer(DataAccessLayer db, Connection conn) {
+        this.db = db;
+        this.conn = conn;
+    }
+
     /**
      * gets a connection to the database in the DatabaseURL field
      * 
