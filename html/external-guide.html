@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RepairHub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+
+  </head>
+  <!-- Body container -->
+  <body class = "homepage-container">
+    <!-- Header -->
+    <header>
+      <!-- Navigation -->
+      <nav class="navbar">
+        <div class="logo">
+          <a href="index.html"><b>RepairHub</a></b>
+        </div>
+
+        <ul class="nav-items">
+          <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li> 
+          <li><a href="external-guide.html"><i class="fa-solid fa-circle-xmark"></i></a></li>
+          <li><a href="about.html"><i class="fa-solid fa-info"></i></a></li>
+          <li><a href="add-item.html"><i class="fa-solid fa-plus"></i></a></li>
+          <li><a href="login.html"><i class="fa-solid fa-user"></i></a></li>    
+        </ul>
+      </nav>
+    </header>
+    <!-- End of Header -->
+   
+
+    <!-- JavaWebSite.Main body wrapper -->
+    <div class="suggestion-search-container">
+        <div class="search-wrapper">
+            <form action="">
+                <div class="search">
+                    <span class="search-icon material-symbols-outlined">
+                        search
+                    </span>
+                    <input class="serach-input" type="search" name="search" id="searchInput" placeholder="Search iFixIt Guides">
+                </div>
+            </form>
+        </div>
+        <div class = "suggestions" id = "suggestions"></div>
+      <!-- End of JavaWebSite.Main Content -->
+    </div>
+    <!-- End of JavaWebSite.Main body wrapper -->
+    
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 RepairHub. Rights reserved and all that</p>
+    </footer>
+    <!-- End of Footer -->
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <!-- End of JavaScript -->
+  </body>
+  <!-- End of Body container -->
+</html>
