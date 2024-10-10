@@ -23,7 +23,7 @@ public class Guide {
      *                   creator).
      * @param difficulty The difficulty rating of the guide.
      */
-    Guide(int id, String title, String content, Account account, int difficulty) {
+    public Guide(int id, String title, String content, Account account, int difficulty) {
         this.id = id;
         this.title = title;
         this.content = content;
