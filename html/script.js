@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     const toggleButton = document.querySelector('.toggle'); // Select the toggle button
     const sidebar = document.querySelector('.side-nav'); // Select the sidebar
     const mainContainer = document.querySelector('.main-content-container'); // Select the main content container
-
+  
     // Add event listener to the toggle button
     toggleButton.addEventListener('click', function () {
         // Toggle the hidden class on the sidebar
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Toggle the sidebar-hidden class on the main content container
     });
 });
-
+  
 
 
 // alert("JavaScript loaded successfully!");
@@ -27,10 +27,10 @@ function login() {
         //check if the username and password are correct
         if (username === "test" && password === "test123") {
             messageElement.innerHTML = `<p style="color: green;">Login successful! Welcome, ${username}.</p>`;
-            // we should load the admin page. 
+            // we should load the admin page.
             //const newUrl = `/guide2`;
             //window.history.pushState({ path: newUrl }, '', newUrl);
-    
+
         } else {
             alert("Wrong!!!")
             messageElement.innerHTML = `<p style="color: red;">Invalid username or password.</p>`;

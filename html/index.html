@@ -6,7 +6,19 @@
     <title>RepairHub</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.css">
+  <style>
+    ul {
+      list-style-type: none;    /* Remove default bullets */
+      padding: 0;
+      margin: 0;
+      text-align: center;       /* Center the text */
+    }
 
+    li {
+      font-size: 24px;          /* Increase font size */
+      margin-bottom: 10px;      /* Space between list items */
+     }
+  </style>
     
   </head>
   <!-- Body container -->
@@ -20,7 +32,6 @@
         </div>
       
           <ul class="nav-items">
-
             <!-- Icon buttons for Home, About and Adding a guide-->
             <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
             <li><a href="external-guide.html"><i class="fa-solid fa-circle-xmark"></i></a></li>
@@ -28,9 +39,6 @@
             <li><a href="add-item.html"><i class="fa-solid fa-plus"></i></a></li>
             <li><a href="login.html"><i class="fa-solid fa-user"></i></a></li>
           </ul>
-  
-        
-    
       </nav>
     </header>
     <!-- End of Header -->
@@ -45,21 +53,17 @@
           <h1>Welcome to RepairHub!</h1>
           <p>This is a simple web page where you can read repair guides</p>
         </section>
-        <br>
-
-        <section class="item-list">
-          <h2>Your Items</h2>
-          <ul id="item-container">
-            <li><a href="guide1.html">Clean a camera lens</a></li>
-            <li><a href="guide2.html">Clean a charging port</a></li>
-          </ul>
+        <section class="center" id="center">
+          <h1>Pick a Guide to get started!</h1>
+          <div id="centered-list"></div>
         </section>
-        <!-- End of Text Sections -->
+        <!--Centered list of guide links -->
+
       </main>
       <!-- End of JavaWebSite.Main Content -->
     </div>
     <!-- End of JavaWebSite.Main body wrapper -->
-    
+
     <!-- Footer -->
     <footer>
       <p>&copy; 2024 RepairHub. Rights reserved and all that</p>
@@ -67,7 +71,8 @@
     <!-- End of Footer -->
 
     <!-- JavaScript -->
-    <script src="script.js"></script>
+<!--    <script src="script.js"></script>-->
+    <script src="index.js"></script>
     <!-- End of JavaScript -->
   </body>
   <!-- End of Body container -->
