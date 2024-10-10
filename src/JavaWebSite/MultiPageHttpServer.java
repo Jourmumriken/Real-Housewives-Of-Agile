@@ -41,7 +41,7 @@ public class MultiPageHttpServer {
 
         // Create context for the root (Home page) or index.html
         server.createContext("/", new MyFileHandler("html/index.html"));
-
+        server.createContext("/allGuides",new indexHandler(database));
         // Create context for the About page
         server.createContext("/about", new MyFileHandler("html/about.html"));
 
@@ -73,9 +73,9 @@ public class MultiPageHttpServer {
         // register page
         server.createContext("/register", new MyFileHandler("html/register.html"));
 
-        // load script file
+        // load script files
         server.createContext("/script.js", new MyFileHandler("html/script.js", "application/javascript"));
-
+        server.createContext("/index.js", new MyFileHandler("html/index.js", "application/javascript"));
         // Start the server
         server.setExecutor(null); // Default executor
         server.start();

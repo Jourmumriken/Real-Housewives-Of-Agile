@@ -391,3 +391,44 @@ button[type="submit"]:hover {
   flex-direction: column;
   gap: 3px;
 }
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+
+.center h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+#centered-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    list-style-type: none;
+}
+
+
+#centered-list li {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 10px 0;
+    width: 80%;
+    max-width: 500px;
+    transition: background-color 0.3s;
+}
+
+
+#centered-list li:hover {
+    background-color: #e0e0e0;
+}
