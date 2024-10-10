@@ -1,7 +1,6 @@
 package JavaWebSite;
 
 import JavaDataBase.*;
-import JavaDataBase.Exceptions.AccountCreationException;
 import com.sun.net.httpserver.HttpServer;
 import config.ServerConfig;
 import java.io.IOException;
@@ -41,7 +40,7 @@ public class MultiPageHttpServer {
 
         // Create context for the root (Home page) or index.html
         server.createContext("/", new MyFileHandler("html/index.html"));
-        server.createContext("/allGuides",new indexHandler(database));
+        server.createContext("/allGuides",new allGuidesHandler(database));
         // Create context for the About page
         server.createContext("/about", new MyFileHandler("html/about.html"));
 
