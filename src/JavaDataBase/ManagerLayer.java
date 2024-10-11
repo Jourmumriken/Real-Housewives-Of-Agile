@@ -23,7 +23,7 @@ public class ManagerLayer {
         this.db = new DataAccessLayer(conn);
     }
 
-    // Constructor injection for testing
+    // Added for testing purposes
     public ManagerLayer(DataAccessLayer db, Connection conn) {
         this.db = db;
         this.conn = conn;
