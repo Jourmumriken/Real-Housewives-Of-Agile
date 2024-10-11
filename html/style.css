@@ -97,64 +97,78 @@ nav.navbar {
 }
 
 .side-nav {
-  flex: 1;
-  width: 110px;
+  /* flex: 1; */
+  width: 130px;
   display: flex;
   flex-direction: column;
   background-color: var(--medium-green);
   color: var(--anti-flash-white);
-  transition: transform 300ms ease in;
-  text-align: left;
+  /* transition: transform 300ms ease in; */
   transition: 0.15s;
-  padding: 1rem 0rem;
-  /* padding: 1rem; */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   gap: 1rem;
-}
-
-.side-nav .toggle-btn {
-  color: var(--almost-dark-green);
-  position: relative;
-  top: 0;
-  padding: 0rem 5px
-}
-.side-nav .toggle-btn:hover {
-  color:var(--dark-green)
-}
-
-.side-nav a {
-  padding: 0rem 15px;
-  /* display:table-column; */
-  position: center;
   list-style: none;
   /* Remove bullet points */
 }
 
 
+.side-nav .toggle-btn {
+  display: block;
+  color: var(--almost-dark-green);
+  position: relative;
+  top: 0;
+  /* width: 100%; */
+}
+
+.side-nav .toggle-btn:hover {
+  color: var(--dark-green)
+}
+
+.side-nav .toggle-btn i {
+  position: absolute;
+  right: 5px;
+}
+
+.side-nav li {
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+.side-nav li a {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+
 .side-nav.collapsed {
-  transform: translateX(-90px);
+  transform: translateX(-110px);
 }
 
 .main-with-sidebar.collapsed {
-  transform: translateX(-90px);
+  transform: translateX(-100px);
   width: 100vw;
 }
 
 
 
-  .icon {
-    width: 24px;
-    height: 24px;
-    vertical-align: center; /* Aligns the icon with text */
-    margin-right: 8px; /* Adds some spacing between the icon and the text */
-  }
-  
-a:before{
+.icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: center;
+  /* Aligns the icon with text */
+  margin-right: 8px;
+  /* Adds some spacing between the icon and the text */
+}
+
+a:before {
   color: var(--dark-green);
 }
 
-a:visited {
+/* a:visited {
   color: var(--almost-light-green);
-}
+} */
 
 /* Aeshetics */
 .logo {
@@ -184,7 +198,7 @@ a:visited {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
 }
 
 .nav-items li a {
@@ -273,7 +287,8 @@ button,
 .submit-button {
   background-color: var(--medium-green);
   color: var(--anti-flash-white);
-  padding: 0.5rem 2rem; /* Consistent padding */
+  padding: 0.5rem 2rem;
+  /* Consistent padding */
   font-size: 1rem;
   border: none;
   border-radius: 5px;
@@ -281,8 +296,10 @@ button,
   text-align: center;
   transition: background-color 0.3s ease-in-out;
   width: 100%;
-  max-width: 200px; /* Max width for buttons, to prevent too wide */
-  margin: 0 auto; /* Center button */
+  max-width: 200px;
+  /* Max width for buttons, to prevent too wide */
+  margin: 0 auto;
+  /* Center button */
 }
 
 button:hover,
@@ -291,7 +308,8 @@ button:hover,
 }
 
 button i {
-  margin-right: 8px; /* Space between icon and text */
+  margin-right: 8px;
+  /* Space between icon and text */
 }
 
 .submit-button {
@@ -391,54 +409,55 @@ button[type="submit"]:hover {
   flex-direction: column;
   gap: 3px;
 }
+
 .center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
 }
 
 
 .center h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 
 #centered-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-    list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  list-style-type: none;
 }
 
 
 #centered-list li {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px 15px;
-    margin: 10px 0;
-    width: 80%;
-    max-width: 500px;
-    transition: background-color 0.3s;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin: 10px 0;
+  width: 80%;
+  max-width: 500px;
+  transition: background-color 0.3s;
 }
 
 
 #centered-list li:hover {
-    background-color: #e0e0e0;
+  background-color: #e0e0e0;
 }
 
 .search-wrapper {
   display: flex;
   padding: 5vh;
-  align-items:baseline;
+  align-items: baseline;
   justify-content: center;
-  min-width:  100vw;
+  min-width: 100vw;
 }
 
 .search {
@@ -500,7 +519,9 @@ button[type="submit"]:hover {
   text-decoration: none;
   color: white;
 }
+
 /* Adds spacing between images fetched in external guides */
 div[id^="step-"] img {
-  margin: 10px 20px 10px 0; /* Top, Right, Bottom, Left */
+  margin: 10px 20px 10px 0;
+  /* Top, Right, Bottom, Left */
 }

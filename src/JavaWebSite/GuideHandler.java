@@ -232,8 +232,7 @@ class GuideHandler implements HttpHandler {
         // Copypasted from guide1.html, idk exactly how it works but it does :)
         sideNavBuilder.append("<div id=\"toggle-sidebar\" class=\"side-nav\">\n")
                 .append("<a href=\"#\" class=\"toggle-btn\" onclick=\"toggleSideNav()\">")
-                .append("&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;")
-                .append("</a>\n");
+                .append("<i class=\"fa-solid fa-bars\"> </i></a>\n");
 
         try {
             for (Guide guide : database.getAllGuides()) {
