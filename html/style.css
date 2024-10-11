@@ -118,7 +118,6 @@ nav.navbar {
   color: var(--almost-dark-green);
   position: relative;
   top: 0;
-  right: -20px; /* remove this line when html for db guides are fixed/updated */
   /* width: 100%; */
 }
 
