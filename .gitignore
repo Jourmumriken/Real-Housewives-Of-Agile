@@ -7,3 +7,6 @@ RepairWikiDB/log/logmirror.ctrl
 out/production/Real-Housewives-Of-Agile/JavaDataBase/
 out/production/Real-Housewives-Of-Agile/JavaWebSite/
 out/production/Real-Housewives-Of-Agile/config/
+
+.idea
+.vscode
