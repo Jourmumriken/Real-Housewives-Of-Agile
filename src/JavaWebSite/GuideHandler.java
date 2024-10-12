@@ -212,7 +212,7 @@ class GuideHandler implements HttpHandler {
     // Generates a Table of Contents based on the list of headers
     private String generateTableOfContents(List<String> headers) {
         StringBuilder tocBuilder = new StringBuilder();
-        tocBuilder.append("<div class=\"TableOfContents\">\n<h3>Table of Contents</h3>\n<ul>\n");
+        tocBuilder.append("<div class=\"table-of-contents\">\n<h3>Table of Contents</h3>\n<ul>\n");
         int sectionCounter = 1;
         for (String header : headers) {
             tocBuilder.append("<li><a href=\"#section-" + sectionCounter + "\">")
