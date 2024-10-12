@@ -2,6 +2,7 @@
 
 /* Colours used for website */
 :root {
+  --darker-green: #062a25;
   --dark-green: #16423C;
   --almost-dark-green: #244c47;
   --medium-green: #6A9C89;
@@ -141,6 +142,14 @@ nav.navbar {
   word-break: break-word;
 }
 
+.side-nav li a:link{
+  color:var(--darker-green)
+}
+
+.side-nav li a:visited{
+  color:var(--darker-green)
+}
+
 
 .side-nav.collapsed {
   transform: translateX(-110px);
@@ -220,6 +229,14 @@ a:before {
 
 .intro h1 {
   margin-bottom: 0.5rem;
+}
+
+.table-of-contents li a:link{
+  color:var(--almost-dark-green)
+}
+
+.table-of-contents li a:visited{
+  color:var(--almost-dark-green)
 }
 
 .item-list ul {
@@ -450,6 +467,13 @@ button[type="submit"]:hover {
 
 #centered-list li:hover {
   background-color: #e0e0e0;
+}
+
+#centered-list li a:link {
+  color: var(--almost-dark-green);
+}
+#centered-list li a:visited {
+  color: var(--almost-dark-green);
 }
 
 .search-wrapper {
