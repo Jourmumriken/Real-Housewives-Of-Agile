@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function login() {
     //event.preventDefault(); //Uncomment this to prevent redirections after login, if you intend to get a response on the login page.
     // Get username and password input values
+
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const messageElement = document.getElementById('message'); // Element to display login messages
@@ -48,11 +49,12 @@ function login() {
     .then(data => {
         // Display server response in the message element
         document.getElementById('message').innerText = data;
+
+        localStorage.setItem("username",username);
     })
     .catch(error => {
         document.getElementById('message').innerText = 'Error: ' + error;
     }); 
-    
 
 }
 
