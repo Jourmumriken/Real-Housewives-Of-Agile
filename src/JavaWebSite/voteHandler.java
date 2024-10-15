@@ -2,6 +2,7 @@ package JavaWebSite;
 
 import JavaDataBase.Account;
 import JavaDataBase.Exceptions.DataBaseConnectionException;
+import JavaDataBase.Exceptions.GuideNotFoundException;
 import JavaDataBase.Guide;
 import JavaDataBase.ManagerLayer;
 import JavaDataBase.VoteType;
@@ -26,15 +27,40 @@ public class voteHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        InputStream requestBody = exchange.getRequestBody();
+        System.out.println("voteHandler");
+
         InputStream is = exchange.getRequestBody();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
+        System.out.println("2");
+
         // Parse data
         String json = reader.readLine();
+        System.out.println("3");
         String[] parsed = parse(json);
+        System.out.println("4");
         String query = exchange.getRequestURI().getQuery();
-        int id = Integer.parseInt(query.substring(3));
+
+        System.out.println(query);
+        int id = 999;
+        if (query != null && query.startsWith("id=")) {
+            try {
+                id = Integer.parseInt(query.substring(3));
+            }
+            catch (Exception  e) {
+                System.out.println("Error");
+            }
+
+        }
+
+        try {
+            System.out.println(database.getVoteBalance(database.getGuideById(id)));
+        } catch (GuideNotFoundException e) {
+            System.out.println("Guide note found in voteHandler");
+        }
+
+
+
         String username = parsed[1];
         String response = "Vote received ";
         try{
@@ -51,11 +77,15 @@ public class voteHandler implements HttpHandler {
         }
         exchange.sendResponseHeaders(200, response.length());
 
-        // Write the response to the output stream
         OutputStream os = exchange.getResponseBody();
         os.write(response.getBytes());
-        os.close(); // Close the output stream
+        os.close();
 
+        try {
+            System.out.println(database.getVoteBalance(database.getGuideById(id)));
+        } catch (GuideNotFoundException e) {
+            System.out.println("Guide note found in voteHandler");
+        }
     }
 
     private String[] parse(String json){
