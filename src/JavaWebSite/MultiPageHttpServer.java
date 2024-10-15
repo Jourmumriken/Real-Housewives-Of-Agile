@@ -46,7 +46,8 @@ public class MultiPageHttpServer {
 
         // Create context for generic guide
         server.createContext("/guide", new GuideHandler(database)); // TODO: Attempt at generic guide, WIP.
-
+        // Create context for voting on guides.
+        server.createContext("/vote",new voteHandler(database));
         // Create context fro guide1
         server.createContext("/guide1", new MyFileHandler("html/guide1.html"));
 
