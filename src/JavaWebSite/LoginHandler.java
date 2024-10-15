@@ -79,7 +79,7 @@ public class LoginHandler implements HttpHandler{
 
 
                 } else {
-                    response = "Invalid username or password.";
+                    response = "Invalid password.";
                     // Redirect to login page again, if account exists but password was wrong.
                     sendResponse(exchange, response,  302, "/login?error=invalid");
                 }

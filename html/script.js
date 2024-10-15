@@ -64,7 +64,7 @@ function loginfailure(){
 
     // Set error text depending on kind of error
     if(error === 'invalid') {
-        document.getElementById('error-message').textContent = 'Invalid username or password.';
+        document.getElementById('error-message').textContent = 'Invalid password.';
     } else if (error === 'notfound') {
         document.getElementById('error-message').textContent = 'Account does not exist.';
     }
