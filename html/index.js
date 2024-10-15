@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     createCenterList();
 });
 
-// appends guides to content the div
+// appends guides to content div
 function appendGuides(guides,contentDiv) {
               guides.forEach(guide => {
                   const li = document.createElement('li');
