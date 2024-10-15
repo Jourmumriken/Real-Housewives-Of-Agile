@@ -21,10 +21,10 @@ import JavaDataBase.Exceptions.*;
  */
 public class LoginHandler implements HttpHandler{
 
-    private String username; 
-    private String password; 
+    private String username;
+    private String password;
     private ManagerLayer database;
-    UserLogin userLogin; 
+    UserLogin userLogin;
     Account account;
     public final Logger logger = Logger.getLogger(MultiPageHttpServer.class.getName());
 
@@ -35,8 +35,8 @@ public class LoginHandler implements HttpHandler{
      * @param database The manager layer responsible for database operations.
      */
     public LoginHandler(ManagerLayer database){
-        this.database = database; 
-         
+        this.database = database;
+
     }
 
     @Override
@@ -79,14 +79,14 @@ public class LoginHandler implements HttpHandler{
 
 
                 } else {
-                    response = "Invalid username or password.";
+                    response = "Invalid password.";
                     // Redirect to login page again, if account exists but password was wrong.
-                    sendResponse(exchange, response, 302, "/login");
+                    sendResponse(exchange, response,  302, "/login?error=invalid");
                 }
             } catch (AccountNotFoundException e) {
-                response = "Account does not Exist";
+                response = "Account does not exist.";
                 // Redirect to login page again, if account does not exist.
-                sendResponse(exchange, response, 302, "/login");
+                sendResponse(exchange, response, 302, "/login?error=notfound");
             }
 
             // Send response back to client

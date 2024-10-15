@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleButton = document.querySelector('.toggle'); // Select the toggle button
     const sidebar = document.querySelector('.side-nav'); // Select the sidebar
     const mainContainer = document.querySelector('.main-content-container'); // Select the main content container
-  
+
     // Add event listener to the toggle button
     toggleButton.addEventListener('click', function () {
         // Toggle the hidden class on the sidebar
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Toggle the sidebar-hidden class on the main content container
     });
 });
-  
+
 
 
 // alert("JavaScript loaded successfully!");
@@ -56,6 +56,22 @@ function login() {
 
 
 }
+
+// Checks URL for error messages and displays them depending on error type that occured
+function loginfailure(){
+    const urlParameters = new URLSearchParams(window.location.search);
+    const error = urlParameters.get('error');
+
+    // Set error text depending on kind of error
+    if(error === 'invalid') {
+        document.getElementById('error-message').textContent = 'Invalid password.';
+    } else if (error === 'notfound') {
+        document.getElementById('error-message').textContent = 'Account does not exist.';
+    }
+}
+
+// Create event listener to check for loginfailures
+document.addEventListener('DOMContentLoaded', function(){ loginfailure(); });
 
 // Function to handle registration functionality
 function register() {
