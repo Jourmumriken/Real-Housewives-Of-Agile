@@ -40,4 +40,5 @@ This however did not last forever as eventually the front and back end were merg
 The solution used was to make sure every member did something small, so that each memeber still could contribute. One example could be doing a small bugfix or researching some information for future sprints and so on.\
 \
 Another issue faced was the lack of experience within the team. Since the team consisted of mostly inexperienced students a significant portion of time was allocated to researching tools and figuring out the best way to do things. In the end this was solved by deciding not to use tools that were deemed impraactical to learn such as the react framework and using tools that were already familiar such as java and SQL as well as pure HTML, CSS and JavaScript.\
-
+\
+Of these two major issues the second could be considered more or less fully dealth with however the first only partially. This is the nature of such prjects and not much more could be done about this wihtout more rigorous planning and experience.
