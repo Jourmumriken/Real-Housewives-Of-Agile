@@ -548,3 +548,19 @@ div[id^="step-"] img {
   margin: 10px 20px 10px 0;
   /* Top, Right, Bottom, Left */
 }
+
+/* Success/Fail message color on registration */
+.message {
+  text-decoration: none;
+  color:white;
+}
+
+/* Sets a static color on the "already registered" / "create account" hrefs */
+#registration-login-redirect,
+#registration-login-redirect:visited,
+#registration-login-redirect:hover,
+#registration-login-redirect:active {
+  /* Feel free to change, was just hard seeing dark purple on dark green */
+  color:#6A9C89;
+  text-decoration: none;
+}
