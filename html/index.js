@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // appends guides to content the div
-function appendGuides(guides,contentDiv) {
+function appendGuides(guides ,contentDiv) {
               guides.forEach(guide => {
                   const li = document.createElement('li');
                   const a = document.createElement('a');
