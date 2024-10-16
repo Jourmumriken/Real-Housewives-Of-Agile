@@ -82,7 +82,7 @@ public class MultiPageHttpServer {
         // load script files
         server.createContext("/script.js", new MyFileHandler("html/script.js", "application/javascript"));
         server.createContext("/index.js", new MyFileHandler("html/index.js", "application/javascript"));
-        server.createContext("/voting.js", new MyFileHandler("html/voting.js", "application/javascript"));
+        //server.createContext("/voting.js", new MyFileHandler("html/voting.js", "application/javascript"));
         // Start the server
         server.setExecutor(null); // Default executor
         server.start();

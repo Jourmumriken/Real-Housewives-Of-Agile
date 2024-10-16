@@ -101,7 +101,7 @@ public class ManagerLayer {
      * <p>If user votes on guide but already has voted and the vote is same as before: remove the vote.
      * If the new vote is not the same as the old vote: switch the old vote to the type of new vote.
      * If the user have not voted on guide before: add vote as you would expect </p>
-     * @param username The user name of the account that is voting as string
+     * @param username The username of the account that is voting as string
      * @param guideId the id of the guide that will be voted on as int
      * @param voteType the type of vote as {@link VoteType} enum type. Only VoteType.DOWNVOTE or VoteType.UPVOTE allowed
      * @throws DataBaseConnectionException if an access error occurs or the database connection is closed
