@@ -27,42 +27,19 @@ public class voteHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        System.out.println("voteHandler");
 
         InputStream is = exchange.getRequestBody();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
-        System.out.println("2");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
         // Parse data
         String json = reader.readLine();
-        System.out.println("3");
         String[] parsed = parse(json);
-        System.out.println("4");
         String query = exchange.getRequestURI().getQuery();
-
-        System.out.println(query);
-        int id = 999;
-        if (query != null && query.startsWith("id=")) {
-            try {
-                id = Integer.parseInt(query.substring(3));
-            }
-            catch (Exception  e) {
-                System.out.println("Error");
-            }
-
-        }
-
-        try {
-            System.out.println(database.getVoteBalance(database.getGuideById(id)));
-        } catch (GuideNotFoundException e) {
-            System.out.println("Guide note found in voteHandler");
-        }
-
-
-
+        int id = Integer.parseInt(query.substring(3));
         String username = parsed[1];
-        String response = "Vote received ";
+        String response = "Vote received";
+
         try{
             if(parsed[2].equals("down")){
                 database.voteOnGuide(username,id, VoteType.DOWNVOTE);
@@ -81,11 +58,6 @@ public class voteHandler implements HttpHandler {
         os.write(response.getBytes());
         os.close();
 
-        try {
-            System.out.println(database.getVoteBalance(database.getGuideById(id)));
-        } catch (GuideNotFoundException e) {
-            System.out.println("Guide note found in voteHandler");
-        }
     }
 
     private String[] parse(String json){
@@ -96,5 +68,7 @@ public class voteHandler implements HttpHandler {
 //    {
 //        "username": "name","vote": "down"
 //    }
+
+
 
 }
