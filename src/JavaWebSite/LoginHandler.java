@@ -73,7 +73,7 @@ public class LoginHandler implements HttpHandler{
                     // we need to send further to the protected site
                     logger.info("Login successful!");
 
-                    sendResponse(exchange, response, 302, "/guide1");
+                    sendResponse(exchange, response, 302, "/");
 
 
 

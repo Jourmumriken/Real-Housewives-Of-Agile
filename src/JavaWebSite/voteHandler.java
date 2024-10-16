@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 /**
- * An endpoint for handling votes. Requires that name and vote type  is sent in a JSON object.
+ * An endpoint for handling votes. Requires that vote type and guide id is sent in a JSON object.
  */
 
 public class voteHandler implements HttpHandler {
@@ -35,38 +35,58 @@ public class voteHandler implements HttpHandler {
         // Parse data
         String json = reader.readLine();
         String[] parsed = parse(json);
-        String query = exchange.getRequestURI().getQuery();
-        int id = Integer.parseInt(query.substring(3));
-        String username = parsed[1];
+        System.out.println("handle:");
+        System.out.println(json);
+        int id = Integer.parseInt(parsed[1]);
+        String username = UserLogin.extractSessionIdFromCookies(exchange); // When a client receives a cookie it will automatically send the cookie with every request thereafter
+        // in LoginHandler we attach a cookie (which includes the username of the logged in account) to the response when logging in. We extract it here.
+        System.out.println(username);
         String response = "Vote received";
 
         try{
-            if(parsed[2].equals("down")){
+            if(parsed[0].equals("down")){
                 database.voteOnGuide(username,id, VoteType.DOWNVOTE);
             }
-            else if(parsed[2].equals("up")){
+            else if(parsed[0].equals("up")){
                 database.voteOnGuide(username,id, VoteType.UPVOTE);
             }
         }
         catch (DataBaseConnectionException e) {
+            System.out.println("DataBaseError voteHandler");
             response="An error occurred on our end...";
-            exchange.sendResponseHeaders(500, response.length());
+            sendResponse(exchange,response,500);
+            return;
         }
-        exchange.sendResponseHeaders(200, response.length());
-
-        OutputStream os = exchange.getResponseBody();
-        os.write(response.getBytes());
-        os.close();
-
+        sendResponse(exchange,response,200);
     }
 
+    /**
+     * Sends the response back to the client
+     * @param exchange the Http exchange
+     * @param responseText the message of the response as String
+     * @param statusCode the status code as int
+     * @throws IOException if an I/O error occurs
+     */
+    private void sendResponse(HttpExchange exchange, String responseText, int statusCode) throws IOException {
+        exchange.sendResponseHeaders(statusCode, responseText.length() );
+        OutputStream os = exchange.getResponseBody();
+        os.write(responseText.getBytes());
+        os.close();
+    }
+
+    /**
+     * parses the JSON and returns the vote type and the guide id.
+     * @param json The JSON object to parse as string
+     * @return An array of Strings first element is vote type, either "up" or "down". Seconds element is id which is a the id as a String.
+     * An example of returned data: {"down","5"}
+     */
     private String[] parse(String json){
-        String str = json.replaceAll("[{} \"]",""); //remove '{','}',' ' and '"' characters
+        String str = json.replaceAll("[{} \"]",""); //remove '{','}',' ' (empty space) and '"' characters
         String[] arr = str.split("[:,]"); // split at ':' or ','
-        return new String[]{arr[1],arr[3]}; // from the example below we get "name" and "down" as output.
+        return new String[]{arr[1],arr[3]}; // from the example below we get "down" and "7" as output.
     }
 //    {
-//        "username": "name","vote": "down"
+//        "vote": "down", "guideID": "7"
 //    }
 
 
