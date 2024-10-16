@@ -1,10 +1,11 @@
  function vote(type) {
     const username = localStorage.getItem("username");
+    const guideID = parseInt(window.location.search.replace("[^0-9]",""));
     const voteData = {
-            name: username,
-            type: type
+            name: ""+username,
+            type:  ""+type,
     }
-    console.log();
+
     fetch('/vote',{
     method: "POST",
     headers: {
