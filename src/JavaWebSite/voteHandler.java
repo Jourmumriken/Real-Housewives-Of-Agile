@@ -40,23 +40,28 @@ public class voteHandler implements HttpHandler {
         int id = Integer.parseInt(parsed[1]);
         String username = UserLogin.extractSessionIdFromCookies(exchange); // When a client receives a cookie it will automatically send the cookie with every request thereafter
         // in LoginHandler we attach a cookie (which includes the username of the logged in account) to the response when logging in. We extract it here.
-        System.out.println(username);
+        System.out.println("yes" + username);
         String response = "Vote received";
+        if(username != null){
+            try{
+                if(parsed[0].equals("down")){
+                    database.voteOnGuide(username,id, VoteType.DOWNVOTE);
+                }
+                else if(parsed[0].equals("up")){
+                    database.voteOnGuide(username,id, VoteType.UPVOTE);
+                }
+            }
+            catch (DataBaseConnectionException e) {
+                System.out.println("DataBaseError voteHandler");
+                response="An error occurred on our end...";
+                sendResponse(exchange,response,500);
+                return;
+            }
+        }
+        else{
+            response = "not registered";
+        }
 
-        try{
-            if(parsed[0].equals("down")){
-                database.voteOnGuide(username,id, VoteType.DOWNVOTE);
-            }
-            else if(parsed[0].equals("up")){
-                database.voteOnGuide(username,id, VoteType.UPVOTE);
-            }
-        }
-        catch (DataBaseConnectionException e) {
-            System.out.println("DataBaseError voteHandler");
-            response="An error occurred on our end...";
-            sendResponse(exchange,response,500);
-            return;
-        }
         sendResponse(exchange,response,200);
     }
 
