@@ -20,7 +20,7 @@
 // Report starts here
 // The titile, aligned to the center
 #align(center,[
-    = Repair wiki report (TODO: change title)\
+    = THIS IS ONLY A ROUGH DRAFT TO GET ALL THOUGHTS WRITEN DOWN. IT SHOULD UNDER NO CIRCUMSTANCE BE SUBMITTED(TODO: change title)\
 ])
 \
 
