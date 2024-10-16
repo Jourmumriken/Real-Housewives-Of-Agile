@@ -207,7 +207,7 @@ a:before {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  
 }
 
 .nav-items li a {
@@ -426,12 +426,13 @@ button[type="submit"]:hover {
   flex-direction: column;
   gap: 3px;
 }
-
+/* TODO remove height */
 .center {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
   text-align: center;
 }
 

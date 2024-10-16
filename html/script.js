@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleButton = document.querySelector('.toggle'); // Select the toggle button
     const sidebar = document.querySelector('.side-nav'); // Select the sidebar
     const mainContainer = document.querySelector('.main-content-container'); // Select the main content container
-
+  
     // Add event listener to the toggle button
     toggleButton.addEventListener('click', function () {
         // Toggle the hidden class on the sidebar
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
+  
 // alert("JavaScript loaded successfully!");
 // Function to handle login functionality
 function login() {
@@ -22,20 +22,6 @@ function login() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const messageElement = document.getElementById('message'); // Element to display login messages
-
-    /*
-        //check if the username and password are correct
-        if (username === "test" && password === "test123") {
-            messageElement.innerHTML = `<p style="color: green;">Login successful! Welcome, ${username}.</p>`;
-            // we should load the admin page.
-            //const newUrl = `/guide2`;
-            //window.history.pushState({ path: newUrl }, '', newUrl);
-
-        } else {
-            alert("Wrong!!!")
-            messageElement.innerHTML = `<p style="color: red;">Invalid username or password.</p>`;
-        }
-            */
 
     // Send login credentials to the server using a POST request
     fetch('/auth', {
@@ -104,7 +90,61 @@ function register() {
 function toggleSideNav() {
     document.getElementById("toggle-sidebar").classList.toggle("collapsed");
     document.getElementById("toggle-main").classList.toggle("collapsed");
-}
+  }
+
+// Handle voting
+function vote(input){
+       const guideID = parseInt(window.location.search.replace(/[^0-9]/g,"")); // regex, remove all non digit characters
+       if (input == 1){
+            console.log("up")
+            sendVoteToServer(guideID, 'up')
+       }
+       else{
+                       console.log("down")
+                       sendVoteToServer(guideID, 'down')
+       }
+//           .then(() => {
+//               console.log("up")
+//
+//           })
+//           .catch(error => console.error('Error upvoting:', error.text));}
+
+
+
+//                   .then(() => {
+//                       console.log("down")
+//                   })
+//                   .catch(error => console.error('Error downVoting:', error));}
+   }
+
+   function sendVoteToServer(guideId, voteType) {
+       return fetch('/vote', {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({
+               voteType: voteType,
+               guideId: guideId
+           })
+       })
+       .then(response => {
+           if (!response.ok) {
+               throw new Error('Vote request failed');
+           }
+           location.reload();
+
+       }).catch(error=> {
+            console.error('Error:', error.message);
+            alert(error);
+       });
+   }
+
+
+
+
+
+//}
 
 // ---------------------- //
 // ----- iFixIt API ----- //
@@ -278,14 +318,14 @@ function displayData(data) {
 }
 
 function vote(input){
-    
+
     if (input = 1){sendVoteToServer(guide.id, 'upvote')
         .then(() => {
             console.log("up")
-            
+
         })
         .catch(error => console.error('Error upvoting:', error));}
-    
+
         else{sendVoteToServer(guide.id, 'downvote')
                 .then(() => {
                     console.log("down")
