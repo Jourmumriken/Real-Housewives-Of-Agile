@@ -60,6 +60,7 @@ public class voteHandler implements HttpHandler {
         }
         else{
             response = "not registered";
+            System.out.println(response);
         }
 
         sendResponse(exchange,response,200);
