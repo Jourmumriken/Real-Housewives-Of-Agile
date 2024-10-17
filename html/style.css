@@ -424,7 +424,9 @@ button[type="submit"]:hover {
 .auth-action {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 /* TODO remove height */
 .center {
@@ -564,4 +566,7 @@ div[id^="step-"] img {
   /* Feel free to change, was just hard seeing dark purple on dark green */
   color:#6A9C89;
   text-decoration: none;
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
 }
