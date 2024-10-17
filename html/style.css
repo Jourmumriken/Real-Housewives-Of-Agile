@@ -582,6 +582,14 @@ div[id^="step-"] img {
   margin-bottom: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.about-us-1:hover,
+.about-us-2:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); 
+  background-color: rgb(196, 218, 210, 0.7); 
 }
 
 .about-us-1 h1, .about-us-2 h1 {
@@ -600,32 +608,34 @@ div[id^="step-"] img {
 
 .about-us-2 h2 {
   font-size: 1.5rem;
-  color: #4CAF50;
+  color: #16423c;
   margin-bottom: 1rem;
 }
 
 /* List Styles */
-.main ul {
+.about-us-content-container ul {
   margin: 20px 0;
   padding-left: 20px;
 }
 
-.main ul li {
+.about-us-content-container ul li {
   margin-bottom: 0.8rem;
 }
 
-.main ul li a {
+.about-us-content-container ul li a {
+  /*För att visa det är en länk*/
   color: #1a73e8;
   text-decoration: none;
 }
 
-.main ul li a:hover {
+.about-us-content-container ul li a:hover {
   text-decoration: underline;
 }
 
 /* Horizontal Rule */
 hr {
   border: 0;
+  /*Så att hr linjen inte syns*/
   border-top: 1px solid #e0e0e0;
   margin: 2rem 0;
 }
