@@ -269,7 +269,7 @@ button.toggle i {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background-color: #E9EFEC;
+  background-color: var(--anti-flash-white);
   padding: 20px;
   border-radius: 10px;
   width: 300px;
@@ -290,7 +290,7 @@ button.toggle i {
   width: 100%;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #E9EFEC;
+  border: 1px solid var(--anti-flash-white);
   margin-bottom: 20px;
 }
 
@@ -442,7 +442,7 @@ button[type="submit"]:hover {
 .center h1 {
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #333;
+  color: var(--dark-green);
 }
 
 
@@ -456,8 +456,8 @@ button[type="submit"]:hover {
 
 
 #centered-list li {
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
+  background-color: var(--anti-flash-white);
+  border: 1px solid var(--anti-flash-white);
   border-radius: 5px;
   padding: 10px 15px;
   margin: 10px 0;
@@ -468,7 +468,7 @@ button[type="submit"]:hover {
 
 
 #centered-list li:hover {
-  background-color: #e0e0e0;
+  background-color: var(--anti-flash-white);
 }
 
 #centered-list li a:link {
@@ -492,7 +492,7 @@ button[type="submit"]:hover {
   align-items: center;
   padding: 14px;
   border-radius: 28px;
-  background: #C4DAD2;
+  background: var(--anti-flash-white);
   transition: box-shadow 0.25s;
 }
 
@@ -503,7 +503,7 @@ button[type="submit"]:hover {
 .serach-input {
   font-size: 16px;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  color: #16432C;
+  color: var(--almost-dark-green);
   margin-left: 14px;
   background: transparent;
   outline: none;
@@ -513,7 +513,7 @@ button[type="submit"]:hover {
 
 .serach-input::placeholder,
 .search-icon {
-  color: rgba(0, 0, 0, 0.5);
+  color: var(--darker-green);
 }
 
 .suggestion-search-container {
@@ -536,14 +536,14 @@ button[type="submit"]:hover {
   height: auto;
   max-height: 50vh;
   overflow-y: auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px var(--darker-green);
   border-radius: 5px;
 }
 
 .suggestions a {
   margin: 10px;
   text-decoration: none;
-  color: white;
+  color:var(--anti-flash-white);
 }
 
 /* Adds spacing between images fetched in external guides */
@@ -555,7 +555,7 @@ div[id^="step-"] img {
 /* Success/Fail message color on registration */
 .message {
   text-decoration: none;
-  color:white;
+  color:var(--anti-flash-white);
 }
 
 /* Sets a static color on the "already registered" / "create account" hrefs */
