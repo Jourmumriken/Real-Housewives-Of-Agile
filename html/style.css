@@ -564,3 +564,71 @@ div[id^="step-"] img {
   color:#6A9C89;
   text-decoration: none;
 }
+
+/* Main Content Container */
+.about-us-content-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 50px;
+  background-color: rgb(196, 218, 210, 0.4);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* About Us Sections */
+.about-us-1, .about-us-2 {
+  background-color: rgb(196, 218, 210, 0.7);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.about-us-1 h1, .about-us-2 h1 {
+  font-size: 2rem;
+  color: #16423c;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.about-us-1 p, .about-us-2 p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+  color: #16423c;
+}
+
+.about-us-2 h2 {
+  font-size: 1.5rem;
+  color: #4CAF50;
+  margin-bottom: 1rem;
+}
+
+/* List Styles */
+.main ul {
+  margin: 20px 0;
+  padding-left: 20px;
+}
+
+.main ul li {
+  margin-bottom: 0.8rem;
+}
+
+.main ul li a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.main ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Horizontal Rule */
+hr {
+  border: 0;
+  border-top: 1px solid #e0e0e0;
+  margin: 2rem 0;
+}
+
+
+
