@@ -161,39 +161,6 @@ nav.navbar {
 }
 
 
-
-.icon {
-  width: 24px;
-  height: 24px;
-  vertical-align: center;
-  /* Aligns the icon with text */
-  margin-right: 8px;
-  /* Adds some spacing between the icon and the text */
-}
-
-a:before {
-  color: var(--dark-green);
-}
-
-/* a:visited {
-  color: var(--almost-light-green);
-} */
-
-/* Aeshetics */
-.logo {
-  font-size: 2rem;
-  font-weight: bold;
-  display: flex;
-  gap: 1rem;
-
-}
-
-.logo a {
-  background-color: transparent;
-  text-decoration: none;
-  color: var(--anti-flash-white);
-}
-
 /* Navigation Items */
 .nav-items {
   list-style: none;
@@ -224,6 +191,35 @@ a:before {
 
 .nav-items li a:hover {
   background-color: var(--almost-dark-green);
+}
+
+
+.icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: center;
+  margin-right: 8px;
+}
+
+a:before {
+  color: var(--dark-green);
+}
+
+
+
+/* Aeshetics */
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  gap: 1rem;
+
+}
+
+.logo a {
+  background-color: transparent;
+  text-decoration: none;
+  color: var(--anti-flash-white);
 }
 
 
@@ -263,7 +259,6 @@ button.toggle i {
 
 
 /* Add Item Page Styles */
-
 .add-item-form {
   margin-bottom: 1.5rem;
   display: flex;
@@ -377,7 +372,6 @@ button[type="submit"]:hover {
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.);
-  /* Soft shadow for depth */
   margin: auto;
 
 }
@@ -387,7 +381,6 @@ button[type="submit"]:hover {
   font-size: 2em;
   color: var(--anti-flash-white);
   margin-bottom: 20px;
-  /* Add space below the label */
 }
 
 .input-box {
@@ -395,14 +388,12 @@ button[type="submit"]:hover {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-  /* Spacing between input boxes */
 }
 
 /* Input Styles for Form */
 .input-box input {
   width: 100%;
   max-width: 300px;
-  /* Responsive width */
   padding: 15px;
   background: transparent;
   outline: none;
@@ -428,7 +419,6 @@ button[type="submit"]:hover {
   justify-content: center;
   gap: 10px;
 }
-/* TODO remove height */
 .center {
   display: flex;
   flex-direction: column;
