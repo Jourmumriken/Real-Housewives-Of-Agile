@@ -52,7 +52,8 @@ public class MultiPageHttpServer {
 
         // Create context for generic guide
         server.createContext("/guide", new GuideHandler(database)); // TODO: Attempt at generic guide, WIP.
-
+        // Create context for voting on guides.
+        server.createContext("/vote",new voteHandler(database));
         // Create context fro guide1
         server.createContext("/guide1", new MyFileHandler("html/guide1.html"));
 
@@ -81,6 +82,7 @@ public class MultiPageHttpServer {
         // load script files
         server.createContext("/script.js", new MyFileHandler("html/script.js", "application/javascript"));
         server.createContext("/index.js", new MyFileHandler("html/index.js", "application/javascript"));
+        //server.createContext("/voting.js", new MyFileHandler("html/voting.js", "application/javascript"));
         // Start the server
         server.setExecutor(null); // Default executor
         server.start();
