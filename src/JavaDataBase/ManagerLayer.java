@@ -79,6 +79,8 @@ public class ManagerLayer {
     // VoteType.DOWNVOTE.
     // -Markus.H
     // ________________________________________________________________________________________________________________
+
+
     public void voteOnGuide(Account account,Guide guide, VoteType voteType) throws DataBaseConnectionException {
         String username = account.getUsername();
         int id = guide.getId();
@@ -94,6 +96,29 @@ public class ManagerLayer {
             }
         }
     }
+    /**
+     * The provided Account Makes a vote on the provided guide
+     * <p>If user votes on guide but already has voted and the vote is same as before: remove the vote.
+     * If the new vote is not the same as the old vote: switch the old vote to the type of new vote.
+     * If the user have not voted on guide before: add vote as you would expect </p>
+     * @param username The username of the account that is voting as string
+     * @param guideId the id of the guide that will be voted on as int
+     * @param voteType the type of vote as {@link VoteType} enum type. Only VoteType.DOWNVOTE or VoteType.UPVOTE allowed
+     * @throws DataBaseConnectionException if an access error occurs or the database connection is closed
+     */
+    public void voteOnGuide(String username,int guideId, VoteType voteType) throws DataBaseConnectionException {
+        try{
+            db.insertVote(conn, voteType,username,guideId); // the user haven't voted yet.
+        } catch (SQLException e) {    // if the vote already exists
+            VoteType type = queryVoteHelper(username,guideId);
+            if(type==voteType) {
+                deleteVoteHelper(username,guideId); // the type is the same so we delete the database entry
+            }
+            else {
+                setVoteHelper(username,guideId,voteType); // the type is different so we switch to the other type
+            }
+        }
+    }
 
     /**
      * Just a helper method for voteOnGuide().
@@ -105,7 +130,7 @@ public class ManagerLayer {
             type = db.queryVoteType(conn, username, id);
         }
         catch (SQLException ex) {
-            throw new DataBaseConnectionException("1Database access error or database connection closed",ex);
+            throw new DataBaseConnectionException("Database access error or database connection closed",ex);
         }
         return type;
     }
@@ -117,7 +142,7 @@ public class ManagerLayer {
         try {
             db.deleteVote(conn,username, id);
         } catch (SQLException ex) {
-            throw new DataBaseConnectionException("2Database access error or database connection closed",ex);
+            throw new DataBaseConnectionException("Database access error or database connection closed",ex);
         }
     }
     /**
@@ -128,7 +153,7 @@ public class ManagerLayer {
         try {
             db.setVoteType(conn,username,id,voteType);
         } catch (SQLException ex) {
-            throw new DataBaseConnectionException("3Database access error or database connection closed",ex);
+            throw new DataBaseConnectionException("Database access error or database connection closed",ex);
         }
     }
     /**

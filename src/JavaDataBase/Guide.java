@@ -12,7 +12,7 @@ public class Guide {
     private String content;
     private final Account account;  // Account associated with the guide (creator)
     private int difficulty;
-
+    
     /**
      * Constructs a new Guide object.
      *
