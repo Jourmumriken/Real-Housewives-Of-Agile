@@ -28,7 +28,7 @@ This report aims to show how the project of group 14, aka "The real housewives o
 
 == The Product
 
-TODO: Write about the priduct, should wait untill later in the sprint
+TODO: Write about the product, should wait untill later in the sprint
 
 == The Team
 
@@ -41,7 +41,7 @@ The solution used was to make sure every member did something small, so that eac
 \
 Another issue faced was the lack of experience within the team. Since the team consisted of mostly inexperienced students a significant portion of time was allocated to researching tools and figuring out the best way to do things. In the end this was solved by deciding not to use tools that were deemed impractical to learn such as the react framework and using tools that were already familiar such as java and SQL as well as pure HTML, CSS and JavaScript.\
 \
-Of these two major issues the second could be considered more or less fully dealth with however the first only partially. This is the nature of such prjects and not much more could be done about this wihtout more rigorous planning and experience.\
+Of these two major issues the second could be considered more or less fully dealt with however the first only partially. This is the nature of such projects and not much more could be done about this wihtout more rigorous planning and experience.\
 #line(length:100%)
 The idea of daily scrums was something we didnt do much at all. We instead opted for two meeting per sprint (week) to allow for each meeting to be more informative and give more time to work for each team member.\
 As mentioned before the team initialy self organised into two groups where each memeber felt the most comfortable. These were the database team and the website team. This was a result of what each team member was most comfortable with.\
@@ -49,4 +49,4 @@ The initial idea was to not work weekends however as the project progressed and 
 \
 The team also did not start out with a unnified style however after consilting with the TA and internal discussion a unified style was decided on and followed. This was a small but uneccecary chunk of time wasted on refactoring code to follow the enw standard and should have been discussed earlier, however this is only a small issue and the refactoring was quickly taken care of.\
 \
-Another thing that was not planned anough was the social contract. It should have had a clause for what was expected of someone if they were away sick. Some memebers did get sick during the sprints and a more rigorous and transparent idea of what was expected of them would have aligned better with the principles of agile.
+Another thing that was not planned enough was the social contract. It should have had a clause for what was expected of someone if they were away sick. Some memebers did get sick during the sprints and a more rigorous and transparent idea of what was expected of them would have aligned better with the principles of agile.
