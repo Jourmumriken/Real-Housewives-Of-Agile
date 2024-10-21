@@ -9,6 +9,13 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "JavaWebSite.Main",
+            "projectName": "Real-Housewives-Of-Agile_21d6d1ea"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "JavaWebSite.Main",
             "projectName": "Real-Housewives-Of-Agile_858bf36c"
         },
         {
