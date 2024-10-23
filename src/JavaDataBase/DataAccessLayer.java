@@ -125,18 +125,21 @@ public class DataAccessLayer {
         stm.setString(1,username);
         stm.setInt(2,id);
         ResultSet rs = stm.executeQuery();
-        String type="";
-        while (rs.next()) {
-            type = rs.getString("vote_type");
+
+        if(rs.next()) {
+            String type = rs.getString("vote_type");
+            if (Objects.equals(type, "downvote")) {
+                return VoteType.DOWNVOTE;
+            }
+            else if (Objects.equals(type, "upvote")) {
+                return VoteType.UPVOTE;
+            }
+            else {
+                throw new SQLException("Invalid vote type: " + type);
+            }
         }
-        if(Objects.equals(type, "downvote")) {
-            return VoteType.DOWNVOTE;
-        }
-        else if(Objects.equals(type, "upvote")){
-            return VoteType.UPVOTE;
-        }
-        else{
-            throw new SQLException();
+        else {
+            throw new SQLException("Note vote found for user " + username + " and id " + id);
         }
     }
 
