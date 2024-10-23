@@ -3,7 +3,6 @@ import JavaDataBase.VoteType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.sql.*;
@@ -122,5 +121,87 @@ public class DataAccessLayerTest {
         verify(mockPreStmt).setInt(2, guideID);
         verify(mockPreStmt).executeQuery();
         verify(mockRS, never()).getString("vote_type");  // Should never get the string since no result
+    }
+    @Test
+    public void testDeleteVote() throws SQLException {
+        int guideID = 1;
+        String username = "username";
+
+        PreparedStatement mockPreStmt = mock(PreparedStatement.class);
+        when(mockCon.prepareStatement(anyString())).thenReturn(mockPreStmt);
+
+        dataAccessLayer.deleteVote(mockCon, username, guideID);
+
+        verify(mockCon).prepareStatement("DELETE FROM Votes WHERE username = ? AND id = ?");
+        verify(mockPreStmt).setString(1, username);
+        verify(mockPreStmt).setInt(2,guideID);
+        verify(mockPreStmt).executeUpdate();
+    }
+    @Test
+    public void testInsertVoteUPVOTE() throws SQLException {
+        int guideID = 1;
+        String username = "username";
+        VoteType voteType = VoteType.UPVOTE;
+
+        PreparedStatement mockPreStmt = mock(PreparedStatement.class);
+        when(mockCon.prepareStatement(anyString())).thenReturn(mockPreStmt);
+
+        dataAccessLayer.insertVote(mockCon, voteType, username, guideID);
+
+        verify(mockCon).prepareStatement("INSERT INTO Votes(vote_type,username,id) VALUES (?,?,?)");
+        verify(mockPreStmt).setString(1, "upvote");
+        verify(mockPreStmt).setString(2, username);
+        verify(mockPreStmt).setInt(3, guideID);
+        verify(mockPreStmt).executeUpdate();
+    }
+
+    @Test
+    public void testInsertVoteDOWNVOTE() throws SQLException {
+        int guideID = 1;
+        String username = "username";
+        VoteType voteType = VoteType.DOWNVOTE;
+
+        PreparedStatement mockPreStmt = mock(PreparedStatement.class);
+        when(mockCon.prepareStatement(anyString())).thenReturn(mockPreStmt);
+
+        dataAccessLayer.insertVote(mockCon, voteType, username, guideID);
+
+        verify(mockCon).prepareStatement("INSERT INTO Votes(vote_type,username,id) VALUES (?,?,?)");
+        verify(mockPreStmt).setString(1, "downvote");
+        verify(mockPreStmt).setString(2, username);
+        verify(mockPreStmt).setInt(3, guideID);
+        verify(mockPreStmt).executeUpdate();
+    }
+    @Test
+    public void testSetVoteTypeUPVOTE() throws SQLException {
+        int guideID = 1;
+        String username = "username";
+        VoteType voteType = VoteType.UPVOTE;
+
+        PreparedStatement mockPreStmt = mock(PreparedStatement.class);
+        when(mockCon.prepareStatement(anyString())).thenReturn(mockPreStmt);
+
+        dataAccessLayer.setVoteType(mockCon, username, guideID, voteType);
+
+        verify(mockCon).prepareStatement("UPDATE Votes SET vote_type=? WHERE username=? AND id=?");
+        verify(mockPreStmt).setString(1, "upvote");
+        verify(mockPreStmt).setString(2, username);
+        verify(mockPreStmt).setInt(3, guideID);
+    }
+    @Test
+    public void testSetVoteTypeDOWNVOTE() throws SQLException {
+        int guideID = 1;
+        String username = "username";
+        VoteType voteType = VoteType.DOWNVOTE;
+
+        PreparedStatement mockPreStmt = mock(PreparedStatement.class);
+        when(mockCon.prepareStatement(anyString())).thenReturn(mockPreStmt);
+
+        dataAccessLayer.setVoteType(mockCon, username, guideID, voteType);
+
+        verify(mockCon).prepareStatement("UPDATE Votes SET vote_type=? WHERE username=? AND id=?");
+        verify(mockPreStmt).setString(1, "downvote");
+        verify(mockPreStmt).setString(2, username);
+        verify(mockPreStmt).setInt(3, guideID);
     }
 }
