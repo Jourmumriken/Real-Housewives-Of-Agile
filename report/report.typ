@@ -29,8 +29,19 @@ This report aims to show how the project of group 14, aka "The real housewives o
 == The Product
 
 TODO: Write about the product, should wait untill later in the sprint
+// The product. Compare the end result with what you described in the project scope.
+//   * Did you end up with a product close to the initial thoughts you had? Why or why not did this happen? Was your first mockup somewhat accurate? 
+//   * Consider all sprints, what are the three most important learnings (what did you learn and how did you adapt to it) you discovered along the way 
+//       about the product you built? It could be about the usage, the users, the technology behind, the features included etc.
 
-== The Team
+There are three features we ended up droppign from our original plan: the ability to search or filter for user-made guides, the ability to add images to user made guides, and the ability to edit published posts. 
+Although these are useful features that we would like to have implemented, they are not essential to the funktionality of the site. We ended up dropping them due to their lower priority and the time and effort needed to implement them outweighed the impact and benifits they would have on the product. 
+This highlights one of the streangths of the Agile working process, namely by making the desired and required features different stories in our plan we are able to remain more flexible and focus always focus on the highest priority tasks without compromising any of the core funktionality of the product. 
+If we had used a more classical approach (say waterfall for example) we might have spent too much time on these features with the risk of not having a finished (or working!) product by the final deadline. 
+
+Dropping the ability to leave comments on the guides did lead to a change away from our initial visual design sketch. //ref to image
+Instead of having the comments and rating at the bottom of the page, we decided on presenting the difficulty rating closer to the top of the page, right underneath the title of the guide. 
+Apart from this our final product has followed the visual design sketch as planned. 
 
 TODO: write about the teamwork and challenges faced.
 
