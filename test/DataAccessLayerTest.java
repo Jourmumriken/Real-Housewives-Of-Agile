@@ -1,3 +1,4 @@
+import JavaDataBase.Account;
 import JavaDataBase.DataAccessLayer;
 import JavaDataBase.VoteType;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -203,5 +205,36 @@ public class DataAccessLayerTest {
         verify(mockPreStmt).setString(1, "downvote");
         verify(mockPreStmt).setString(2, username);
         verify(mockPreStmt).setInt(3, guideID);
+    }
+    @Test
+    public void testQueryAllAccounts() throws SQLException {
+        PreparedStatement mockPreStmt = mock(PreparedStatement.class);
+        ResultSet mockRS = mock(ResultSet.class);
+
+        when(mockCon.prepareStatement(anyString())).thenReturn(mockPreStmt);
+        when(mockPreStmt.executeQuery()).thenReturn(mockRS);
+
+        //Mock behaviour of ResultSet to return data
+        when(mockRS.next()).thenReturn(true, true, false);
+        when(mockRS.getString("username")).thenReturn("user1", "user2");
+        when(mockRS.getString("password")).thenReturn("pass1", "pass2");
+        //method call to test
+        ArrayList<Account> accounts = dataAccessLayer.queryAllAccounts(mockCon);
+
+        //Assert the results
+        assertEquals(2, accounts.size());
+        Account account1 = accounts.get(0);
+        Account account2 = accounts.get(1);
+
+        assertEquals("user1", account1.getUsername());
+        assertTrue(account1.checkPw("pass1"));
+        assertEquals("user2", account2.getUsername());
+        assertTrue(account2.checkPw("pass2"));
+
+        verify(mockCon).prepareStatement("SELECT username,password FROM Account");
+        verify(mockPreStmt).executeQuery();
+        verify(mockRS, times(3)).next();
+        verify(mockRS, times(2)).getString("username");
+        verify(mockRS, times(2)).getString("password");
     }
 }
