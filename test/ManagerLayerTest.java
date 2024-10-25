@@ -19,13 +19,6 @@ public class ManagerLayerTest {
     private DataAccessLayer mockDataAccessLayer;
     private Connection mockConnection;
 
-    //TODO testVoteOnGuideNotFound
-    //TODO testgetAccount
-    //TODO getAllGuides
-    //TODO getGuideByTitle
-    //TODO getAllGuidesFromUser
-    //TODO getGuidesWithDifficulty
-
     /**
      * called BeforeEach test to initialize mocked MangerLayer
      * for running unit testing

@@ -1,5 +1,8 @@
 import JavaDataBase.Account;
 import junit.framework.TestCase;
+/**
+ * The AccountTest class handles test cases for the Account class
+ */
 public class AccountTest extends TestCase {
     private Account account = new Account("User", "Test");
     

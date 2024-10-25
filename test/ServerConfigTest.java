@@ -1,5 +1,9 @@
 import junit.framework.TestCase;
 import config.ServerConfig;
+
+/**
+ * The ServerConfig class handles test cases for the ServerConfig class
+ */
 public class ServerConfigTest extends TestCase {
     public ServerConfig config = ServerConfig.getInstance();
 

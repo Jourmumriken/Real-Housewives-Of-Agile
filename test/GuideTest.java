@@ -1,6 +1,10 @@
 import JavaDataBase.Account;
 import JavaDataBase.Guide;
 import junit.framework.TestCase;
+
+/**
+ * The GuideTest class handles test cases for the GuideTest class
+ */
 public class GuideTest extends TestCase {
     private int id = 1;
     private String title = "title";

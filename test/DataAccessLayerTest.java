@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The DataAccessLayerTest class handles test cases for the DataAccessLayer class
+ */
 public class DataAccessLayerTest {
 
     @Mock
