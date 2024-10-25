@@ -1,7 +1,6 @@
 package JavaWebSite;
 
 import JavaDataBase.*;
-import JavaDataBase.Exceptions.AccountCreationException;
 import com.sun.net.httpserver.HttpServer;
 import config.ServerConfig;
 import java.io.IOException;
@@ -41,13 +40,20 @@ public class MultiPageHttpServer {
 
         // Create context for the root (Home page) or index.html
         server.createContext("/", new MyFileHandler("html/index.html"));
-
+        server.createContext("/allGuides",new allGuidesHandler(database));
         // Create context for the About page
         server.createContext("/about", new MyFileHandler("html/about.html"));
 
+        // Create context for the External Guide(iFixIt) page
+        server.createContext("/external-guide", new MyFileHandler("html/external-guide.html"));
+
+        // Creaate context for the External Guide viewing page
+        server.createContext("/extguide", new MyFileHandler("html/extguide.html"));
+
         // Create context for generic guide
         server.createContext("/guide", new GuideHandler(database)); // TODO: Attempt at generic guide, WIP.
-
+        // Create context for voting on guides.
+        server.createContext("/vote",new voteHandler(database));
         // Create context fro guide1
         server.createContext("/guide1", new MyFileHandler("html/guide1.html"));
 
@@ -73,9 +79,10 @@ public class MultiPageHttpServer {
         // register page
         server.createContext("/register", new MyFileHandler("html/register.html"));
 
-        // load script file
+        // load script files
         server.createContext("/script.js", new MyFileHandler("html/script.js", "application/javascript"));
-
+        server.createContext("/index.js", new MyFileHandler("html/index.js", "application/javascript"));
+        //server.createContext("/voting.js", new MyFileHandler("html/voting.js", "application/javascript"));
         // Start the server
         server.setExecutor(null); // Default executor
         server.start();

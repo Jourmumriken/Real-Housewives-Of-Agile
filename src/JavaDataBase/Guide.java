@@ -12,7 +12,7 @@ public class Guide {
     private String content;
     private final Account account;  // Account associated with the guide (creator)
     private int difficulty;
-
+    
     /**
      * Constructs a new Guide object.
      *
@@ -117,5 +117,18 @@ public class Guide {
                 ", Content: " + content +
                 ", Poster: " + account.getUsername() +
                 ", Difficulty: " + difficulty;
+    }
+
+    /**
+     * Returns a JSON object containing the title ( named 'title') and the url (named 'url') of the guide.
+     * @return A String formatted into JSON notation
+     */
+    public String toJson(){
+//        String id =getId()+"";
+//        String title="\""+getTitle()+"\"";
+        // TODO We could expand this so that the caller
+        //  decided which, potentially all, fields the JSON object stores.
+
+        return "{ \"title\":"+"\""+getTitle()+"\""+",\"url\":\"guide?id="+getId()+"\"}";
     }
 }

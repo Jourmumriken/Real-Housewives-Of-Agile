@@ -1,5 +1,4 @@
 package JavaWebSite;
-
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -16,6 +15,9 @@ import JavaDataBase.ManagerLayer;
 import JavaDataBase.Guide;
 import JavaDataBase.Exceptions.*;
 
+
+
+
 //import org.apache.derby.impl.load.Import;
 /**
  * Currently messy "proof of concept". It works by grabbing html files as
@@ -31,6 +33,8 @@ import JavaDataBase.Exceptions.*;
  */
 class GuideHandler implements HttpHandler {
     ManagerLayer database;
+    
+    
 
     /**
      * Constructor to initialize the JavaWebSite.GuideHandler with a database
@@ -58,6 +62,8 @@ class GuideHandler implements HttpHandler {
         } catch (IOException e) {
             System.out.println(e);
         }
+
+
         return contentBuilder.toString();
     }
 
@@ -68,6 +74,7 @@ class GuideHandler implements HttpHandler {
      *
      * @param htmlContent The HTML content as a string.
      * @return The modified HTML content with inserted guide links.
+     * @throws GuideNotFoundException 
      */
 
     // Method to insert guide links dynamically into the '<ul id="item-container">'
@@ -208,7 +215,7 @@ class GuideHandler implements HttpHandler {
     // Generates a Table of Contents based on the list of headers
     private String generateTableOfContents(List<String> headers) {
         StringBuilder tocBuilder = new StringBuilder();
-        tocBuilder.append("<div class=\"TableOfContents\">\n<h3>Table of Contents</h3>\n<ul>\n");
+        tocBuilder.append("<div class=\"table-of-contents\">\n<h3>Table of Contents</h3>\n<ul>\n");
         int sectionCounter = 1;
         for (String header : headers) {
             tocBuilder.append("<li><a href=\"#section-" + sectionCounter + "\">")
@@ -228,8 +235,7 @@ class GuideHandler implements HttpHandler {
         // Copypasted from guide1.html, idk exactly how it works but it does :)
         sideNavBuilder.append("<div id=\"toggle-sidebar\" class=\"side-nav\">\n")
                 .append("<a href=\"#\" class=\"toggle-btn\" onclick=\"toggleSideNav()\">")
-                .append("&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;&#9776;")
-                .append("</a>\n");
+                .append("<i class=\"fa-solid fa-bars\"> </i></a>\n");
 
         try {
             for (Guide guide : database.getAllGuides()) {
@@ -249,7 +255,31 @@ class GuideHandler implements HttpHandler {
         sideNavBuilder.append("</div>");
         return sideNavBuilder.toString();
     }
+    // a helper function that creates a html UpDown vote balance b, changing the color.
+    // based on the balance 
+    String gernerateUpVote(int balance){
+        StringBuilder UpVote = new StringBuilder(); 
 
+        UpVote.append("<br>");
+        if(balance >= 0){
+            UpVote.append("<p style=\"color: green;\">"  + "Rating: "+ balance + "</p>");
+        }
+        else{
+            UpVote.append("<p style=\"color: red;\">"+ "Rating: "+ + balance + "</p>");
+        }
+        return UpVote.toString();
+    }
+
+    // how to generate a button to vote down and up 
+    String generateUpVoteButtons(){
+        StringBuilder button = new StringBuilder(); 
+        String UpButton = "<button id=\" upvoteBtn\"onclick=\"vote(1)\">Upvote</button>"; 
+        String DownButton = "<button id=\" downvoteBtn\"onclick=\"vote(-1)\">Downvote</button>"; 
+        button.append(UpButton).append(DownButton); 
+
+
+        return button.toString(); 
+    }
     /**
      * Creates HTML content for a specific guide by removing the existing ToC and
      * content,
@@ -267,11 +297,16 @@ class GuideHandler implements HttpHandler {
         // ----- Replace the <h1> tag with the guide title -----//
         // Find the <h1> tag within the intro section and replace it with the guide's
         // title
-        template = template.replaceFirst("<h1>.*?</h1>", "<h1>" + guide.getTitle() + "</h1>");
+        template = template.replaceFirst("<h1>.*?</h1>", "<h1>" + guide.getTitle() + "</h1>" + generateUpVoteButtons());
 
         // Add the author and difficulty level of the guide
-        template = template.replaceFirst("<hr>", "<hr>" + "\n" + "Author: " + guide.getAccount().getUsername()
-                + "<br>" + "Difficulty: " + guide.getDifficulty());
+        try {
+            template = template.replaceFirst("<hr>", "<hr>" + "\n" + "Author: " + guide.getAccount().getUsername()
+                    + "<br>" + "Difficulty: " + guide.getDifficulty() + gernerateUpVote(database.getVoteBalance(guide)));
+        } catch (GuideNotFoundException e) {
+            
+            e.printStackTrace();
+        }
 
         // ----- Remove existing table of contentes ----- //
         String tocStartTag = "<div class=\"TableOfContents\">";
@@ -336,5 +371,5 @@ class GuideHandler implements HttpHandler {
         // Return the complete & edited template to match the guide.
         return template;
     }
-
+    
 }
